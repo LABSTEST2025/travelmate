@@ -149,7 +149,7 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 | T52 | Reprise : rouvrir le lien ramène à la bonne étape ; message clair si le jeton a été perdu (autre navigateur) | S | done | T43 |
 | T53 | Moments forts légers : pastille qui tombe à l'arrivée d'un membre, confettis au dernier envoi, révélation du vote (désactivés avec `prefers-reduced-motion`) | M | done | T44–T47 |
 | T54 | Test de bout en bout du parcours web à plusieurs membres (au niveau API, plus une checklist manuelle sur navigateur) | M | done | T42, T49 |
-| T55 | Documentation : `CLAUDE.md` (architecture web, PWA), `diagrams.drawio`, instructions de lancement | S | todo | — |
+| T55 | Documentation : `CLAUDE.md` (architecture web, PWA), `diagrams.drawio`, instructions de lancement | S | done | — |
 
 ## Problèmes repérés en test réel (LLM, Tavily, SerpApi)
 
