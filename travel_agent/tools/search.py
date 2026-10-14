@@ -29,7 +29,8 @@ def search_hotels(country: str, budget_eur: float, zones: list[str] | None = Non
     return _run(query)
 
 
-def search_activities(country: str, travel_style: str | None = None) -> dict:
+def search_activities(country: str, travel_style: str | None = None, city: str | None = None) -> dict:
     style_part = f" de style {travel_style}" if travel_style else ""
-    query = f"Activités et lieux à visiter en {country} pour un voyage{style_part}"
+    place = f"à {city} et ses environs ({country})" if city else f"en {country}"
+    query = f"Activités et lieux à visiter {place} pour un voyage{style_part}"
     return _run(query)

@@ -55,6 +55,7 @@ class TravelState(TypedDict):
     research: list[dict]
     overviews: list[CountryOverview]
     selected_country: str | None
+    stay_city: str | None  # ville de séjour choisie par `planner` : vols, hôtel et itinéraire y convergent
     feedback: str | None
     flights: list[dict]
     hotels: list[dict]

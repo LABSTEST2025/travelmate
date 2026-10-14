@@ -33,6 +33,7 @@ DEFAULT_LLM_RESPONSES: dict[str, dict] = {
         "estimated_budget_eur": 900,
         "best_period": "mai-juin",
     },
+    "_StayDraft": {"city": "Lisbonne"},
     "_HotelDraft": {"name": "Hôtel Test", "price_eur": 800, "notes": "Centre-ville"},
     "_ItineraryDraft": {"days": [{"day": 1, "activities": ["Visite du centre"]}]},
     "_AirportCodes": {"codes": ["CDG", "ORY"]},

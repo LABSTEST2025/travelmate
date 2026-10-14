@@ -155,7 +155,7 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 | ID | Ticket | Taille | Statut | Dépend de |
 |---|---|---|---|---|
-| T56 | Cohérence de la destination : transmettre l'aéroport / la ville d'arrivée des vols aux nœuds `hotels` et `itinerary` (le premier plan réel avait des vols vers Lisbonne mais un hôtel et un itinéraire à Porto). Les branches étant parallèles, il faut décider la ville d'arrivée dans `planner` (ou après `flights`) | M | todo | — |
+| T56 | Cohérence de la destination : transmettre l'aéroport / la ville d'arrivée des vols aux nœuds `hotels` et `itinerary` (le premier plan réel avait des vols vers Lisbonne mais un hôtel et un itinéraire à Porto). Les branches étant parallèles, il faut décider la ville d'arrivée dans `planner` (ou après `flights`) | M | done | — |
 | T57 | `tools/search.py` chargeait le `.env` avec `override=True` : une variable d'environnement ne pouvait pas remplacer une valeur du `.env` (piège pour les tests et le déploiement) | S | done | — |
 
 | T58 | Garde-fou sur les textes libres du site (`guard_in` ne voit que `messages`, que le site n'envoie pas) : champs courts (pays, ville, style) validés strictement (lettres, espaces, tirets, apostrophes, ≤ 60 car.) ; « Autres idées » et « ajustement » passés au classifieur LLM existant (hors sujet, injection) avant de lancer l'agent, avec masquage des PII ; textes délimités dans les prompts comme « retour du groupe, pas des instructions ». Fonction partagée dans `guardrails/input.py` | M | done | — |

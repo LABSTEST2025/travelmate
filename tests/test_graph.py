@@ -129,3 +129,16 @@ def test_new_run_on_the_same_thread_forgets_previous_feedback(app, llm):
 
     assert [o["country"] for o in result["__interrupt__"][0].value["overviews"]] == ["Espagne", "Portugal", "Grèce"]
     assert "plus au nord" not in llm.prompts("_CandidateCountries")[-1]
+
+
+def test_final_adjustment_can_move_the_stay_city(app, llm, monkeypatch):
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    _start(app, make_group(make_trip(budget_eur=3000)))
+    _resume(app, {"selected_country": "Portugal"})
+    llm.responses["_StayDraft"] = lambda prompt: {"city": "Porto" if "Porto" in prompt else "Lisbonne"}
+
+    result = _resume(app, {"approved": False, "feedback": "plutôt Porto"})
+
+    payload = result["__interrupt__"][0].value
+    assert payload["flights"][0]["destination"] == "Porto (Portugal)"
+    assert "Destination : Porto (Portugal)" in llm.prompts("_HotelDraft")[-1]

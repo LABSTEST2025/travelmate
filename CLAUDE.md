@@ -57,7 +57,7 @@ Utilisateur
 - `hitl_country` : appelle `interrupt()` avec les overviews, puis reprend avec `Command(resume=...)`. Si l'utilisateur choisit un pays, on passe à Graph 2. S'il refuse ou fait un retour, on revient à `research` avec ce feedback.
 
 **Graph 2 : planification**
-- `planner` : découpe la tâche et lance les trois branches **en parallèle** (fan-out via `Send` ou des arêtes multiples).
+- `planner` : choisit la **ville de séjour** (`stay_city`, en tenant compte du feedback), puis lance les trois branches **en parallèle** (arêtes multiples). Vols, hôtel et itinéraire visent tous cette ville.
 - `flights` : estime le prix des vols via SerpApi (Google Flights), ou le stub sans clé. En cas d'échec, écrit un message dans `guardrail_error` et le graphe s'arrête.
 - `hotels` : appelle Tavily, filtre selon le budget et les zones.
 - `itinerary` : appelle Tavily pour les activités et le LLM pour le programme jour par jour.

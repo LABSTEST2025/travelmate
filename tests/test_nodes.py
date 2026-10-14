@@ -6,7 +6,7 @@ from pydantic import ValidationError
 from tests.conftest import make_group, make_trip
 from travel_agent.state import CountryOverview
 from travel_agent.subgraphs import planning
-from travel_agent.subgraphs.planning import aggregate, flights, hotels, itinerary, route_after_aggregate
+from travel_agent.subgraphs.planning import aggregate, flights, hotels, itinerary, planner, route_after_aggregate
 from travel_agent.subgraphs.suggestion import _OverviewDraft, research, suggest
 from travel_agent.tools.flights import FlightsSearchError
 
@@ -220,3 +220,41 @@ def test_overview_keeps_three_points_at_most(llm):
 
     assert overview.pros == ["pro 0", "pro 1", "pro 2"] and len(overview.cons) == 3
     assert "au plus 3 points forts" in llm.prompts("_OverviewDraft")[0]
+
+
+# --- T56 : une seule ville de séjour pour les vols, l'hôtel et l'itinéraire ----------------------
+
+
+def test_planner_chooses_the_stay_city(llm):
+    state = _planning_state(make_trip(travel_style="culture")) | {"feedback": "un hôtel à Porto"}
+
+    assert planner(state) == {"stay_city": "Lisbonne"}
+    prompt = llm.prompts("_StayDraft")[0]
+    assert "Portugal" in prompt and "culture" in prompt and "« un hôtel à Porto »" in prompt
+
+
+def test_planner_ignores_an_invalid_city(llm):
+    llm.responses["_StayDraft"] = {"city": "Lisbonne, puis Porto, puis l'Algarve en voiture de location"}
+
+    assert planner(_planning_state(make_trip())) == {"stay_city": None}
+
+
+def test_all_branches_target_the_stay_city(llm, search):
+    state = _planning_state(make_trip(origin_city="Lyon")) | {"stay_city": "Lisbonne"}
+
+    (flight,) = flights(state)["flights"]
+    hotels(state)
+    itinerary(state)
+
+    assert flight["destination"] == "Lisbonne (Portugal)"
+    assert "Destination : Lisbonne (Portugal)" in llm.prompts("_HotelDraft")[0]
+    assert "avec Lisbonne comme ville d'arrivée" in llm.prompts("_ItineraryDraft")[0]
+    assert ("activities", ("Portugal", "culture")) in search.calls
+
+
+def test_branches_fall_back_to_the_country_without_stay_city(llm):
+    (flight,) = flights(_planning_state(make_trip()))["flights"]
+    hotels(_planning_state(make_trip()))
+
+    assert flight["destination"] == "Portugal"
+    assert "Destination : Portugal." in llm.prompts("_HotelDraft")[0]
