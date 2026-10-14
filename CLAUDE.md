@@ -127,6 +127,7 @@ travel_agent/
 │   ├── repository.py   # voyages dans le store LangGraph (SqliteStore)
 │   ├── runner.py       # runs de l'agent en tâche de fond, statut du voyage
 │   ├── views.py        # vue renvoyée à un membre (règles de confidentialité des budgets)
+│   ├── static/         # front sans build : index.html, app.css (Confetti), app.js (routage, écrans)
 │   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
 tests/
@@ -140,6 +141,7 @@ diagrams.drawio         # diagramme d'architecture
 - **Statut** déduit du runner et du checkpoint : `collecting` → `generating` → `voting` → `planning` → (`reviewing` si `ENABLE_FINAL_HITL`) → `done`, ou `error` (reprise via `POST /retry`). Les interruptions sont lues sur `snapshot.tasks` ; pendant le vote, les pays proposés sont dans la charge utile de l'interruption (pas encore dans l'état parent).
 - **Budgets privés** : aucun budget individuel ne sort de l'API, sauf celui du membre qui regarde. Fourchette du groupe arrondie à 100 € à partir de 3 réponses ; en dessous, seulement « dans le budget de chacun : oui / non ». Ne jamais dériver un prix affiché d'un budget (cf. stub de vols à prix fixe).
 - Un seul processus serveur : le verrou de `TripRepository` sérialise les écritures.
+- **Front** (`web/static/`) : HTML/CSS/JS sans build, servi sur `/` et `/t/{code}`, rafraîchi toutes les 3 s. Tout texte venant de l'API passe par `textContent` (jamais `innerHTML`). Accents de la palette en aplats sous texte encre ; texte coloré en variantes foncées (contraste ≥ 4,5:1).
 
 ## Variables d'environnement
 

@@ -517,3 +517,27 @@ def test_more_ideas_progress_skips_reading_wishes(graph, llm):
 
     assert seen[0][0] == {"label": "Envies lues", "done": True}
     assert not seen[0][1]["done"]
+
+
+def test_steps_already_done_are_shown_as_done(graph):
+    runner = TripRunner(graph, _PendingExecutor())
+
+    runner.submit("t", "planning", None, done_steps=("flights", "hotels", "itinerary"))
+
+    assert [step["done"] for step in runner.state("t").progress] == [True, True, True, False]
+
+
+# --- T43 : front servi par FastAPI ----------------------------------------------------------------
+
+
+def test_front_pages_and_assets_are_served(client):
+    visitor = client()
+    for path in ("/", "/t/un-voyage"):
+        page = visitor.get(path)
+        assert page.status_code == 200 and 'id="app"' in page.text
+        assert page.headers["cache-control"] == "no-cache"
+    for asset, kind in (("/static/app.js", "javascript"), ("/static/app.css", "css")):
+        response = visitor.get(asset)
+        assert response.status_code == 200 and kind in response.headers["content-type"]
+        assert response.headers["cache-control"] == "no-cache"
+    assert visitor.get("/static/inconnu.js").status_code == 404

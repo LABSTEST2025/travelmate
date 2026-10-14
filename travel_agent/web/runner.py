@@ -99,7 +99,8 @@ class TripRunner:
         self._errors: dict[str, str] = {}
         self._done_nodes: dict[str, set[str]] = {}
 
-    def submit(self, trip_id: str, stage: Stage, graph_input: Any) -> None:
+    def submit(self, trip_id: str, stage: Stage, graph_input: Any, *, done_steps: tuple[str, ...] = ()) -> None:
+        """`done_steps` : nœuds déjà faits que ce run ne rejouera pas (affichés comme terminés)."""
         with self._lock:
             if trip_id in self._running:
                 raise TripBusyError(trip_id)
@@ -107,7 +108,7 @@ class TripRunner:
             self._errors.pop(trip_id, None)
             # « Autres idées » reprend à `research` : les envies ont déjà été lues.
             resumed_suggestions = stage == "generating" and isinstance(graph_input, Command)
-            self._done_nodes[trip_id] = {"guard_in"} if resumed_suggestions else set()
+            self._done_nodes[trip_id] = ({"guard_in"} if resumed_suggestions else set()) | set(done_steps)
         if self._executor is None:
             self._run(trip_id, graph_input)
         else:

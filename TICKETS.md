@@ -105,7 +105,7 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 ## Sprint 2 — Vote et plan
 
-> T41 : côté API, c'est fait (`POST /retry`, message clair, reprise au dernier checkpoint ou relance complète) ; reste le bouton « Réessayer » de l'interface (T48). T42 : couvert par `tests/test_api.py`.
+> T41 : API (`POST /retry`, reprise au dernier checkpoint ou relance complète) et bouton « Réessayer » de l'écran d'erreur. T42 : couvert par `tests/test_api.py`.
 
 **Objectif** : tout le parcours fonctionne côté API, du vote au plan final, avec les états d'attente et d'erreur.
 **Démo** : vote secret à 3, égalité tranchée, plan final avec grand livre (postes, total, budget, écart en € et en %).
@@ -116,24 +116,26 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 | T37 | Égalité : second tour entre les ex æquo ou tirage au sort, au choix de l'organisateur | S | done | T36 |
 | T38 | « Autres idées » : feedback du groupe → retour à `research` sans reproposer les mêmes pays | S | done | T34 |
 | T39 | Plan final via l'API : grand livre (vols, hébergement), total, budget du groupe, écart € et %, coût par personne ; validation / ajustements de l'organisateur (`hitl_final`) | M | done | T36 |
-| T40 | Avancement de la génération : vraies étapes (envies lues, pays étudiés, budgets vérifiés, rédaction) exposées dans le statut | M | todo | T34 |
-| T41 | Erreurs : message clair (« L'agent n'a pas pu finir, tes réponses sont gardées »), bouton « Réessayer » qui repart du dernier checkpoint | S | in_progress | T34 |
+| T40 | Avancement de la génération : vraies étapes (envies lues, pays étudiés, budgets vérifiés, rédaction) exposées dans le statut | M | done | T34 |
+| T41 | Erreurs : message clair (« L'agent n'a pas pu finir, tes réponses sont gardées »), bouton « Réessayer » qui repart du dernier checkpoint | S | done | T34 |
 | T42 | Tests API du vote, de l'égalité, du plan et des erreurs | M | done | T36–T41 |
 
 ## Sprint 3 — Interface Confetti
+
+> Vérifié dans Chrome headless (mobile 360–390 px, tablette 820 px, desktop 1280 px) : parcours complet à plusieurs membres, égalité, erreur, relecture du plan, onglets au clavier ; audit sans débordement, sans champ sans libellé, cibles ≥ 44 px. Pas encore de test navigateur automatisé dans le dépôt (cf. T54).
 
 **Objectif** : les 5 écrans utilisables sur téléphone et sur ordinateur, branchés sur l'API.
 **Démo** : un voyage complet joué à 3 navigateurs, de la création au plan final.
 
 | ID | Ticket | Taille | Statut | Dépend de |
 |---|---|---|---|---|
-| T43 | Socle front : jetons de design Confetti (palette, Bricolage Grotesque + DM Sans), composants (bouton, chips, avatars-pastilles, cartes, onglets), mise en page mobile d'abord avec points de rupture desktop, routage par URL `/t/{code}`, interrogation régulière de l'API | M | todo | T31 |
-| T44 | Écran 1 — Création et invitation : nom du voyage, lien (copier, partage natif via Web Share API), pile d'avatars en direct | S | todo | T43 |
-| T45 | Écran 2 — Envies : obligatoires d'abord, style en chips, badge « visible par toi seul·e », progression du groupe, formulaire incomplet (le bouton dit ce qui manque), brouillon gardé en local, attente des autres | M | todo | T43, T32 |
-| T46 | Écran 3 — Suggestions : cartes pays, graphique des 3 budgets sur une même échelle avec la fourchette du groupe (Atlas), pros / cons, sources, « Autres idées », écran de génération en cours | L | todo | T43, T40 |
-| T47 | Écran 4 — Vote : grandes cibles, résultats cachés, compteur, égalité | M | todo | T43, T36, T37 |
-| T48 | Écran 5 — Plan : bloc budget toujours visible, grand livre (Atlas), onglets itinéraire / vols / hôtels, budget dépassé et erreur avec « Réessayer » | M | todo | T43, T39, T41 |
-| T49 | Contrôle responsive et accessibilité : cibles ≥ 44 px, contrastes, navigation clavier, mise en page desktop (cartes côte à côte), `prefers-reduced-motion` | S | todo | T44–T48 |
+| T43 | Socle front : jetons de design Confetti (palette, Bricolage Grotesque + DM Sans), composants (bouton, chips, avatars-pastilles, cartes, onglets), mise en page mobile d'abord avec points de rupture desktop, routage par URL `/t/{code}`, interrogation régulière de l'API | M | done | T31 |
+| T44 | Écran 1 — Création et invitation : nom du voyage, lien (copier, partage natif via Web Share API), pile d'avatars en direct | S | done | T43 |
+| T45 | Écran 2 — Envies : obligatoires d'abord, style en chips, badge « visible par toi seul·e », progression du groupe, formulaire incomplet (le bouton dit ce qui manque), brouillon gardé en local, attente des autres | M | done | T43, T32 |
+| T46 | Écran 3 — Suggestions : cartes pays, graphique des 3 budgets sur une même échelle avec la fourchette du groupe (Atlas), pros / cons, sources, « Autres idées », écran de génération en cours | L | done | T43, T40 |
+| T47 | Écran 4 — Vote : grandes cibles, résultats cachés, compteur, égalité | M | done | T43, T36, T37 |
+| T48 | Écran 5 — Plan : bloc budget toujours visible, grand livre (Atlas), onglets itinéraire / vols / hôtels, budget dépassé et erreur avec « Réessayer » | M | done | T43, T39, T41 |
+| T49 | Contrôle responsive et accessibilité : cibles ≥ 44 px, contrastes, navigation clavier, mise en page desktop (cartes côte à côte), `prefers-reduced-motion` | S | done | T44–T48 |
 
 ## Sprint 4 — PWA et finitions
 

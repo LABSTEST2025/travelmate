@@ -3,9 +3,11 @@ import secrets
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import UTC, datetime
+from pathlib import Path
 
 from fastapi import APIRouter, FastAPI, HTTPException, Request, Response, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from langgraph.types import Command
 
 from travel_agent.guardrails.input import validate_trip
@@ -26,6 +28,9 @@ from travel_agent.web.runner import AgentState, Status, TripBusyError, TripRunne
 from travel_agent.web.views import trip_view, vote_options
 
 MAX_MEMBERS = 20
+STATIC_DIR = Path(__file__).parent / "static"
+# Les fichiers du front sont revalidés à chaque chargement (ETag) : pas de version périmée en cache.
+_NO_CACHE = {"Cache-Control": "no-cache"}
 _COOKIE_MAX_AGE_S = 90 * 24 * 3600
 
 
@@ -257,7 +262,8 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         trip = load(trip_id)
         organizer = require_organizer(trip, request)
         require_status(trip, "reviewing")
-        runner.submit(trip.id, "planning", Command(resume={"approved": True}))
+        # Valider ne rejoue que guard_out : vols, hébergement et programme sont déjà faits.
+        runner.submit(trip.id, "planning", Command(resume={"approved": True}), done_steps=("flights", "hotels", "itinerary"))
         return view(trip, organizer)
 
     @api.post("/trips/{trip_id}/plan/adjust")
@@ -269,4 +275,20 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         return view(trip, organizer)
 
     app.include_router(api)
+
+    # --- Front (page unique, routée côté navigateur) -------------------------------------
+
+    @app.middleware("http")
+    async def _revalidate_static(request: Request, call_next):
+        response = await call_next(request)
+        if request.url.path.startswith("/static/"):
+            response.headers.update(_NO_CACHE)
+        return response
+
+    @app.get("/", include_in_schema=False)
+    @app.get("/t/{trip_id}", include_in_schema=False)
+    def page() -> FileResponse:
+        return FileResponse(STATIC_DIR / "index.html", headers=_NO_CACHE)
+
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     return app
