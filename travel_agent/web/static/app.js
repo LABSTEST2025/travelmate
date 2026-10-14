@@ -246,6 +246,8 @@ async function refresh() {
         h("h2", {}, "Voyage introuvable"),
         h("p", {}, "Ce lien ne correspond à aucun voyage. Vérifie qu'il est complet."),
         button("Créer un voyage", () => navigate("/"), { kind: "primary" })));
+    } else if (error.status === 0 && !trip.view) {
+      mount(topbar(), screenOffline());
     } else if (trip.view) {
       toast(error.message, true);
     }
@@ -296,6 +298,19 @@ function renderTrip() {
 }
 
 const organizerOf = (view) => view.members.find((m) => m.is_organizer);
+
+// --- Hors ligne -------------------------------------------------------------------------------------------
+
+function screenOffline() {
+  return h("section", { class: "card stack narrow", role: "alert" },
+    h("h2", {}, "Tu es hors ligne"),
+    h("p", {}, "Le voyage s'affichera dès que la connexion reviendra. Tes réponses déjà envoyées sont gardées."),
+    button("Réessayer", () => refresh().then(schedulePoll), { kind: "dark" }));
+}
+
+window.addEventListener("online", () => {
+  if (trip.id && location.pathname.startsWith("/t/")) refresh().then(schedulePoll);
+});
 
 // --- Rejoindre --------------------------------------------------------------------------------------------
 
@@ -965,5 +980,10 @@ window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => { if (trip.view?.status === "voting") renderTrip(); }, 200);
 });
+
+// Service worker (PWA) : installation et accès hors ligne à l'interface. Sans lui, le site marche quand même.
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js").catch(() => { /* navigation privée, HTTP non local… */ });
+}
 
 route();

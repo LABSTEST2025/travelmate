@@ -144,8 +144,8 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 | ID | Ticket | Taille | Statut | Dépend de |
 |---|---|---|---|---|
-| T50 | Manifeste web (nom, couleurs Confetti, mode `standalone`), icônes (dont *maskable*) | S | todo | T43 |
-| T51 | Service worker : cache de l'interface, page hors ligne, API jamais mise en cache, mise à jour propre des versions | M | todo | T50 |
+| T50 | Manifeste web (nom, couleurs Confetti, mode `standalone`), icônes (dont *maskable*) | S | done | T43 |
+| T51 | Service worker : cache de l'interface, page hors ligne, API jamais mise en cache, mise à jour propre des versions | M | done | T50 |
 | T52 | Reprise : rouvrir le lien ramène à la bonne étape ; message clair si le jeton a été perdu (autre navigateur) | S | todo | T43 |
 | T53 | Moments forts légers : pastille qui tombe à l'arrivée d'un membre, confettis au dernier envoi, révélation du vote (désactivés avec `prefers-reduced-motion`) | M | todo | T44–T47 |
 | T54 | Test de bout en bout du parcours web à plusieurs membres (au niveau API, plus une checklist manuelle sur navigateur) | M | todo | T42, T49 |

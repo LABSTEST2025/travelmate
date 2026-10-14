@@ -298,6 +298,15 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
             response.headers.update(_NO_CACHE)
         return response
 
+    @app.get("/manifest.webmanifest", include_in_schema=False)
+    def manifest() -> FileResponse:
+        return FileResponse(STATIC_DIR / "manifest.webmanifest", media_type="application/manifest+json", headers=_NO_CACHE)
+
+    # À la racine : un service worker ne contrôle que les pages situées sous son propre chemin.
+    @app.get("/sw.js", include_in_schema=False)
+    def service_worker() -> FileResponse:
+        return FileResponse(STATIC_DIR / "sw.js", media_type="text/javascript", headers=_NO_CACHE)
+
     @app.get("/", include_in_schema=False)
     @app.get("/t/{trip_id}", include_in_schema=False)
     def page() -> FileResponse:
