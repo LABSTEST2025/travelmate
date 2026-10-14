@@ -10,6 +10,7 @@ from travel_agent.state import CountryOverview, TravelState, TripPreferences
 from travel_agent.tools.search import search_country_overview
 
 _MAX_CANDIDATES = 3
+_CANDIDATES_ATTEMPTS = 2
 
 
 class _CandidateCountries(BaseModel):
@@ -77,11 +78,19 @@ def _generate_candidates(trips: list[TripPreferences], feedback: str | None, exc
         excluded=", ".join(excluded) or "aucun",
     )
     llm = with_structured_retry(get_llm(temperature=0.3), _CandidateCountries)
+    proposed: list[str] = []
     countries: list[str] = []
-    for country in llm.invoke(prompt).countries:
-        if not _contains(countries, country) and not _contains(excluded, country):
-            countries.append(country)
-    return countries[:_MAX_CANDIDATES]
+    # Les modèles gratuits rendent parfois moins de pays que demandé : on complète avec une
+    # nouvelle tentative, sans doublon.
+    for _ in range(_CANDIDATES_ATTEMPTS):
+        for country in llm.invoke(prompt).countries:
+            proposed.append(country)
+            if not _contains(countries, country) and not _contains(excluded, country):
+                countries.append(country)
+        if len(countries) >= _MAX_CANDIDATES:
+            break
+    # Le LLM n'a proposé que des pays exclus : mieux vaut les reproposer que n'avoir rien à voter.
+    return (countries or list(dict.fromkeys(proposed)))[:_MAX_CANDIDATES]
 
 
 def _build_overview(item: dict, trips: list[TripPreferences]) -> CountryOverview:

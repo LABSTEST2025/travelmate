@@ -15,6 +15,9 @@ dependencies = [
     "uvicorn>=0.54.0",
 ]
 
+[project.scripts]
+travel-web = "travel_agent.web.server:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8",

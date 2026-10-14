@@ -81,7 +81,7 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 **Hypothèses retenues** (à confirmer ou corriger avant le sprint 1) :
 - Pas de comptes : un membre = un jeton aléatoire dans un cookie. Lien d'invitation non devinable.
-- Persistance : uniquement le SQLite du checkpointer LangGraph. Un voyage = un `thread_id`, membres, préférences et votes vivent dans l'état du graphe. Un seul processus serveur, verrou par voyage.
+- Persistance : un seul fichier SQLite. L'état de l'agent vit dans le checkpointer (un voyage = un `thread_id`) ; membres, envies et votes vivent dans le store LangGraph (`SqliteStore`, même fichier) — écrire dans l'état du graphe pendant une interruption de sous-graphe ou un run en cours est fragile. Un seul processus serveur, verrou sur les écritures.
 - Backend FastAPI + uvicorn dans le même process que le graphe. Front en HTML / CSS / JS sans build, servi par FastAPI, mobile d'abord puis adapté au desktop.
 - Rafraîchissement par interrogation régulière (2–3 s), pas de WebSocket.
 - Exécution en local (`localhost` est un contexte sécurisé, donc le service worker fonctionne). Pas d'hébergement ni de notifications push dans ces sprints.
@@ -95,28 +95,30 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 | ID | Ticket | Taille | Statut | Dépend de |
 |---|---|---|---|---|
-| T29 | Socle web : dépendances `fastapi` et `uvicorn`, paquet `travel_agent/web/`, commande `uv run travel-web`, `/api/health` | S | todo | — |
-| T30 | État de groupe dans `TravelState` : membres (id, prénom, couleur, hash du jeton, organisateur, a soumis), préférences par membre, phase du voyage. Écritures via `update_state`, verrou par voyage | M | todo | T29 |
-| T31 | API lobby : créer un voyage, rejoindre par code, vue publique du voyage, soumettre / modifier mes envies. Jeton en cookie `HttpOnly`, l'organisateur seul peut lancer | M | todo | T30 |
-| T32 | Budget privé : la vue publique n'expose jamais les budgets individuels ; fourchette du groupe arrondie à 100 € à partir de 3 réponses, « dans le budget de chacun : oui / non » à 2 | S | todo | T31 |
-| T33 | Graph 1 pour le groupe : envies agrégées, 3 pays pour tout le groupe au lieu de 3 par voyageur, budget estimé par personne | M | todo | T30 |
-| T34 | Lancement de l'IA en tâche de fond par l'organisateur (avec ou sans retardataires) ; statut exposé (`collecting`, `generating`, `voting`, `planning`, `done`, `error`) ; reprise depuis le dernier checkpoint | M | todo | T31, T33 |
-| T35 | Tests API (`TestClient`, mocks existants) : parcours lobby, droits organisateur, non-fuite des budgets, jeton invalide | M | todo | T31–T34 |
+| T29 | Socle web : dépendances `fastapi` et `uvicorn`, paquet `travel_agent/web/`, commande `uv run travel-web`, `/api/health` | S | done | — |
+| T30 | État de groupe dans `TravelState` : membres (id, prénom, couleur, hash du jeton, organisateur, a soumis), préférences par membre, phase du voyage. Écritures via `update_state`, verrou par voyage | M | done | T29 |
+| T31 | API lobby : créer un voyage, rejoindre par code, vue publique du voyage, soumettre / modifier mes envies. Jeton en cookie `HttpOnly`, l'organisateur seul peut lancer | M | done | T30 |
+| T32 | Budget privé : la vue publique n'expose jamais les budgets individuels ; fourchette du groupe arrondie à 100 € à partir de 3 réponses, « dans le budget de chacun : oui / non » à 2 | S | done | T31 |
+| T33 | Graph 1 pour le groupe : envies agrégées, 3 pays pour tout le groupe au lieu de 3 par voyageur, budget estimé par personne | M | done | T30 |
+| T34 | Lancement de l'IA en tâche de fond par l'organisateur (avec ou sans retardataires) ; statut exposé (`collecting`, `generating`, `voting`, `planning`, `done`, `error`) ; reprise depuis le dernier checkpoint | M | done | T31, T33 |
+| T35 | Tests API (`TestClient`, mocks existants) : parcours lobby, droits organisateur, non-fuite des budgets, jeton invalide | M | done | T31–T34 |
 
 ## Sprint 2 — Vote et plan
+
+> T41 : côté API, c'est fait (`POST /retry`, message clair, reprise au dernier checkpoint ou relance complète) ; reste le bouton « Réessayer » de l'interface (T48). T42 : couvert par `tests/test_api.py`.
 
 **Objectif** : tout le parcours fonctionne côté API, du vote au plan final, avec les états d'attente et d'erreur.
 **Démo** : vote secret à 3, égalité tranchée, plan final avec grand livre (postes, total, budget, écart en € et en %).
 
 | ID | Ticket | Taille | Statut | Dépend de |
 |---|---|---|---|---|
-| T36 | Vote secret : voter, changer d'avis, compteur sans révéler qui a voté quoi, dépouillement au dernier vote ou clôture par l'organisateur, reprise du graphe avec le pays gagnant | M | todo | T34 |
-| T37 | Égalité : second tour entre les ex æquo ou tirage au sort, au choix de l'organisateur | S | todo | T36 |
-| T38 | « Autres idées » : feedback du groupe → retour à `research` sans reproposer les mêmes pays | S | todo | T34 |
-| T39 | Plan final via l'API : grand livre (vols, hébergement), total, budget du groupe, écart € et %, coût par personne ; validation / ajustements de l'organisateur (`hitl_final`) | M | todo | T36 |
+| T36 | Vote secret : voter, changer d'avis, compteur sans révéler qui a voté quoi, dépouillement au dernier vote ou clôture par l'organisateur, reprise du graphe avec le pays gagnant | M | done | T34 |
+| T37 | Égalité : second tour entre les ex æquo ou tirage au sort, au choix de l'organisateur | S | done | T36 |
+| T38 | « Autres idées » : feedback du groupe → retour à `research` sans reproposer les mêmes pays | S | done | T34 |
+| T39 | Plan final via l'API : grand livre (vols, hébergement), total, budget du groupe, écart € et %, coût par personne ; validation / ajustements de l'organisateur (`hitl_final`) | M | done | T36 |
 | T40 | Avancement de la génération : vraies étapes (envies lues, pays étudiés, budgets vérifiés, rédaction) exposées dans le statut | M | todo | T34 |
-| T41 | Erreurs : message clair (« L'agent n'a pas pu finir, tes réponses sont gardées »), bouton « Réessayer » qui repart du dernier checkpoint | S | todo | T34 |
-| T42 | Tests API du vote, de l'égalité, du plan et des erreurs | M | todo | T36–T41 |
+| T41 | Erreurs : message clair (« L'agent n'a pas pu finir, tes réponses sont gardées »), bouton « Réessayer » qui repart du dernier checkpoint | S | in_progress | T34 |
+| T42 | Tests API du vote, de l'égalité, du plan et des erreurs | M | done | T36–T41 |
 
 ## Sprint 3 — Interface Confetti
 

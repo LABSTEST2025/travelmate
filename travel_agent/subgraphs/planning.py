@@ -12,16 +12,19 @@ from travel_agent.tools.search import search_activities, search_hotels
 
 # Part du budget total du groupe allouée à l'hébergement (les vols et les activités se partagent le reste).
 _HOTEL_BUDGET_SHARE = 0.5
+_ITINERARY_ATTEMPTS = 2
 
 _HOTEL_PROMPT = (
-    "Propose un hôtel pour un séjour en {country} du {check_in} au {check_out}. Le prix total du séjour "
-    "pour tout le groupe ne doit pas dépasser {budget_eur:.0f} EUR.\n"
+    "Propose un hôtel pour {group_size} personne(s), en {country}, du {check_in} au {check_out}. Le prix total du séjour "
+    "pour tout le groupe ne doit pas dépasser {budget_eur:.0f} EUR. Ne mentionne pas ce plafond "
+    "dans les notes : elles sont visibles par tout le groupe.\n"
     "Informations : {info}{feedback_part}"
 )
 
 _ITINERARY_PROMPT = (
     "Construis un itinéraire jour par jour pour un séjour de {num_days} jours en {country}, "
-    "pour un groupe avec les styles de voyage suivants : {styles}.\n"
+    "pour un groupe avec les styles de voyage suivants : {styles}. Donne exactement {num_days} jours, "
+    "numérotés de 1 à {num_days}.\n"
     "Informations : {info}{feedback_part}"
 )
 
@@ -45,9 +48,12 @@ def _final_hitl_enabled() -> bool:
     return os.environ.get("ENABLE_FINAL_HITL", "false").strip().lower() == "true"
 
 
-def _build_hotel(country: str, check_in, check_out, budget_eur: float, query_result: dict, feedback: str | None) -> dict:
+def _build_hotel(
+    country: str, group_size: int, check_in, check_out, budget_eur: float, query_result: dict, feedback: str | None
+) -> dict:
     feedback_part = f"\nAjustement demandé par le groupe : {feedback}" if feedback else ""
     prompt = _HOTEL_PROMPT.format(
+        group_size=group_size,
         country=country,
         check_in=check_in.isoformat(),
         check_out=check_out.isoformat(),
@@ -77,7 +83,15 @@ def _build_itinerary(country: str, num_days: int, styles: list[str], query_resul
         feedback_part=feedback_part,
     )
     llm = with_structured_retry(get_llm(temperature=0.3), _ItineraryDraft)
-    return llm.invoke(prompt)
+    # Les modèles gratuits rendent parfois moins de jours que demandé : une seconde tentative, puis
+    # on garde le programme le plus complet.
+    best = llm.invoke(prompt)
+    for _ in range(_ITINERARY_ATTEMPTS - 1):
+        if len(best.days) >= num_days:
+            break
+        retry = llm.invoke(prompt)
+        best = max(best, retry, key=lambda draft: len(draft.days))
+    return best
 
 
 def planner(state: TravelState) -> dict:
@@ -109,7 +123,7 @@ def hotels(state: TravelState) -> dict:
     check_out = max(trip.end_date for trip in trips)
     budget_eur = sum(trip.budget_eur for trip in trips) * _HOTEL_BUDGET_SHARE
     query_result = search_hotels(selected_country, budget_eur)
-    hotel = _build_hotel(selected_country, check_in, check_out, budget_eur, query_result, feedback)
+    hotel = _build_hotel(selected_country, len(trips), check_in, check_out, budget_eur, query_result, feedback)
     return {"hotels": [hotel]}
 
 

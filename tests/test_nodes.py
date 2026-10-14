@@ -147,3 +147,56 @@ def test_route_after_aggregate(monkeypatch):
     monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
     assert route_after_aggregate({}) == "hitl_final"
     assert route_after_aggregate({"guardrail_error": "Aucun vol."}) == "__end__"
+
+
+def test_research_never_returns_an_empty_list(llm):
+    llm.responses["_CandidateCountries"] = {"countries": ["Espagne", "Portugal"]}
+    previous = [
+        CountryOverview(country=c, pros=[], cons=[], estimated_budget_eur=1, best_period="", sources=[])
+        for c in ("Espagne", "Portugal")
+    ]
+
+    result = research({"preferences": make_group(), "feedback": "autre chose", "overviews": previous})
+
+    assert [r["country"] for r in result["research"]] == ["Espagne", "Portugal"]
+
+
+def test_itinerary_retries_when_days_are_missing(llm):
+    start = make_trip().start_date
+    trip = make_trip(start_date=start, end_date=start + timedelta(days=2))  # 3 jours
+    llm.responses["_ItineraryDraft"] = [
+        {"days": [{"day": 1, "activities": ["a"]}]},
+        {"days": [{"day": d, "activities": ["a"]} for d in (1, 2, 3)]},
+    ]
+
+    result = itinerary(_planning_state(trip))
+
+    assert [d["day"] for d in result["itinerary"]] == [1, 2, 3]
+    assert "exactement 3 jours" in llm.prompts("_ItineraryDraft")[0]
+
+
+def test_itinerary_keeps_the_most_complete_attempt(llm):
+    start = make_trip().start_date
+    trip = make_trip(start_date=start, end_date=start + timedelta(days=4))  # 5 jours
+    llm.responses["_ItineraryDraft"] = [
+        {"days": [{"day": d, "activities": ["a"]} for d in (1, 2)]},
+        {"days": [{"day": 1, "activities": ["a"]}]},
+    ]
+
+    assert len(itinerary(_planning_state(trip))["itinerary"]) == 2
+    assert len(llm.prompts("_ItineraryDraft")) == 2
+
+
+def test_hotel_prompt_mentions_group_size(llm):
+    hotels(_planning_state(make_trip(), make_trip(), make_trip()))
+
+    assert "3 personne(s)" in llm.prompts("_HotelDraft")[0]
+
+
+def test_research_completes_a_short_list_of_countries(llm):
+    llm.responses["_CandidateCountries"] = [{"countries": ["Portugal"]}, {"countries": ["Portugal", "Italie", "Grèce"]}]
+
+    result = research({"preferences": make_group(make_trip(preferred_country="Portugal"))})
+
+    assert [r["country"] for r in result["research"]] == ["Portugal", "Italie", "Grèce"]
+    assert len(llm.prompts("_CandidateCountries")) == 2

@@ -34,6 +34,9 @@ class FlightsProvider(ABC):
 
 
 class StubFlightsProvider(FlightsProvider):
+    # Prix fixe : un prix calculé sur le budget permettrait aux autres membres de le retrouver.
+    PRICE_EUR = 250.0
+
     def search(
         self,
         origin_city: str,
@@ -48,7 +51,7 @@ class StubFlightsProvider(FlightsProvider):
                 "destination": destination_country,
                 "departure_date": start_date.isoformat(),
                 "return_date": end_date.isoformat(),
-                "price_eur": round(budget_eur * 0.3, 2),
+                "price_eur": self.PRICE_EUR,
                 "airline": "Stub Airlines",
                 "stub": True,
             }

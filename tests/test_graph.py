@@ -7,6 +7,7 @@ from langgraph.types import Command
 from tests.conftest import make_group, make_trip
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
+from travel_agent.tools.flights import StubFlightsProvider
 
 
 @pytest.fixture
@@ -38,7 +39,7 @@ def test_full_trip_is_planned_after_country_choice(app):
     assert result["guardrail_error"] is None
     plan = result["final_plan"]
     assert plan["selected_country"] == "Portugal"
-    assert plan["total_cost_eur"] == 900 + 800  # vol du stub (30 % de 3000) + hôtel
+    assert plan["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800  # vol du stub + hôtel
     assert plan["budget_eur"] == 3000
 
 
@@ -91,7 +92,7 @@ def test_final_hitl_adjustments_loop_back_to_planner(app, llm, monkeypatch):
     _start(app, make_group(make_trip(budget_eur=3000)))
 
     result = _resume(app, {"selected_country": "Portugal"})
-    assert result["__interrupt__"][0].value["total_cost_eur"] == 1700
+    assert result["__interrupt__"][0].value["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800
 
     result = _resume(app, {"approved": False, "feedback": "un hôtel avec piscine"})
     assert "__interrupt__" in result
@@ -118,3 +119,13 @@ def test_flights_error_reaches_the_user(app, monkeypatch):
     assert "__interrupt__" not in result  # pas de HITL final sur un plan incomplet
     assert result["guardrail_error"] == "Aucun vol trouvé de Paris vers Portugal."
     assert result["final_plan"] is None
+
+
+def test_new_run_on_the_same_thread_forgets_previous_feedback(app, llm):
+    _start(app, make_group())
+    _resume(app, {"feedback": "plus au nord"})
+
+    result = _start(app, make_group())
+
+    assert [o["country"] for o in result["__interrupt__"][0].value["overviews"]] == ["Espagne", "Portugal", "Grèce"]
+    assert "plus au nord" not in llm.prompts("_CandidateCountries")[-1]

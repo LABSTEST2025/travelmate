@@ -121,11 +121,25 @@ travel_agent/
 ├── guardrails/
 │   ├── input.py
 │   └── output.py
+├── web/                # API du site Escapade (FastAPI) — `uv run travel-web`
+│   ├── app.py          # routes /api/…
+│   ├── models.py       # TripRecord (groupe, envies, votes) + corps des requêtes
+│   ├── repository.py   # voyages dans le store LangGraph (SqliteStore)
+│   ├── runner.py       # runs de l'agent en tâche de fond, statut du voyage
+│   ├── views.py        # vue renvoyée à un membre (règles de confidentialité des budgets)
+│   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
 tests/
 diagrams.drawio         # diagramme d'architecture
 .env.example
 ```
+
+## Site web (API)
+
+- **Un voyage = un `thread_id`** du checkpointer. L'état de l'agent (pays, plan) vit dans le checkpointer ; le groupe (membres, envies, votes) vit dans un `TripRecord` du store LangGraph (`SqliteStore`), dans le même fichier SQLite. Pas de comptes : un membre = un jeton aléatoire en cookie `HttpOnly`, seul son hash est stocké.
+- **Statut** déduit du runner et du checkpoint : `collecting` → `generating` → `voting` → `planning` → (`reviewing` si `ENABLE_FINAL_HITL`) → `done`, ou `error` (reprise via `POST /retry`). Les interruptions sont lues sur `snapshot.tasks` ; pendant le vote, les pays proposés sont dans la charge utile de l'interruption (pas encore dans l'état parent).
+- **Budgets privés** : aucun budget individuel ne sort de l'API, sauf celui du membre qui regarde. Fourchette du groupe arrondie à 100 € à partir de 3 réponses ; en dessous, seulement « dans le budget de chacun : oui / non ». Ne jamais dériver un prix affiché d'un budget (cf. stub de vols à prix fixe).
+- Un seul processus serveur : le verrou de `TripRepository` sérialise les écritures.
 
 ## Variables d'environnement
 
@@ -136,6 +150,9 @@ TAVILY_API_KEY=
 SERPAPI_API_KEY=         # vide = stub de vols factices
 SQLITE_PATH=checkpoints.sqlite
 ENABLE_FINAL_HITL=false
+WEB_HOST=127.0.0.1       # optionnel, serveur web
+WEB_PORT=8000            # optionnel
+WEB_SECURE_COOKIES=false # true derrière HTTPS
 ```
 
 Ne jamais committer `.env` ni le fichier SQLite.

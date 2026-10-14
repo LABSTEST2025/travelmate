@@ -46,7 +46,7 @@ def _last_human_message(messages: list) -> str | None:
     return None
 
 
-def _validate_trip(trip: TripPreferences) -> str | None:
+def validate_trip(trip: TripPreferences) -> str | None:
     if not trip.origin_city or not trip.origin_city.strip():
         return f"La ville de départ pour {trip.preferred_country} est obligatoire pour estimer les vols."
     if trip.budget_eur <= 0:
@@ -74,7 +74,7 @@ def guard_in(state: TravelState) -> dict:
         return {"guardrail_error": "Merci d'indiquer au moins un voyage (pays, budget, dates) avant de continuer."}
 
     for trip in preferences.group_travel:
-        error = _validate_trip(trip)
+        error = validate_trip(trip)
         if error:
             return {"guardrail_error": error}
 
