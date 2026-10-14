@@ -148,6 +148,7 @@ def trip_view(trip: TripRecord, me: Member | None, agent: AgentState | None) -> 
         "status": agent.status if agent else "collecting",
         "error": agent.error if agent else None,
         "can_retry": bool(agent and agent.status == "error"),
+        "progress": agent.progress if agent else None,
         "me": _me_view(trip, me) if me else None,
         "members": [_member_view(trip, m) for m in trip.members],
         "responses": len(budgets),

@@ -12,8 +12,10 @@ from datetime import date, timedelta
 import pytest
 from fastapi.testclient import TestClient
 from langgraph.checkpoint.memory import MemorySaver
+from langgraph.types import Command
 from langgraph.store.sqlite import SqliteStore
 
+from tests.conftest import make_group, make_trip
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
 from travel_agent.tools.flights import StubFlightsProvider
@@ -461,3 +463,57 @@ def test_final_review_by_the_organizer(client, llm, monkeypatch):
     view = organizer.post(f"/api/trips/{trip_id}/plan/approve").json()
     assert view["status"] == "done" and view["plan"]["selected_country"] == "Portugal"
     assert organizer.post(f"/api/trips/{trip_id}/plan/approve").status_code == 409
+
+
+# --- T40 : avancement de la génération ---------------------------------------------------------
+
+
+def test_progress_reports_real_steps_during_a_run(graph, llm):
+    runner = TripRunner(graph)
+    seen = {}
+
+    def overview(prompt):
+        seen.setdefault("generating", runner.state("t").progress)
+        return {"pros": [], "cons": [], "estimated_budget_eur": 900, "best_period": "mai"}
+
+    llm.responses["_OverviewDraft"] = overview
+    runner.submit("t", "generating", {"preferences": make_group(), "messages": []})
+
+    assert seen["generating"] == [
+        {"label": "Envies lues", "done": True},
+        {"label": "Pays passés au crible", "done": True},
+        {"label": "Fiches pays rédigées", "done": False},
+    ]
+    assert runner.state("t").status == "voting" and runner.state("t").progress is None
+
+
+def test_progress_restarts_planning_steps_when_replanning(graph, llm):
+    runner = TripRunner(graph)
+    llm.responses["_HotelDraft"] = [
+        {"name": "Palace", "price_eur": 50_000, "notes": ""},
+        lambda prompt: (seen.append(runner.state("t").progress), {"name": "Auberge", "price_eur": 100, "notes": ""})[1],
+    ]
+    seen: list = []
+    runner.submit("t", "generating", {"preferences": make_group(make_trip(budget_eur=2000)), "messages": []})
+
+    runner.submit("t", "planning", Command(resume={"selected_country": "Portugal"}))
+
+    # Second passage (après dépassement de budget) : « Budget vérifié » n'est plus coché.
+    (progress,) = seen
+    assert [step["label"] for step in progress][-1] == "Budget vérifié" and not progress[-1]["done"]
+    assert runner.state("t").status == "done"
+
+
+def test_more_ideas_progress_skips_reading_wishes(graph, llm):
+    runner = TripRunner(graph)
+    runner.submit("t", "generating", {"preferences": make_group(), "messages": []})
+    seen = []
+    llm.responses["_CandidateCountries"] = lambda prompt: (
+        seen.append(runner.state("t").progress),
+        {"countries": ["Islande", "Norvège", "Écosse"]},
+    )[1]
+
+    runner.submit("t", "generating", Command(resume={"feedback": "plus au nord"}))
+
+    assert seen[0][0] == {"label": "Envies lues", "done": True}
+    assert not seen[0][1]["done"]
