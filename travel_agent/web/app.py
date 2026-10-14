@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from langgraph.types import Command
 
-from travel_agent.guardrails.input import validate_trip
+from travel_agent.guardrails.input import screen_free_text, validate_trip
 from travel_agent.state import TripResponseModelGroup
 from travel_agent.web.models import (
     AVATAR_COLORS,
@@ -89,6 +89,17 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         if current not in expected:
             raise HTTPException(status.HTTP_409_CONFLICT, f"Action impossible à cette étape du voyage ({current}).")
         return agent
+
+    def screened(trip_id: str, request: Request, text: str, *statuses: Status) -> str:
+        """Contrôle un texte libre avant de le confier à l'agent. Droits et étape sont vérifiés d'abord
+        (pas d'appel au LLM pour une requête refusée), et hors verrou (l'appel prend quelques secondes)."""
+        trip = load(trip_id)
+        require_organizer(trip, request)
+        require_status(trip, *statuses)
+        error, cleaned = screen_free_text(text)
+        if error:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, error)
+        return cleaned
 
     def view(trip: TripRecord, member: Member | None) -> dict:
         return trip_view(trip, member, agent_state(trip))
@@ -250,11 +261,12 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
 
     @api.post("/trips/{trip_id}/more-ideas")
     def more_ideas(trip_id: str, body: FeedbackIn, request: Request) -> dict:
+        feedback = screened(trip_id, request, body.feedback, "voting")
         with editing(trip_id) as trip:
             organizer = require_organizer(trip, request)
             require_status(trip, "voting")
             reset_vote(trip)
-            runner.submit(trip.id, "generating", Command(resume={"feedback": body.feedback}))
+            runner.submit(trip.id, "generating", Command(resume={"feedback": feedback}))
         return view(trip, organizer)
 
     @api.post("/trips/{trip_id}/plan/approve")
@@ -268,10 +280,11 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
 
     @api.post("/trips/{trip_id}/plan/adjust")
     def adjust_plan(trip_id: str, body: FeedbackIn, request: Request) -> dict:
+        feedback = screened(trip_id, request, body.feedback, "reviewing")
         trip = load(trip_id)
         organizer = require_organizer(trip, request)
         require_status(trip, "reviewing")
-        runner.submit(trip.id, "planning", Command(resume={"approved": False, "feedback": body.feedback}))
+        runner.submit(trip.id, "planning", Command(resume={"approved": False, "feedback": feedback}))
         return view(trip, organizer)
 
     app.include_router(api)
