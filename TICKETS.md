@@ -151,6 +151,15 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 | T54 | Test de bout en bout du parcours web à plusieurs membres (au niveau API, plus une checklist manuelle sur navigateur) | M | todo | T42, T49 |
 | T55 | Documentation : `CLAUDE.md` (architecture web, PWA), `diagrams.drawio`, instructions de lancement | S | todo | — |
 
+## Problèmes repérés en test réel (LLM, Tavily, SerpApi)
+
+| ID | Ticket | Taille | Statut | Dépend de |
+|---|---|---|---|---|
+| T56 | Cohérence de la destination : transmettre l'aéroport / la ville d'arrivée des vols aux nœuds `hotels` et `itinerary` (le premier plan réel avait des vols vers Lisbonne mais un hôtel et un itinéraire à Porto). Les branches étant parallèles, il faut décider la ville d'arrivée dans `planner` (ou après `flights`) | M | todo | — |
+| T57 | `tools/search.py` chargeait le `.env` avec `override=True` : une variable d'environnement ne pouvait pas remplacer une valeur du `.env` (piège pour les tests et le déploiement) | S | done | — |
+
+Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (B03) ; le budget ne chiffre que vols et hôtel (B04).
+
 ## Backlog — après le MVP
 
 | ID | Ticket | Prérequis |
@@ -163,6 +172,7 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 | B06 | QR code d'invitation | — |
 | B07 | Export PDF souvenir du voyage (direction Carnet) | — |
 | B08 | App native Expo branchée sur la même API, si l'usage le justifie | B02 |
+| B09 | Nationalité des voyageurs : le LLM cite parfois des règles de visa d'une autre nationalité (sources Tavily canadiennes). **Reporté** : on laisse en l'état pour le moment | — |
 
 ## Risques à surveiller
 

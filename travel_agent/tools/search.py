@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from langchain_tavily import TavilySearch
 
-load_dotenv(override=True)
+load_dotenv()
 
 
 def _get_tool(**kwargs) -> TavilySearch:
