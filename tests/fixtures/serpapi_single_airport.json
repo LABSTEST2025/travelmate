@@ -1,0 +1,983 @@
+{
+ "search_metadata": {
+  "id": "6acfab7d1736b7442cf3a337",
+  "status": "Success",
+  "json_endpoint": "https://serpapi.com/searches/pyNv7FJaKTqgwG1oLI-51f-_JlAEG96vTNxU0D6dQDE/6acfab7d1736b7442cf3a337.json",
+  "markdown_endpoint": "https://serpapi.com/searches/pyNv7FJaKTqgwG1oLI-51f-_JlAEG96vTNxU0D6dQDE/6acfab7d1736b7442cf3a337.md",
+  "created_at": "2026-10-14 16:19:09 UTC",
+  "processed_at": "2026-10-14 16:19:09 UTC",
+  "google_flights_url": "https://www.google.com/travel/flights?hl=fr&gl=fr&curr=EUR&tfs=CBwQAhoeEgoyMDI2LTEyLTA1agcIARIDQ0RHcgcIARIDTElTGh4SCjIwMjYtMTItMTJqBwgBEgNMSVNyBwgBEgNDREdAAUgBcAGYAQE&tfu=EgIIAQ",
+  "raw_html_file": "https://serpapi.com/searches/pyNv7FJaKTqgwG1oLI-51f-_JlAEG96vTNxU0D6dQDE/6acfab7d1736b7442cf3a337.html",
+  "prettify_html_file": "https://serpapi.com/searches/pyNv7FJaKTqgwG1oLI-51f-_JlAEG96vTNxU0D6dQDE/6acfab7d1736b7442cf3a337.prettify",
+  "total_time_taken": 4.37
+ },
+ "search_parameters": {
+  "engine": "google_flights",
+  "hl": "fr",
+  "gl": "fr",
+  "type": "1",
+  "departure_id": "CDG",
+  "arrival_id": "LIS",
+  "outbound_date": "2026-12-05",
+  "return_date": "2026-12-12",
+  "travel_class": 1,
+  "adults": 1,
+  "currency": "EUR"
+ },
+ "best_flights": [
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 13:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 15:10"
+     },
+     "duration": 165,
+     "airplane": "Airbus A320",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1624",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Wi-Fi for a fee",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 134 kg"
+     ]
+    }
+   ],
+   "total_duration": 165,
+   "carbon_emissions": {
+    "this_flight": 135000,
+    "typical_for_this_route": 149000,
+    "difference_percent": -9
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ1pCUmpFMk1qUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTYyNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 15:50"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 17:30"
+     },
+     "duration": 160,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1194",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 150000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 1
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ1pCUmpFeE9UUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTE5NCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 20:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 22:25"
+     },
+     "duration": 160,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1124",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 150000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 1
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ1pCUmpFeE1qUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTEyNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 09:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 11:25"
+     },
+     "duration": 165,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1024",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 165,
+   "carbon_emissions": {
+    "this_flight": 150000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 1
+   },
+   "price": 164,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ1pCUmpFd01qUWFDd2lPZ0FFUUFob0RSVlZTT0J4d3ZJNEIiLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTAyNCJdXV0="
+  }
+ ],
+ "other_flights": [
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 08:55"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Franz-Josef-Strauss de Munich",
+      "id": "MUC",
+      "time": "2026-12-05 10:20"
+     },
+     "duration": 85,
+     "airplane": "Airbus A319",
+     "airline": "Lufthansa City Airlines",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/VL.png",
+     "travel_class": "Economy",
+     "flight_number": "VL 2239",
+     "ticket_also_sold_by": [
+      "Lufthansa"
+     ],
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Carbon emissions estimate: 92 kg"
+     ]
+    },
+    {
+     "departure_airport": {
+      "name": "Aéroport Franz-Josef-Strauss de Munich",
+      "id": "MUC",
+      "time": "2026-12-05 11:10"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 13:30"
+     },
+     "duration": 200,
+     "airplane": "Airbus A321neo",
+     "airline": "Lufthansa",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LH.png",
+     "travel_class": "Economy",
+     "flight_number": "LH 1778",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 154 kg"
+     ]
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 50,
+     "name": "Aéroport Franz-Josef-Strauss de Munich",
+     "id": "MUC"
+    }
+   ],
+   "total_duration": 335,
+   "carbon_emissions": {
+    "this_flight": 247000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 66
+   },
+   "price": 176,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZzFXVERJeU16bDhURWd4TnpjNEdnc0k2b2dCRUFJYUEwVlZVamdjY0pXWUFRPT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJNVUMiLG51bGwsIlZMIiwiMjIzOSJdLFsiTVVDIiwiMjAyNi0xMi0wNSIsIkxJUyIsbnVsbCwiTEgiLCIxNzc4Il1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 09:45"
+     },
+     "arrival_airport": {
+      "name": "Amsterdam Airport Schiphol",
+      "id": "AMS",
+      "time": "2026-12-05 11:10"
+     },
+     "duration": 85,
+     "airplane": "Airbus A321neo",
+     "airline": "KLM",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+     "travel_class": "Economy",
+     "flight_number": "KL 1404",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Free Wi-Fi",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 41 kg"
+     ]
+    },
+    {
+     "departure_airport": {
+      "name": "Amsterdam Airport Schiphol",
+      "id": "AMS",
+      "time": "2026-12-05 12:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 14:40"
+     },
+     "duration": 180,
+     "airplane": "Boeing 737",
+     "airline": "KLM",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+     "travel_class": "Economy",
+     "flight_number": "KL 1583",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 140 kg"
+     ]
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 90,
+     "name": "Amsterdam Airport Schiphol",
+     "id": "AMS"
+    }
+   ],
+   "total_duration": 355,
+   "carbon_emissions": {
+    "this_flight": 182000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 22
+   },
+   "price": 189,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZzFMVERFME1EUjhTMHd4TlRnekdnc0krcElCRUFJYUEwVlZVamdjY0xhakFRPT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJBTVMiLG51bGwsIktMIiwiMTQwNCJdLFsiQU1TIiwiMjAyNi0xMi0wNSIsIkxJUyIsbnVsbCwiS0wiLCIxNTgzIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 10:20"
+     },
+     "arrival_airport": {
+      "name": "Amsterdam Airport Schiphol",
+      "id": "AMS",
+      "time": "2026-12-05 11:40"
+     },
+     "duration": 80,
+     "airplane": "Embraer 195 E2",
+     "airline": "KLM",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+     "travel_class": "Economy",
+     "flight_number": "KL 1406",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 54 kg"
+     ],
+     "plane_and_crew_by": "KLM Cityhopper"
+    },
+    {
+     "departure_airport": {
+      "name": "Amsterdam Airport Schiphol",
+      "id": "AMS",
+      "time": "2026-12-05 12:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 14:40"
+     },
+     "duration": 180,
+     "airplane": "Boeing 737",
+     "airline": "KLM",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+     "travel_class": "Economy",
+     "flight_number": "KL 1583",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 140 kg"
+     ]
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 60,
+     "name": "Amsterdam Airport Schiphol",
+     "id": "AMS"
+    }
+   ],
+   "total_duration": 320,
+   "carbon_emissions": {
+    "this_flight": 195000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 31
+   },
+   "price": 194,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZzFMVERFME1EWjhTMHd4TlRnekdnc0k3cFlCRUFJYUEwVlZVamdjY09LbkFRPT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJBTVMiLG51bGwsIktMIiwiMTQwNiJdLFsiQU1TIiwiMjAyNi0xMi0wNSIsIkxJUyIsbnVsbCwiS0wiLCIxNTgzIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 09:55"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Zurich",
+      "id": "ZRH",
+      "time": "2026-12-05 11:20"
+     },
+     "duration": 85,
+     "airplane": "Airbus A220-100 Passenger",
+     "airline": "SWISS",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LX.png",
+     "travel_class": "Economy",
+     "flight_number": "LX 633",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "Carbon emissions estimate: 78 kg"
+     ]
+    },
+    {
+     "departure_airport": {
+      "name": "Aéroport international de Zurich",
+      "id": "ZRH",
+      "time": "2026-12-05 12:35"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 14:35"
+     },
+     "duration": 180,
+     "airplane": "Embraer 190 E2",
+     "airline": "SWISS",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LX.png",
+     "travel_class": "Economy",
+     "flight_number": "LX 2084",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 169 kg"
+     ],
+     "often_delayed_by_over_30_min": true,
+     "plane_and_crew_by": "Helvetic"
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 75,
+     "name": "Aéroport international de Zurich",
+     "id": "ZRH"
+    }
+   ],
+   "total_duration": 340,
+   "carbon_emissions": {
+    "this_flight": 249000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 67
+   },
+   "price": 213,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LX.png",
+   "extensions": [
+    "Checked baggage not included in price",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ3hNV0RZek0zeE1XREl3T0RRYUN3aXNwZ0VRQWhvRFJWVlNPQnh3L3JnQiIsW1siQ0RHIiwiMjAyNi0xMi0wNSIsIlpSSCIsbnVsbCwiTFgiLCI2MzMiXSxbIlpSSCIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkxYIiwiMjA4NCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 18:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport de Londres-Heathrow",
+      "id": "LHR",
+      "time": "2026-12-05 18:40"
+     },
+     "duration": 75,
+     "airplane": "Airbus A319",
+     "airline": "British Airways",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/BA.png",
+     "travel_class": "Economy",
+     "flight_number": "BA 315",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 63 kg"
+     ]
+    },
+    {
+     "departure_airport": {
+      "name": "Aéroport de Londres-Heathrow",
+      "id": "LHR",
+      "time": "2026-12-05 19:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 22:30"
+     },
+     "duration": 170,
+     "airplane": "Airbus A321neo",
+     "airline": "British Airways",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/BA.png",
+     "travel_class": "Economy",
+     "flight_number": "BA 512",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Wi-Fi for a fee",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 117 kg"
+     ]
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 60,
+     "name": "Aéroport de Londres-Heathrow",
+     "id": "LHR"
+    }
+   ],
+   "total_duration": 305,
+   "carbon_emissions": {
+    "this_flight": 181000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 21
+   },
+   "price": 241,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/BA.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZ3RDUVRNeE5YeENRVFV4TWhvTENQeTdBUkFDR2dORlZWSTRISENFMFFFPSIsW1siQ0RHIiwiMjAyNi0xMi0wNSIsIkxIUiIsbnVsbCwiQkEiLCIzMTUiXSxbIkxIUiIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkJBIiwiNTEyIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 15:35"
+     },
+     "arrival_airport": {
+      "name": "Aéropuerto Adolfo-Suárez de Madrid-Barajas",
+      "id": "MAD",
+      "time": "2026-12-05 17:45"
+     },
+     "duration": 130,
+     "airplane": "Embraer 190",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1800",
+     "ticket_also_sold_by": [
+      "Air Europa"
+     ],
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Wi-Fi for a fee",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 112 kg"
+     ],
+     "plane_and_crew_by": "HOP!"
+    },
+    {
+     "departure_airport": {
+      "name": "Aéropuerto Adolfo-Suárez de Madrid-Barajas",
+      "id": "MAD",
+      "time": "2026-12-05 18:55"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 19:15"
+     },
+     "duration": 80,
+     "airplane": "Boeing 737",
+     "airline": "Air Europa",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/UX.png",
+     "travel_class": "Economy",
+     "flight_number": "UX 1157",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "In-seat USB outlet",
+      "Stream media to your device",
+      "Carbon emissions estimate: 61 kg"
+     ],
+     "plane_and_crew_by": "Air Europa Express"
+    }
+   ],
+   "layovers": [
+    {
+     "duration": 70,
+     "name": "Aéropuerto Adolfo-Suárez de Madrid-Barajas",
+     "id": "MAD"
+    }
+   ],
+   "total_duration": 280,
+   "carbon_emissions": {
+    "this_flight": 174000,
+    "typical_for_this_route": 149000,
+    "difference_percent": 17
+   },
+   "price": 361,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+   "extensions": [
+    "1 checked bag up to 23 kg included",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJWjFoWE4zZG9jR0pyU2tGQlRVVmhla0ZDUnkwdExTMHRMUzF2YTJWcU5TMXVNVUZCUVVGQlIzSlFjVFJCUW1kMU1qSkJFZzFCUmpFNE1EQjhWVmd4TVRVM0dnc0k0cGtDRUFJYUEwVlZVamdjY0t5NUFnPT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJNQUQiLG51bGwsIkFGIiwiMTgwMCJdLFsiTUFEIiwiMjAyNi0xMi0wNSIsIkxJUyIsbnVsbCwiVVgiLCIxMTU3Il1dXQ=="
+  }
+ ],
+ "price_insights": {
+  "lowest_price": 159,
+  "price_level": "typical",
+  "typical_price_range": [
+   130,
+   380
+  ],
+  "price_history": [
+   [
+    1786744800,
+    160
+   ],
+   [
+    1786831200,
+    160
+   ],
+   [
+    1786917600,
+    160
+   ],
+   [
+    1787004000,
+    160
+   ],
+   [
+    1787090400,
+    160
+   ],
+   [
+    1787176800,
+    160
+   ],
+   [
+    1787263200,
+    160
+   ],
+   [
+    1787349600,
+    160
+   ],
+   [
+    1787436000,
+    160
+   ],
+   [
+    1787522400,
+    160
+   ],
+   [
+    1787608800,
+    160
+   ],
+   [
+    1787695200,
+    160
+   ],
+   [
+    1787781600,
+    160
+   ],
+   [
+    1787868000,
+    160
+   ],
+   [
+    1787954400,
+    160
+   ],
+   [
+    1788040800,
+    160
+   ],
+   [
+    1788127200,
+    160
+   ],
+   [
+    1788213600,
+    159
+   ],
+   [
+    1788300000,
+    150
+   ],
+   [
+    1788386400,
+    150
+   ],
+   [
+    1788472800,
+    150
+   ],
+   [
+    1788559200,
+    150
+   ],
+   [
+    1788645600,
+    150
+   ],
+   [
+    1788732000,
+    149
+   ],
+   [
+    1788818400,
+    149
+   ],
+   [
+    1788904800,
+    149
+   ],
+   [
+    1788991200,
+    149
+   ],
+   [
+    1789077600,
+    149
+   ],
+   [
+    1789164000,
+    149
+   ],
+   [
+    1789250400,
+    149
+   ],
+   [
+    1789336800,
+    149
+   ],
+   [
+    1789423200,
+    149
+   ],
+   [
+    1789509600,
+    149
+   ],
+   [
+    1789596000,
+    149
+   ],
+   [
+    1789682400,
+    149
+   ],
+   [
+    1789768800,
+    159
+   ],
+   [
+    1789855200,
+    159
+   ],
+   [
+    1789941600,
+    159
+   ],
+   [
+    1790028000,
+    159
+   ],
+   [
+    1790114400,
+    159
+   ],
+   [
+    1790200800,
+    169
+   ],
+   [
+    1790287200,
+    169
+   ],
+   [
+    1790373600,
+    169
+   ],
+   [
+    1790460000,
+    169
+   ],
+   [
+    1790546400,
+    169
+   ],
+   [
+    1790632800,
+    169
+   ],
+   [
+    1790719200,
+    169
+   ],
+   [
+    1790805600,
+    169
+   ],
+   [
+    1790892000,
+    169
+   ],
+   [
+    1790978400,
+    169
+   ],
+   [
+    1791064800,
+    169
+   ],
+   [
+    1791151200,
+    159
+   ],
+   [
+    1791237600,
+    159
+   ],
+   [
+    1791324000,
+    159
+   ],
+   [
+    1791410400,
+    159
+   ],
+   [
+    1791496800,
+    159
+   ],
+   [
+    1791583200,
+    172
+   ],
+   [
+    1791669600,
+    172
+   ],
+   [
+    1791756000,
+    159
+   ],
+   [
+    1791842400,
+    159
+   ],
+   [
+    1791928800,
+    159
+   ]
+  ]
+ },
+ "airports": [
+  {
+   "departure": [
+    {
+     "airport": {
+      "id": "CDG",
+      "name": "Aéroport de Paris-Charles de Gaulle"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    }
+   ],
+   "arrival": [
+    {
+     "airport": {
+      "id": "LIS",
+      "name": "Aéroport international de Lisbonne"
+     },
+     "city": "Lisbonne",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLxT3PIh1TwnGsLrG7G-JQRFMG0zIp4uiQ71FTwf1WQHKROUG_veOYAiGQTLGO36g5OCdu9DUrwHrzaA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG3-nF1u-sTIpnrbZ3a_ly_OcwqDxS9MCOGoiQTX3dJ3ZoIiUsVHqxHC-nmruwZ8aoJZJPM7O5YSmsHR6tp2L_EHV4CnsiNtatHuedKBE"
+    }
+   ]
+  },
+  {
+   "departure": [
+    {
+     "airport": {
+      "id": "LIS",
+      "name": "Aéroport international de Lisbonne"
+     },
+     "city": "Lisbonne",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLxT3PIh1TwnGsLrG7G-JQRFMG0zIp4uiQ71FTwf1WQHKROUG_veOYAiGQTLGO36g5OCdu9DUrwHrzaA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG3-nF1u-sTIpnrbZ3a_ly_OcwqDxS9MCOGoiQTX3dJ3ZoIiUsVHqxHC-nmruwZ8aoJZJPM7O5YSmsHR6tp2L_EHV4CnsiNtatHuedKBE"
+    }
+   ],
+   "arrival": [
+    {
+     "airport": {
+      "id": "CDG",
+      "name": "Aéroport de Paris-Charles de Gaulle"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    }
+   ]
+  }
+ ]
+}

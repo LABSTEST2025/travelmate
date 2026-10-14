@@ -1,0 +1,1398 @@
+{
+ "search_metadata": {
+  "id": "6acfab3141ffc8ac2762a1c9",
+  "status": "Success",
+  "json_endpoint": "https://serpapi.com/searches/pQyMPO7Ye2JAvAV9Ub9vP3E_eiZJbR3cJDEIDv4E4kI/6acfab3141ffc8ac2762a1c9.json",
+  "markdown_endpoint": "https://serpapi.com/searches/pQyMPO7Ye2JAvAV9Ub9vP3E_eiZJbR3cJDEIDv4E4kI/6acfab3141ffc8ac2762a1c9.md",
+  "created_at": "2026-10-14 16:17:53 UTC",
+  "processed_at": "2026-10-14 16:17:53 UTC",
+  "google_flights_url": "https://www.google.com/travel/flights?hl=fr&gl=fr&curr=EUR&tfs=CBwQAhpCEgoyMDI2LTEyLTA1agcIARIDQ0RHagcIARIDT1JZagcIARIDQlZBcgcIARIDTElTcgcIARIDT1BPcgcIARIDRkFPGkISCjIwMjYtMTItMTJqBwgBEgNMSVNqBwgBEgNPUE9qBwgBEgNGQU9yBwgBEgNDREdyBwgBEgNPUllyBwgBEgNCVkFAAUgBcAGYAQE&tfu=EgIIAQ",
+  "raw_html_file": "https://serpapi.com/searches/pQyMPO7Ye2JAvAV9Ub9vP3E_eiZJbR3cJDEIDv4E4kI/6acfab3141ffc8ac2762a1c9.html",
+  "prettify_html_file": "https://serpapi.com/searches/pQyMPO7Ye2JAvAV9Ub9vP3E_eiZJbR3cJDEIDv4E4kI/6acfab3141ffc8ac2762a1c9.prettify",
+  "total_time_taken": 1.98
+ },
+ "search_parameters": {
+  "engine": "google_flights",
+  "hl": "fr",
+  "gl": "fr",
+  "type": "1",
+  "departure_id": "CDG,ORY,BVA",
+  "arrival_id": "LIS,OPO,FAO",
+  "outbound_date": "2026-12-05",
+  "return_date": "2026-12-12",
+  "travel_class": 1,
+  "adults": 1,
+  "currency": "EUR"
+ },
+ "best_flights": [
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport Paris-Beauvais",
+      "id": "BVA",
+      "time": "2026-12-05 22:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 23:35"
+     },
+     "duration": 130,
+     "airplane": "Boeing 737MAX 8 Passenger",
+     "airline": "Ryanair",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+     "travel_class": "Economy",
+     "flight_number": "FR 595",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 91 kg"
+     ]
+    }
+   ],
+   "total_duration": 130,
+   "carbon_emissions": {
+    "this_flight": 92000
+   },
+   "price": 65,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZHVWpVNU5Sb0tDTkl5RUFJYUEwVlZVamdjY0tnNCIsW1siQlZBIiwiMjAyNi0xMi0wNSIsIk9QTyIsbnVsbCwiRlIiLCI1OTUiXV1d"
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 07:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Faro",
+      "id": "FAO",
+      "time": "2026-12-05 09:05"
+     },
+     "duration": 160,
+     "airplane": "Airbus A320neo",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7670",
+     "extensions": [
+      "Carbon emissions estimate: 114 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 114000
+   },
+   "price": 70,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk56QWFDZ2pZTmhBQ0dnTkZWVkk0SEhEb1BBPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJGQU8iLG51bGwsIlRPIiwiNzY3MCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 15:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Faro",
+      "id": "FAO",
+      "time": "2026-12-05 17:15"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320",
+     "airline": "easyJet",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+     "travel_class": "Economy",
+     "flight_number": "U2 4883",
+     "extensions": [
+      "Carbon emissions estimate: 133 kg"
+     ]
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 133000
+   },
+   "price": 82,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pWTWpRNE9ETWFDZ2prUHhBQ0dnTkZWVkk0SEhEM1JnPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJGQU8iLG51bGwsIlUyIiwiNDg4MyJdXV0="
+  }
+ ],
+ "other_flights": [
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport Paris-Beauvais",
+      "id": "BVA",
+      "time": "2026-12-05 14:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 15:55"
+     },
+     "duration": 130,
+     "airplane": "Boeing 737",
+     "airline": "Ryanair",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+     "travel_class": "Economy",
+     "flight_number": "FR 7479",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "Carbon emissions estimate: 108 kg"
+     ]
+    }
+   ],
+   "total_duration": 130,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 69,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pHVWpjME56a2FDZ2l1TlJBQ0dnTkZWVkk0SEhDck93PT0iLFtbIkJWQSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIkZSIiwiNzQ3OSJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 16:00"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 17:15"
+     },
+     "duration": 135,
+     "airplane": "Airbus A320",
+     "airline": "easyJet",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+     "travel_class": "Economy",
+     "flight_number": "U2 4895",
+     "extensions": [
+      "Carbon emissions estimate: 109 kg"
+     ]
+    }
+   ],
+   "total_duration": 135,
+   "carbon_emissions": {
+    "this_flight": 110000
+   },
+   "price": 93,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pWTWpRNE9UVWFDZ2orUnhBQ0dnTkZWVkk0SEhDSFVBPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlUyIiwiNDg5NSJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport Paris-Beauvais",
+      "id": "BVA",
+      "time": "2026-12-05 10:20"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 11:30"
+     },
+     "duration": 130,
+     "airplane": "Boeing 737MAX 8 Passenger",
+     "airline": "Ryanair",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+     "travel_class": "Economy",
+     "flight_number": "FR 7475",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 91 kg"
+     ]
+    }
+   ],
+   "total_duration": 130,
+   "carbon_emissions": {
+    "this_flight": 92000
+   },
+   "price": 94,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pHVWpjME56VWFDZ2p5U0JBQ0dnTkZWVkk0SEhDSVVRPT0iLFtbIkJWQSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIkZSIiwiNzQ3NSJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 10:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 11:35"
+     },
+     "duration": 130,
+     "airplane": "Airbus A320",
+     "airline": "easyJet",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+     "travel_class": "Economy",
+     "flight_number": "U2 6852",
+     "extensions": [
+      "Carbon emissions estimate: 109 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 130,
+   "carbon_emissions": {
+    "this_flight": 110000
+   },
+   "price": 95,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/U2.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pWTWpZNE5USWFDZ2pHU1JBQ0dnTkZWVkk0SEhEbFVRPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlUyIiwiNjg1MiJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport Paris-Beauvais",
+      "id": "BVA",
+      "time": "2026-12-05 20:20"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 21:55"
+     },
+     "duration": 155,
+     "airplane": "Boeing 737",
+     "airline": "Ryanair",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+     "travel_class": "Economy",
+     "flight_number": "FR 1084",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "Carbon emissions estimate: 126 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 126000
+   },
+   "price": 123,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FR.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pHVWpFd09EUWFDZ2lLWUJBQ0dnTkZWVkk0SEhEc2FnPT0iLFtbIkJWQSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkZSIiwiMTA4NCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 16:50"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 18:10"
+     },
+     "duration": 140,
+     "airplane": "Airbus A320neo",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7606",
+     "extensions": [
+      "Carbon emissions estimate: 94 kg"
+     ]
+    }
+   ],
+   "total_duration": 140,
+   "carbon_emissions": {
+    "this_flight": 94000
+   },
+   "price": 131,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk1EWWFDZ2lzWmhBQ0dnTkZWVkk0SEhEb2NRPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRPIiwiNzYwNiJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 12:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 14:25"
+     },
+     "duration": 160,
+     "airplane": "Airbus A320neo",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7646",
+     "extensions": [
+      "Carbon emissions estimate: 109 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 134,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk5EWWFDZ2pZYUJBQ0dnTkZWVkk0SEhDMmRBPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRPIiwiNzY0NiJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 08:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 10:05"
+     },
+     "duration": 140,
+     "airplane": "Boeing 737",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7602",
+     "extensions": [
+      "Carbon emissions estimate: 108 kg"
+     ]
+    }
+   ],
+   "total_duration": 140,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 139,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk1ESWFDZ2pNYkJBQ0dnTkZWVkk0SEhEaWVBPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRPIiwiNzYwMiJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 11:55"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 13:15"
+     },
+     "duration": 140,
+     "airplane": "Boeing 737",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7604",
+     "extensions": [
+      "Carbon emissions estimate: 108 kg"
+     ]
+    }
+   ],
+   "total_duration": 140,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 139,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk1EUWFDZ2pNYkJBQ0dnTkZWVkk0SEhEaWVBPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRPIiwiNzYwNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 11:35"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 13:15"
+     },
+     "duration": 160,
+     "airplane": "Airbus A320neo",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7644",
+     "extensions": [
+      "Carbon emissions estimate: 109 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 144,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk5EUWFDZ2pBY0JBQ0dnTkZWVkk0SEhDT2ZRPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRPIiwiNzY0NCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 06:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 08:05"
+     },
+     "duration": 140,
+     "airplane": "Boeing 737",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7600",
+     "extensions": [
+      "Carbon emissions estimate: 108 kg"
+     ]
+    }
+   ],
+   "total_duration": 140,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 147,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk1EQWFDZ2pzY2hBQ0dnTkZWVkk0SEhEYmZ3PT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRPIiwiNzYwMCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 10:20"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 11:35"
+     },
+     "duration": 135,
+     "airplane": "Airbus A320neo",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 453",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 100 kg"
+     ]
+    }
+   ],
+   "total_duration": 135,
+   "carbon_emissions": {
+    "this_flight": 101000
+   },
+   "price": 150,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRMU14b0tDTmwwRUFJYUEwVlZVamdjY09PQkFRPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRQIiwiNDUzIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 16:50"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 17:55"
+     },
+     "duration": 125,
+     "airplane": "Airbus A320neo",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 455",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 100 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 125,
+   "carbon_emissions": {
+    "this_flight": 101000
+   },
+   "price": 150,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRMU5Sb0tDTmwwRUFJYUEwVlZVamdjY09PQkFRPT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIlRQIiwiNDU1Il1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 13:25"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 15:10"
+     },
+     "duration": 165,
+     "airplane": "Airbus A320",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1624",
+     "legroom": "74 cm",
+     "extensions": [
+      "Below average legroom (74 cm)",
+      "Wi-Fi for a fee",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 134 kg"
+     ]
+    }
+   ],
+   "total_duration": 165,
+   "carbon_emissions": {
+    "this_flight": 135000
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFMk1qUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTYyNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 15:50"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 17:30"
+     },
+     "duration": 160,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1194",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 150000
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFeE9UUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTE5NCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 20:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 22:25"
+     },
+     "duration": 160,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1124",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 150000
+   },
+   "price": 159,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFeE1qUWFDZ2lhZkJBQ0dnTkZWVkk0SEhDUWlnRT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTEyNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 09:15"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 10:35"
+     },
+     "duration": 140,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1528",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 128 kg"
+     ]
+    }
+   ],
+   "total_duration": 140,
+   "carbon_emissions": {
+    "this_flight": 129000
+   },
+   "price": 161,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFMU1qZ2FDZ2lVZlJBQ0dnTkZWVkk0SEhDWGl3RT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIkFGIiwiMTUyOCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 20:45"
+     },
+     "arrival_airport": {
+      "name": "Aéroport Francisco Sá Carneiro",
+      "id": "OPO",
+      "time": "2026-12-05 22:00"
+     },
+     "duration": 135,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1516",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 128 kg"
+     ]
+    }
+   ],
+   "total_duration": 135,
+   "carbon_emissions": {
+    "this_flight": 129000
+   },
+   "price": 161,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFMU1UWWFDZ2lVZlJBQ0dnTkZWVkk0SEhDWGl3RT0iLFtbIkNERyIsIjIwMjYtMTItMDUiLCJPUE8iLG51bGwsIkFGIiwiMTUxNiJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Charles de Gaulle",
+      "id": "CDG",
+      "time": "2026-12-05 09:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 11:25"
+     },
+     "duration": 165,
+     "airplane": "Airbus A220-300 Passenger",
+     "airline": "Air France",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+     "travel_class": "Economy",
+     "flight_number": "AF 1024",
+     "legroom": "76 cm",
+     "extensions": [
+      "Average legroom (76 cm)",
+      "In-seat USB outlet",
+      "Carbon emissions estimate: 149 kg"
+     ]
+    }
+   ],
+   "total_duration": 165,
+   "carbon_emissions": {
+    "this_flight": 150000
+   },
+   "price": 164,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AF.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pCUmpFd01qUWFDd2lPZ0FFUUFob0RSVlZTT0J4d3ZJNEIiLFtbIkNERyIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIkFGIiwiMTAyNCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 07:35"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 09:15"
+     },
+     "duration": 160,
+     "airplane": "Airbus A320neo",
+     "airline": "Transavia",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+     "travel_class": "Economy",
+     "flight_number": "TO 7640",
+     "extensions": [
+      "Carbon emissions estimate: 109 kg"
+     ]
+    }
+   ],
+   "total_duration": 160,
+   "carbon_emissions": {
+    "this_flight": 109000
+   },
+   "price": 169,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TO.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Fare non-refundable, taxes may be refundable",
+    "Ticket changes for a fee",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1pVVHpjMk5EQWFDd2lFaEFFUUFob0RSVlZTT0J4dzZwSUIiLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRPIiwiNzY0MCJdXV0="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 06:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 08:15"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320neo",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 441",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 116 kg"
+     ]
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 117000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRME1Sb0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDQxIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 08:00"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 09:35"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320neo",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 443",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 116 kg"
+     ]
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 117000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRME14b0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDQzIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 11:00"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 12:35"
+     },
+     "duration": 155,
+     "airplane": "Airbus A319",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 431",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 148 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 148000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRek1Sb0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDMxIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 12:35"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 14:10"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 433",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 136 kg"
+     ]
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 136000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRek14b0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDMzIl1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 15:20"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 16:55"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320neo",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 435",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 116 kg"
+     ]
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 117000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRek5Sb0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDM1Il1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 20:35"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 22:10"
+     },
+     "duration": 155,
+     "airplane": "Airbus A320",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 439",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 132 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 132000
+   },
+   "price": 179,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRek9Sb0xDSmVMQVJBQ0dnTkZWVkk0SEhEam1nRT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDM5Il1dXQ=="
+  },
+  {
+   "flights": [
+    {
+     "departure_airport": {
+      "name": "Aéroport de Paris-Orly",
+      "id": "ORY",
+      "time": "2026-12-05 17:40"
+     },
+     "arrival_airport": {
+      "name": "Aéroport international de Lisbonne",
+      "id": "LIS",
+      "time": "2026-12-05 19:15"
+     },
+     "duration": 155,
+     "airplane": "Airbus A319",
+     "airline": "Tap Air Portugal",
+     "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+     "travel_class": "Economy",
+     "flight_number": "TP 437",
+     "legroom": "71 cm",
+     "extensions": [
+      "Below average legroom (71 cm)",
+      "Carbon emissions estimate: 148 kg"
+     ],
+     "often_delayed_by_over_30_min": true
+    }
+   ],
+   "total_duration": 155,
+   "carbon_emissions": {
+    "this_flight": 148000
+   },
+   "price": 203,
+   "type": "Round trip",
+   "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/TP.png",
+   "extensions": [
+    "Checked baggage for a fee",
+    "Full refund for cancellations",
+    "Free change, possible fare difference",
+    "Bag and fare conditions depend on the return flight"
+   ],
+   "departure_token": "WyJDalJJZUZVNWJVOWtNM2d6ZGxWQlRVaHlWRkZDUnkwdExTMHRMUzB0TFc5NWNYY3hNa0ZCUVVGQlIzSlFjWHBGVGpJek5EQkJFZ1ZVVURRek54b0xDUGVkQVJBQ0dnTkZWVkk0SEhEUXJ3RT0iLFtbIk9SWSIsIjIwMjYtMTItMDUiLCJMSVMiLG51bGwsIlRQIiwiNDM3Il1dXQ=="
+  }
+ ],
+ "airports": [
+  {
+   "departure": [
+    {
+     "airport": {
+      "id": "CDG",
+      "name": "Aéroport de Paris-Charles de Gaulle"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    },
+    {
+     "airport": {
+      "id": "ORY",
+      "name": "Aéroport de Paris-Orly"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    },
+    {
+     "airport": {
+      "id": "BVA",
+      "name": "Aéroport Paris-Beauvais"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    }
+   ],
+   "arrival": [
+    {
+     "airport": {
+      "id": "LIS",
+      "name": "Aéroport international de Lisbonne"
+     },
+     "city": "Lisbonne",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLxT3PIh1TwnGsLrG7G-JQRFMG0zIp4uiQ71FTwf1WQHKROUG_veOYAiGQTLGO36g5OCdu9DUrwHrzaA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG3-nF1u-sTIpnrbZ3a_ly_OcwqDxS9MCOGoiQTX3dJ3ZoIiUsVHqxHC-nmruwZ8aoJZJPM7O5YSmsHR6tp2L_EHV4CnsiNtatHuedKBE"
+    },
+    {
+     "airport": {
+      "id": "OPO",
+      "name": "Aéroport Francisco Sá Carneiro"
+     },
+     "city": "Porto",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQe3ktu7ZoHP8OfUAkMcfjveYOPwl7KjwYirPxPmwaMfnIShX6xEtRsoiHB7mGzKBqOQvHAofB3wPXjWQ",
+     "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQGsol-RlKZg6h32HdvWLng51BqL4OzbQG8zhYnEALk8mJ8HMWkOIp-q3VuQMeT5R5Z02gC-I3jcQ85OxPhHK4g8lsD1FhaxTJJiSP0SRU"
+    },
+    {
+     "airport": {
+      "id": "FAO",
+      "name": "Aéroport international de Faro"
+     },
+     "city": "Faro",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeaV3vq4iOlTCi-wsvo-rQEz7r6LzVk2BkWDjafhg8ZlEtflL95UoRqCYELwPrKi1tbN-fh_DFhE2gnA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkRU5OjYfBQXJQzlOPDs5HKxFIqCYFIW6-9vMZUADkO7VV7DQWCF90PAe7IfkQONeP4x7dzXs9W2PNfAiUTEZ8y21QliQ-zkzEkxolVNc"
+    }
+   ]
+  },
+  {
+   "departure": [
+    {
+     "airport": {
+      "id": "LIS",
+      "name": "Aéroport international de Lisbonne"
+     },
+     "city": "Lisbonne",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLxT3PIh1TwnGsLrG7G-JQRFMG0zIp4uiQ71FTwf1WQHKROUG_veOYAiGQTLGO36g5OCdu9DUrwHrzaA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG3-nF1u-sTIpnrbZ3a_ly_OcwqDxS9MCOGoiQTX3dJ3ZoIiUsVHqxHC-nmruwZ8aoJZJPM7O5YSmsHR6tp2L_EHV4CnsiNtatHuedKBE"
+    },
+    {
+     "airport": {
+      "id": "OPO",
+      "name": "Aéroport Francisco Sá Carneiro"
+     },
+     "city": "Porto",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQe3ktu7ZoHP8OfUAkMcfjveYOPwl7KjwYirPxPmwaMfnIShX6xEtRsoiHB7mGzKBqOQvHAofB3wPXjWQ",
+     "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQGsol-RlKZg6h32HdvWLng51BqL4OzbQG8zhYnEALk8mJ8HMWkOIp-q3VuQMeT5R5Z02gC-I3jcQ85OxPhHK4g8lsD1FhaxTJJiSP0SRU"
+    },
+    {
+     "airport": {
+      "id": "FAO",
+      "name": "Aéroport international de Faro"
+     },
+     "city": "Faro",
+     "country": "Portugal",
+     "country_code": "PT",
+     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeaV3vq4iOlTCi-wsvo-rQEz7r6LzVk2BkWDjafhg8ZlEtflL95UoRqCYELwPrKi1tbN-fh_DFhE2gnA",
+     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkRU5OjYfBQXJQzlOPDs5HKxFIqCYFIW6-9vMZUADkO7VV7DQWCF90PAe7IfkQONeP4x7dzXs9W2PNfAiUTEZ8y21QliQ-zkzEkxolVNc"
+    }
+   ],
+   "arrival": [
+    {
+     "airport": {
+      "id": "CDG",
+      "name": "Aéroport de Paris-Charles de Gaulle"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    },
+    {
+     "airport": {
+      "id": "ORY",
+      "name": "Aéroport de Paris-Orly"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    },
+    {
+     "airport": {
+      "id": "BVA",
+      "name": "Aéroport Paris-Beauvais"
+     },
+     "city": "Paris",
+     "country": "France",
+     "country_code": "FR",
+     "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGx8ii2KbSDdbdzfKye5oDN2bwBA6audqI7XUEf2iMRZezpn_ZbQe1ZIuvUSH-8XOMe958umDwSsAF1w",
+     "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSyQJ-woNs0iO22mPSkmRUM5gcsTbbYeypQ6BBTeFxXr90mqTxZl57Fdq2CDuLn4w7cKZ8TT9_zZhOpF57rIpA7yWKQnqKvkKIf9Y-qJDo"
+    }
+   ]
+  }
+ ]
+}

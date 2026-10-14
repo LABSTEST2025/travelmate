@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Young+Serif&family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9E7E2;font-family:'DM Sans',system-ui,sans-serif;color:#1a1a1a}a{color:inherit}a:hover{opacity:.75}.dv-turn{padding:48px 56px 40px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 28px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}.dv-next{margin:28px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}</style></helmet>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Escapade — 3 directions visuelles · <a class="dv-oid" href="#1a">1a</a> Confetti · <a class="dv-oid" href="#1b">1b</a> Atlas · <a class="dv-oid" href="#1c">1c</a> Carnet · <a class="dv-oid" href="#reco">Reco</a></span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Ludique et colorée</div>
+<div class="dv-card" style="width:2040px;background:#FFF8EE;padding:56px;box-sizing:border-box;display:flex;flex-direction:column;gap:56px;font-family:'DM Sans',sans-serif;color:#1E1B2E">
+
+<div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:500 13px 'DM Sans';letter-spacing:.12em;text-transform:uppercase;color:#FF6B4A">Direction A</div>
+<div style="font:800 76px/0.95 'Bricolage Grotesque';letter-spacing:-.03em">Confetti</div>
+<p style="margin:0;font-size:19px;line-height:1.5;max-width:560px;text-wrap:pretty">Une appli qui ressemble à une conversation de groupe qui s'emballe. Couleurs franches, formes rondes, avatars-pastilles partout : chaque action d'un ami se voit et se célèbre. Le ton est tutoyant, rapide, un peu taquin.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:600 13px 'DM Sans';text-transform:uppercase;letter-spacing:.1em;opacity:.6">Palette</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#FFF8EE;border:1.5px solid #1E1B2E"></div><div style="font:500 12px 'JetBrains Mono'">#FFF8EE fond</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#1E1B2E"></div><div style="font:500 12px 'JetBrains Mono'">#1E1B2E encre</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#FF6B4A"></div><div style="font:500 12px 'JetBrains Mono'">#FF6B4A corail</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#FFC93C"></div><div style="font:500 12px 'JetBrains Mono'">#FFC93C soleil</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#3CCB9A"></div><div style="font:500 12px 'JetBrains Mono'">#3CCB9A menthe</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:18px;background:#8F7CFF"></div><div style="font:500 12px 'JetBrains Mono'">#8F7CFF lilas</div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:600 13px 'DM Sans';text-transform:uppercase;letter-spacing:.1em;opacity:.6">Typo · icônes · images</div>
+<div style="font:800 34px 'Bricolage Grotesque';letter-spacing:-.02em">Bricolage Grotesque</div>
+<div style="font-size:15px;opacity:.75;margin-top:-8px">Titres, chiffres clés — 700/800, serré</div>
+<div style="font:500 22px 'DM Sans'">DM Sans — interface et texte</div>
+<div style="font-size:15px;line-height:1.5;opacity:.85">Icônes à trait épais (2 px), bouts arrondis, pleines quand actives. Photos détourées façon sticker, bord blanc de 4 px, légère rotation. Avatars : pastille de couleur + initiale, attribuée à l'arrivée.</div>
+</div>
+</div>
+
+<div style="display:flex;gap:44px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 15px 'Bricolage Grotesque'"><span style="color:#FF6B4A">01</span> Création du groupe</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1E1B2E;padding:9px;box-sizing:border-box;box-shadow:0 30px 60px -30px rgba(30,27,46,.45)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FFF8EE;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'DM Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:12px 20px 20px;display:flex;flex-direction:column;gap:18px">
+<div style="font:800 32px/1 'Bricolage Grotesque';letter-spacing:-.02em">On part où,<br>la team ?</div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font:600 13px 'DM Sans'">Nom du voyage</div><div style="height:50px;border-radius:16px;background:#fff;border:2px solid #1E1B2E;display:flex;align-items:center;padding:0 16px;font-size:16px">Été 2027 entre potes</div></div>
+<div style="background:#FF6B4A;color:#fff;border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:12px">
+<div style="font:700 15px 'DM Sans'">Ton lien d'invitation</div>
+<div style="background:rgba(255,255,255,.18);border-radius:14px;padding:12px 14px;font:500 14px 'JetBrains Mono';display:flex;justify-content:space-between"><span>escapade.app/j/K7Q2</span><span style="font-family:'DM Sans';font-weight:700">Copier</span></div>
+<div style="display:flex;gap:8px"><div style="flex:1;height:40px;border-radius:999px;background:#fff;color:#1E1B2E;display:flex;align-items:center;justify-content:center;font:700 13px 'DM Sans'">WhatsApp</div><div style="flex:1;height:40px;border-radius:999px;background:#fff;color:#1E1B2E;display:flex;align-items:center;justify-content:center;font:700 13px 'DM Sans'">SMS</div><div style="flex:1;height:40px;border-radius:999px;background:#fff;color:#1E1B2E;display:flex;align-items:center;justify-content:center;font:700 13px 'DM Sans'">QR code</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font:600 13px 'DM Sans'">Déjà dans la bande · 3</div>
+<div style="display:flex;align-items:center"><div style="width:44px;height:44px;border-radius:50%;background:#FFC93C;border:3px solid #FFF8EE;display:flex;align-items:center;justify-content:center;font:800 17px 'Bricolage Grotesque'">M</div><div style="width:44px;height:44px;border-radius:50%;background:#3CCB9A;border:3px solid #FFF8EE;margin-left:-10px;display:flex;align-items:center;justify-content:center;font:800 17px 'Bricolage Grotesque'">L</div><div style="width:44px;height:44px;border-radius:50%;background:#8F7CFF;color:#fff;border:3px solid #FFF8EE;margin-left:-10px;display:flex;align-items:center;justify-content:center;font:800 17px 'Bricolage Grotesque'">S</div><div style="width:44px;height:44px;border-radius:50%;border:2px dashed #1E1B2E;margin-left:6px;display:flex;align-items:center;justify-content:center;font:700 20px 'DM Sans';opacity:.4">+</div></div></div>
+<div style="margin-top:auto;height:56px;border-radius:999px;background:#1E1B2E;color:#fff;display:flex;align-items:center;justify-content:center;font:700 16px 'DM Sans'">Passer aux envies →</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.5;opacity:.8">Titre-question → champ unique → carte lien (couleur d'accent = l'action la plus importante) → pile d'avatars. Partage natif en 1 tap ; pas de compte requis pour rejoindre.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 15px 'Bricolage Grotesque'"><span style="color:#FF6B4A">02</span> Saisie des préférences</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1E1B2E;padding:9px;box-sizing:border-box;box-shadow:0 30px 60px -30px rgba(30,27,46,.45)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FFF8EE;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'DM Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:8px 20px 14px;display:flex;flex-direction:column;gap:12px">
+<div style="background:#fff;border-radius:18px;padding:10px 12px;display:flex;align-items:center;gap:10px;border:1.5px solid rgba(30,27,46,.1)">
+<div style="display:flex"><div style="width:26px;height:26px;border-radius:50%;background:#FFC93C;font:800 12px 'Bricolage Grotesque';display:flex;align-items:center;justify-content:center">M</div><div style="width:26px;height:26px;border-radius:50%;background:#3CCB9A;margin-left:-6px;font:800 12px 'Bricolage Grotesque';display:flex;align-items:center;justify-content:center">L</div><div style="width:26px;height:26px;border-radius:50%;background:#8F7CFF;color:#fff;margin-left:-6px;font:800 12px 'Bricolage Grotesque';display:flex;align-items:center;justify-content:center">S</div><div style="width:26px;height:26px;border-radius:50%;background:#5BB6F0;margin-left:-6px;font:800 12px 'Bricolage Grotesque';display:flex;align-items:center;justify-content:center">T</div><div style="width:26px;height:26px;border-radius:50%;border:1.5px dashed #1E1B2E;margin-left:-6px;opacity:.4;background:#FFF8EE"></div><div style="width:26px;height:26px;border-radius:50%;border:1.5px dashed #1E1B2E;margin-left:-6px;opacity:.4;background:#FFF8EE"></div></div>
+<div style="font:600 13px 'DM Sans'">4 sur 6 ont répondu</div>
+</div>
+<div style="font:800 26px/1.05 'Bricolage Grotesque';letter-spacing:-.02em">Tes envies, Inès</div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font:600 13px 'DM Sans'">Pays rêvé *</div><div style="height:46px;border-radius:14px;background:#fff;border:2px solid #1E1B2E;display:flex;align-items:center;padding:0 14px;font-size:15px">Portugal</div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font:600 13px 'DM Sans'">Budget / pers. *</span><span style="font:600 11px 'DM Sans';background:#1E1B2E;color:#FFC93C;padding:3px 8px;border-radius:999px">Visible par toi seul·e</span></div><div style="height:46px;border-radius:14px;background:#fff;border:2px solid #1E1B2E;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font:700 17px 'Bricolage Grotesque'"><span>900</span><span>€</span></div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font:600 13px 'DM Sans'">Dates *</div><div style="display:flex;gap:8px"><div style="flex:1;height:46px;border-radius:14px;background:#fff;border:2px solid #1E1B2E;display:flex;align-items:center;padding:0 12px;font-size:14px">12 juil.</div><div style="flex:1;height:46px;border-radius:14px;background:#fff;border:2px solid #1E1B2E;display:flex;align-items:center;padding:0 12px;font-size:14px">19 juil.</div></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><div style="font:600 13px 'DM Sans'">Ton style <span style="opacity:.5;font-weight:400">· optionnel</span></div><div style="display:flex;flex-wrap:wrap;gap:6px"><div style="padding:8px 12px;border-radius:999px;border:2px solid #1E1B2E;font:600 13px 'DM Sans'">Aventure</div><div style="padding:8px 12px;border-radius:999px;background:#3CCB9A;border:2px solid #1E1B2E;font:600 13px 'DM Sans'">Détente ✓</div><div style="padding:8px 12px;border-radius:999px;background:#3CCB9A;border:2px solid #1E1B2E;font:600 13px 'DM Sans'">Culture ✓</div><div style="padding:8px 12px;border-radius:999px;border:2px solid #1E1B2E;font:600 13px 'DM Sans'">Fête</div></div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font:600 13px 'DM Sans'">Départ de <span style="opacity:.5;font-weight:400">· optionnel</span></div><div style="height:46px;border-radius:14px;background:#fff;border:2px solid rgba(30,27,46,.25);display:flex;align-items:center;padding:0 14px;font-size:15px">Lyon</div></div>
+<div style="margin-top:auto;height:56px;border-radius:999px;background:#FF6B4A;color:#fff;display:flex;align-items:center;justify-content:center;font:700 16px 'DM Sans'">Envoyer mes envies</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.5;opacity:.8">Progression collective épinglée en haut (avatars pleins = soumis). Obligatoires d'abord, optionnels en chips. Badge « visible par toi seul·e » collé au budget pour rassurer.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 15px 'Bricolage Grotesque'"><span style="color:#FF6B4A">03</span> Suggestions de l'IA</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1E1B2E;padding:9px;box-sizing:border-box;box-shadow:0 30px 60px -30px rgba(30,27,46,.45)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FFF8EE;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'DM Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:8px 0 20px;display:flex;flex-direction:column;gap:12px;overflow:hidden">
+<div style="padding:0 20px;display:flex;flex-direction:column;gap:4px"><div style="font:800 26px/1.05 'Bricolage Grotesque';letter-spacing:-.02em">3 idées pour vous 6</div><div style="font-size:13px;opacity:.7">Budget du groupe : <b>800 – 1 100 € / pers.</b></div></div>
+<div style="display:flex;gap:6px;padding:0 20px"><div style="padding:6px 12px;border-radius:999px;background:#1E1B2E;color:#fff;font:700 12px 'DM Sans'">Portugal</div><div style="padding:6px 12px;border-radius:999px;border:1.5px solid #1E1B2E;font:600 12px 'DM Sans'">Grèce</div><div style="padding:6px 12px;border-radius:999px;border:1.5px solid #1E1B2E;font:600 12px 'DM Sans'">Croatie</div></div>
+<div style="display:flex;gap:12px;padding:0 20px">
+<div style="flex:none;width:262px;background:#fff;border:2px solid #1E1B2E;border-radius:26px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:120px;background:repeating-linear-gradient(135deg,#FFE3D6 0 8px,#FFD2BF 8px 16px);display:flex;align-items:flex-end;justify-content:space-between;padding:10px"><span style="font:500 10px 'JetBrains Mono';background:#fff;padding:2px 6px;border-radius:4px">photo destination</span><span style="font:700 11px 'DM Sans';background:#3CCB9A;padding:4px 8px;border-radius:999px">Colle à 6/6</span></div>
+<div style="padding:14px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 22px 'Bricolage Grotesque'">Portugal</span><span style="font-size:12px;opacity:.7">mai – sept.</span></div>
+<div style="display:flex;flex-direction:column;gap:5px"><div style="position:relative;height:12px;border-radius:999px;background:#F1ECE2"><div style="position:absolute;left:30%;width:40%;top:0;bottom:0;background:#BDEFD9;border-radius:999px"></div><div style="position:absolute;left:28%;top:-3px;width:18px;height:18px;border-radius:50%;background:#FF6B4A;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #1E1B2E"></div></div><div style="display:flex;justify-content:space-between;font-size:11px;opacity:.7"><span>500 €</span><span><b style="color:#1E1B2E">780 €</b> · dans la fourchette</span><span>1 500 €</span></div></div>
+<div style="display:flex;flex-direction:column;gap:4px;font-size:13px;line-height:1.35"><div><b style="color:#2BA57C">+</b> Vols directs depuis Lyon</div><div><b style="color:#2BA57C">+</b> Plages et villes à 1 h</div><div><b style="color:#FF6B4A">–</b> Très fréquenté en juillet</div></div>
+<div style="font:600 12px 'DM Sans';text-decoration:underline">4 sources</div>
+</div></div>
+<div style="flex:none;width:262px;background:#fff;border:2px solid #1E1B2E;border-radius:26px;height:420px;opacity:.6"></div>
+</div>
+<div style="margin:auto 20px 0;height:52px;border-radius:999px;border:2px solid #1E1B2E;display:flex;align-items:center;justify-content:center;font:700 15px 'DM Sans'">Comparer côte à côte</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.5;opacity:.8">Carrousel de cartes à swiper + onglets pour sauter. Jauge commune à toutes les cartes (même échelle) : zone menthe = fourchette du groupe, point corail = estimation. « Comparer » ouvre un tableau 3 colonnes en paysage.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 15px 'Bricolage Grotesque'"><span style="color:#FF6B4A">04</span> Vote</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1E1B2E;padding:9px;box-sizing:border-box;box-shadow:0 30px 60px -30px rgba(30,27,46,.45)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FFF8EE;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'DM Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:8px 20px 20px;display:flex;flex-direction:column;gap:14px">
+<div style="font:800 30px/1 'Bricolage Grotesque';letter-spacing:-.02em">Ton vote,<br>ta voix.</div>
+<div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:10px;border-radius:999px;background:#F1ECE2;overflow:hidden"><div style="width:50%;height:100%;background:#8F7CFF"></div></div><span style="font:700 13px 'DM Sans'">3/6 ont voté</span></div>
+<div style="border-radius:22px;background:#FF6B4A;color:#fff;border:2px solid #1E1B2E;padding:16px;display:flex;align-items:center;gap:12px;box-shadow:4px 4px 0 #1E1B2E"><div style="width:52px;height:52px;border-radius:14px;background:repeating-linear-gradient(135deg,#FFB49F 0 6px,#FF9A80 6px 12px)"></div><div style="flex:1"><div style="font:800 20px 'Bricolage Grotesque'">Portugal</div><div style="font-size:12px;opacity:.9">780 € · mai – sept.</div></div><div style="width:30px;height:30px;border-radius:50%;background:#fff;color:#FF6B4A;display:flex;align-items:center;justify-content:center;font:800 16px 'DM Sans'">✓</div></div>
+<div style="border-radius:22px;background:#fff;border:2px solid #1E1B2E;padding:16px;display:flex;align-items:center;gap:12px"><div style="width:52px;height:52px;border-radius:14px;background:repeating-linear-gradient(135deg,#DDE9FF 0 6px,#C9DCFF 6px 12px)"></div><div style="flex:1"><div style="font:800 20px 'Bricolage Grotesque'">Grèce</div><div style="font-size:12px;opacity:.7">940 € · juin – sept.</div></div><div style="width:30px;height:30px;border-radius:50%;border:2px solid #1E1B2E"></div></div>
+<div style="border-radius:22px;background:#fff;border:2px solid #1E1B2E;padding:16px;display:flex;align-items:center;gap:12px"><div style="width:52px;height:52px;border-radius:14px;background:repeating-linear-gradient(135deg,#D7F5E9 0 6px,#BDEFD9 6px 12px)"></div><div style="flex:1"><div style="font:800 20px 'Bricolage Grotesque'">Croatie</div><div style="font-size:12px;opacity:.7">860 € · juin – sept.</div></div><div style="width:30px;height:30px;border-radius:50%;border:2px solid #1E1B2E"></div></div>
+<div style="font-size:13px;line-height:1.4;opacity:.7;text-align:center">Les résultats restent cachés jusqu'au dernier vote. Tu peux changer d'avis d'ici là.</div>
+<div style="margin-top:auto;height:56px;border-radius:999px;background:#1E1B2E;color:#fff;display:flex;align-items:center;justify-content:center;font:700 16px 'DM Sans'">Valider mon vote</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.5;opacity:.8">Grandes cibles (76 px), sélection = carte pleine + ombre portée décalée. Compteur collectif sans dévoiler qui a voté quoi. Résultats masqués pour éviter l'effet moutonnier.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 15px 'Bricolage Grotesque'"><span style="color:#FF6B4A">05</span> Plan final</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1E1B2E;padding:9px;box-sizing:border-box;box-shadow:0 30px 60px -30px rgba(30,27,46,.45)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FFF8EE;display:flex;flex-direction:column">
+<div style="height:150px;flex:none;background:repeating-linear-gradient(135deg,#FFE3D6 0 8px,#FFD2BF 8px 16px);display:flex;flex-direction:column;justify-content:space-between;padding:14px 22px"><div style="display:flex;justify-content:space-between;font:600 13px 'DM Sans'"><span>9:41</span><span>●●● ▮</span></div><div><div style="font:500 10px 'JetBrains Mono';opacity:.6">photo Lisbonne</div><div style="font:800 34px/1 'Bricolage Grotesque';letter-spacing:-.02em">Portugal !</div><div style="font:600 13px 'DM Sans'">12 → 19 juil. · 6 voyageurs</div></div></div>
+<div style="flex:1;padding:14px 18px 18px;display:flex;flex-direction:column;gap:12px">
+<div style="background:#1E1B2E;color:#fff;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 28px 'Bricolage Grotesque'">1 040 €</span><span style="font:700 12px 'DM Sans';background:#3CCB9A;color:#1E1B2E;padding:4px 10px;border-radius:999px">60 € sous le budget</span></div>
+<div style="position:relative;height:12px;border-radius:999px;background:rgba(255,255,255,.15)"><div style="width:94.5%;height:100%;border-radius:999px;background:#FFC93C"></div><div style="position:absolute;right:0;top:-4px;bottom:-4px;width:2px;background:#fff"></div></div>
+<div style="display:flex;justify-content:space-between;font-size:12px;opacity:.8"><span>Coût par pers. · 6 240 € au total</span><span>Budget 1 100 €</span></div>
+</div>
+<div style="display:flex;gap:4px;background:#F1ECE2;border-radius:999px;padding:4px"><div style="flex:1;height:34px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;font:700 13px 'DM Sans'">Jour par jour</div><div style="flex:1;display:flex;align-items:center;justify-content:center;font:600 13px 'DM Sans';opacity:.6">Vols</div><div style="flex:1;display:flex;align-items:center;justify-content:center;font:600 13px 'DM Sans';opacity:.6">Hôtels</div></div>
+<div style="display:flex;gap:12px"><div style="flex:none;width:40px;height:40px;border-radius:12px;background:#FFC93C;display:flex;align-items:center;justify-content:center;font:800 14px 'Bricolage Grotesque'">J1</div><div style="flex:1;border-bottom:1.5px solid rgba(30,27,46,.1);padding-bottom:10px"><div style="font:700 15px 'DM Sans'">Arrivée à Lisbonne</div><div style="font-size:13px;opacity:.7">Vol LYS → LIS 09:40 · check-in Alfama · dîner à Graça</div></div></div>
+<div style="display:flex;gap:12px"><div style="flex:none;width:40px;height:40px;border-radius:12px;background:#3CCB9A;display:flex;align-items:center;justify-content:center;font:800 14px 'Bricolage Grotesque'">J2</div><div style="flex:1;border-bottom:1.5px solid rgba(30,27,46,.1);padding-bottom:10px"><div style="font:700 15px 'DM Sans'">Sintra en train</div><div style="font-size:13px;opacity:.7">Palais de Pena · 40 min depuis Rossio</div></div></div>
+<div style="display:flex;gap:12px"><div style="flex:none;width:40px;height:40px;border-radius:12px;background:#8F7CFF;color:#fff;display:flex;align-items:center;justify-content:center;font:800 14px 'Bricolage Grotesque'">J3</div><div style="flex:1"><div style="font:700 15px 'DM Sans'">Route vers Comporta</div><div style="font-size:13px;opacity:.7">Location de voiture · 2 nuits en casa</div></div></div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.5;opacity:.8">Bloc budget en tête, toujours visible : montant, pastille d'écart (vert sous / corail au-dessus), barre avec repère du budget. Onglets segmentés pour itinéraire, vols, hôtels.</div></sc-if>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:800 34px 'Bricolage Grotesque';letter-spacing:-.02em">États à gérer</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px">
+<div style="background:#fff;border-radius:26px;border:2px solid #1E1B2E;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'JetBrains Mono';opacity:.6">FORMULAIRE INCOMPLET</div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font:600 13px 'DM Sans'">Budget / pers. *</div><div style="height:46px;border-radius:14px;background:#FFF1EC;border:2px solid #FF6B4A;display:flex;align-items:center;padding:0 14px;font-size:15px;color:rgba(30,27,46,.4)">ex. 800 €</div><div style="font:600 12px 'DM Sans';color:#D9472A">Il manque ton budget — même approximatif.</div></div>
+<div style="height:50px;border-radius:999px;background:#E7E1D6;color:rgba(30,27,46,.5);display:flex;align-items:center;justify-content:center;font:700 14px 'DM Sans'">Encore 2 champs</div>
+<div style="font-size:13px;line-height:1.45;opacity:.75">Le bouton dit ce qui manque au lieu d'être juste grisé ; un tap fait défiler vers le 1er champ vide. Brouillon sauvegardé en local.</div>
+</div>
+<div style="background:#fff;border-radius:26px;border:2px solid #1E1B2E;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'JetBrains Mono';opacity:.6">ATTENTE DES AUTRES</div>
+<div style="font:800 26px 'Bricolage Grotesque'">Plus que 2 !</div>
+<div style="display:flex;gap:6px"><div style="width:36px;height:36px;border-radius:50%;background:#FFC93C"></div><div style="width:36px;height:36px;border-radius:50%;background:#3CCB9A"></div><div style="width:36px;height:36px;border-radius:50%;background:#8F7CFF"></div><div style="width:36px;height:36px;border-radius:50%;background:#5BB6F0"></div><div style="width:36px;height:36px;border-radius:50%;border:2px dashed #FF6B4A;display:flex;align-items:center;justify-content:center;font:800 13px 'Bricolage Grotesque';color:#FF6B4A">K</div><div style="width:36px;height:36px;border-radius:50%;border:2px dashed #FF6B4A;display:flex;align-items:center;justify-content:center;font:800 13px 'Bricolage Grotesque';color:#FF6B4A">I</div></div>
+<div style="height:46px;border-radius:999px;background:#FFC93C;display:flex;align-items:center;justify-content:center;font:700 14px 'DM Sans'">Relancer Karim et Inès</div>
+<div style="font-size:13px;line-height:1.45;opacity:.75">Avatars en pointillé qui respirent doucement. Relance = message pré-écrit à partager, limitée à 1 / 12 h. L'organisateur peut lancer l'IA sans les retardataires.</div>
+</div>
+<div style="background:#1E1B2E;color:#fff;border-radius:26px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'JetBrains Mono';opacity:.6">GÉNÉRATION IA EN COURS</div>
+<div style="font:800 24px/1.1 'Bricolage Grotesque'">On mélange vos 6 envies…</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><div>✓ Envies lues</div><div>✓ 14 pays passés au crible</div><div style="color:#FFC93C">● Vérif. des budgets et saisons</div><div style="opacity:.4">○ Rédaction des fiches</div></div>
+<div style="height:46px;border-radius:999px;background:#fff;color:#1E1B2E;display:flex;align-items:center;justify-content:center;font:700 14px 'DM Sans'">Me prévenir quand c'est prêt</div>
+<div style="font-size:13px;line-height:1.45;opacity:.75">Étapes réelles plutôt qu'un spinner ; durée estimée « 1–3 min ». On peut fermer l'appli : notification push / e-mail à tout le groupe.</div>
+</div>
+<div style="background:#fff;border-radius:26px;border:2px solid #1E1B2E;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'JetBrains Mono';opacity:.6">ÉGALITÉ AU VOTE</div>
+<div style="display:flex;align-items:center;gap:10px"><span style="font:800 22px 'Bricolage Grotesque'">Portugal</span><span style="font:800 22px 'Bricolage Grotesque';color:#FF6B4A">3–3</span><span style="font:800 22px 'Bricolage Grotesque'">Grèce</span></div>
+<div style="height:46px;border-radius:999px;background:#FF6B4A;color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px 'DM Sans'">Revote éclair (2 options)</div>
+<div style="height:46px;border-radius:999px;border:2px solid #1E1B2E;display:flex;align-items:center;justify-content:center;font:700 14px 'DM Sans'">Laisser le dé décider</div>
+<div style="font-size:13px;line-height:1.45;opacity:.75">Seules les ex æquo restent. Si nouvelle égalité, l'organisateur tranche. Le dé est animé et visible par tous en même temps.</div>
+</div>
+<div style="background:#fff;border-radius:26px;border:2px solid #FF6B4A;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'JetBrains Mono';opacity:.6">BUDGET DÉPASSÉ · ERREUR</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 26px 'Bricolage Grotesque'">1 280 €</span><span style="font:700 12px 'DM Sans';background:#FF6B4A;color:#fff;padding:4px 10px;border-radius:999px">+180 €</span></div>
+<div style="display:flex;flex-direction:column;gap:6px;font-size:13px"><div style="padding:10px 12px;border-radius:14px;background:#FFF1EC;display:flex;justify-content:space-between"><span>6 nuits au lieu de 7</span><b>−140 €</b></div><div style="padding:10px 12px;border-radius:14px;background:#FFF1EC;display:flex;justify-content:space-between"><span>Vol avec escale</span><b>−90 €</b></div></div>
+<div style="border-top:1.5px dashed rgba(30,27,46,.2);padding-top:10px;font-size:13px;line-height:1.45"><b>Erreur réseau / IA :</b> « L'agent n'a pas pu finir. Tes réponses sont gardées. » → <u>Réessayer</u></div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:800 34px 'Bricolage Grotesque';letter-spacing:-.02em">Moments forts</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+<div style="background:#FFC93C;border-radius:28px;padding:26px;display:flex;flex-direction:column;gap:10px"><div style="font:800 24px 'Bricolage Grotesque'">Le dernier envoi</div><div style="font-size:15px;line-height:1.5">Quand le dernier ami soumet, les 6 pastilles sautent l'une après l'autre (stagger 60 ms), puis éclatent en confettis aux couleurs des avatars. Vibration courte sur tous les téléphones ouverts.</div><div style="font:500 12px 'JetBrains Mono';opacity:.7">ressort · 900 ms · haptique light</div></div>
+<div style="background:#FF6B4A;color:#fff;border-radius:28px;padding:26px;display:flex;flex-direction:column;gap:10px"><div style="font:800 24px 'Bricolage Grotesque'">La révélation du vote</div><div style="font-size:15px;line-height:1.5">Compte à rebours 3-2-1 synchronisé, puis les barres de vote font la course. La gagnante grossit, se retourne et dévoile sa photo ; les avatars de ses votants s'y collent comme des stickers.</div><div style="font:500 12px 'JetBrains Mono';opacity:.8">2,4 s · son optionnel</div></div>
+<div style="background:#8F7CFF;color:#fff;border-radius:28px;padding:26px;display:flex;flex-direction:column;gap:10px"><div style="font:800 24px 'Bricolage Grotesque'">« Léa a rejoint ! »</div><div style="font-size:15px;line-height:1.5">Chaque arrivée fait tomber une pastille dans la pile avec un petit rebond et un toast. L'organisateur voit le groupe se remplir en direct, ce qui l'incite à repartager.</div><div style="font:500 12px 'JetBrains Mono';opacity:.8">rebond · 400 ms · temps réel</div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Minimaliste et éditoriale</div>
+<div class="dv-card" style="width:2040px;background:#F4F2EC;padding:56px;box-sizing:border-box;display:flex;flex-direction:column;gap:56px;font-family:'Geist',sans-serif;color:#151515">
+
+<div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:48px;align-items:start;border-bottom:1px solid #151515;padding-bottom:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.08em;color:#C8402A">DIRECTION B</div>
+<div style="font:400 88px/0.9 'Instrument Serif';letter-spacing:-.02em">Atlas</div>
+<p style="margin:0;font-size:18px;line-height:1.55;max-width:560px;text-wrap:pretty">Un magazine de voyage calme et sûr de lui. Beaucoup de blanc, de grandes capitales serif, des chiffres en mono comme dans un guide. La décision collective devient une lecture posée : on compare, on pèse, on tranche.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.08em;color:#75736C">PALETTE</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #D9D5CA">
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#F4F2EC;border:1px solid #151515"></div><span style="font:400 13px 'JetBrains Mono'">#F4F2EC papier</span></div>
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#151515"></div><span style="font:400 13px 'JetBrains Mono'">#151515 encre</span></div>
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#75736C"></div><span style="font:400 13px 'JetBrains Mono'">#75736C texte secondaire</span></div>
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#D9D5CA"></div><span style="font:400 13px 'JetBrains Mono'">#D9D5CA filets</span></div>
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#C8402A"></div><span style="font:400 13px 'JetBrains Mono'">#C8402A vermillon · action / dépassement</span></div>
+<div style="display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid #D9D5CA"><div style="width:44px;height:28px;background:#2F6B4F"></div><span style="font:400 13px 'JetBrains Mono'">#2F6B4F vert · sous budget</span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.08em;color:#75736C">TYPO · ICÔNES · IMAGES</div>
+<div style="font:400 40px/1 'Instrument Serif'">Instrument Serif</div>
+<div style="font-size:14px;color:#75736C;margin-top:-6px">Titres, noms de pays, citations</div>
+<div style="font:500 20px 'Geist'">Geist — interface</div>
+<div style="font:400 16px 'JetBrains Mono'">JetBrains Mono — 1 040 €</div>
+<div style="font-size:14px;line-height:1.55;color:#3a3935">Icônes filaires 1,25 px, rares : on préfère des chiffres et des mots. Photographie plein cadre légèrement désaturée, légendes en mono. Avatars : initiales sur fond papier, cerclées de filet.</div>
+</div>
+</div>
+
+<div style="display:flex;gap:44px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.06em"><span style="color:#C8402A">01</span> — CRÉATION DU GROUPE</div>
+<div style="width:340px;height:720px;border-radius:44px;background:#151515;padding:7px;box-sizing:border-box">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#F4F2EC;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px 'JetBrains Mono'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:18px 22px 22px;display:flex;flex-direction:column;gap:22px">
+<div style="font:400 12px 'JetBrains Mono';color:#75736C">NOUVEAU VOYAGE</div>
+<div style="font:400 44px/0.98 'Instrument Serif';letter-spacing:-.01em">Un voyage,<br><i>six avis.</i></div>
+<div style="display:flex;flex-direction:column;gap:6px;border-bottom:1px solid #151515;padding-bottom:8px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">TITRE</span><span style="font-size:17px">Été 2027 entre potes</span></div>
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">LIEN D'INVITATION</span><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 15px 'JetBrains Mono';text-decoration:underline;text-underline-offset:4px">escapade.app/j/K7Q2</span><span style="font:500 14px 'Geist';color:#C8402A">Copier</span></div></div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #D9D5CA">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D9D5CA"><div style="width:30px;height:30px;border-radius:50%;border:1px solid #151515;display:flex;align-items:center;justify-content:center;font:400 15px 'Instrument Serif'">M</div><span style="flex:1;font-size:15px">Maya</span><span style="font:400 11px 'JetBrains Mono';color:#75736C">ORGANISE</span></div>
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D9D5CA"><div style="width:30px;height:30px;border-radius:50%;border:1px solid #151515;display:flex;align-items:center;justify-content:center;font:400 15px 'Instrument Serif'">L</div><span style="flex:1;font-size:15px">Léa</span><span style="font:400 11px 'JetBrains Mono';color:#75736C">A REJOINT</span></div>
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D9D5CA"><div style="width:30px;height:30px;border-radius:50%;border:1px dashed #75736C"></div><span style="flex:1;font-size:15px;color:#75736C">En attente…</span></div>
+</div>
+<div style="margin-top:auto;height:54px;background:#151515;color:#F4F2EC;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font:500 15px 'Geist'"><span>Partager le lien</span><span>→</span></div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55;color:#3a3935">Titre éditorial, champs soulignés (pas de boîtes), lien en mono façon référence. Liste des membres en registre ligné. Bouton plein rectangulaire unique.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.06em"><span style="color:#C8402A">02</span> — PRÉFÉRENCES</div>
+<div style="width:340px;height:720px;border-radius:44px;background:#151515;padding:7px;box-sizing:border-box">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#F4F2EC;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px 'JetBrains Mono'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:10px 22px 22px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;gap:3px"><div style="flex:1;height:3px;background:#151515"></div><div style="flex:1;height:3px;background:#151515"></div><div style="flex:1;height:3px;background:#151515"></div><div style="flex:1;height:3px;background:#151515"></div><div style="flex:1;height:3px;background:#D9D5CA"></div><div style="flex:1;height:3px;background:#D9D5CA"></div></div><div style="display:flex;justify-content:space-between;font:400 11px 'JetBrains Mono';color:#75736C"><span>M · L · S · T</span><span>4/6 REÇUS</span></div></div>
+<div style="font:400 34px/1 'Instrument Serif'">Vos envies,<br><i>Inès.</i></div>
+<div style="display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #151515;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">01 PAYS SOUHAITÉ *</span><span style="font-size:17px">Portugal</span></div>
+<div style="display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #151515;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">02 BUDGET PAR PERSONNE *</span><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 17px 'JetBrains Mono'">900 €</span><span style="font:400 11px 'JetBrains Mono';color:#2F6B4F">CONFIDENTIEL</span></div></div>
+<div style="display:flex;gap:16px"><div style="flex:1;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #151515;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">03 DÉPART *</span><span style="font-size:16px">12.07.27</span></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #151515;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">RETOUR *</span><span style="font-size:16px">19.07.27</span></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">04 STYLE — FACULTATIF</span><div style="display:flex;gap:16px;font-size:15px"><span style="color:#75736C">Aventure</span><span style="border-bottom:2px solid #C8402A">Détente</span><span style="border-bottom:2px solid #C8402A">Culture</span><span style="color:#75736C">Fête</span></div></div>
+<div style="display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #D9D5CA;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#75736C">05 VILLE DE DÉPART — FACULTATIF</span><span style="font-size:16px">Lyon</span></div>
+<div style="font-size:12px;line-height:1.5;color:#75736C">Votre budget n'est jamais montré aux autres : seule une fourchette arrondie du groupe apparaît.</div>
+<div style="margin-top:auto;height:54px;background:#C8402A;color:#F4F2EC;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font:500 15px 'Geist'"><span>Soumettre</span><span>→</span></div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55;color:#3a3935">Champs numérotés comme un questionnaire imprimé. Jauge segmentée 1 trait = 1 personne (initiales seulement). Mention de confidentialité en clair sous le formulaire.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.06em"><span style="color:#C8402A">03</span> — SUGGESTIONS</div>
+<div style="width:340px;height:720px;border-radius:44px;background:#151515;padding:7px;box-sizing:border-box">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#F4F2EC;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px 'JetBrains Mono'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:10px 22px 22px;display:flex;flex-direction:column;gap:14px">
+<div style="font:400 34px/1 'Instrument Serif'">Trois pistes</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;font:400 10px 'JetBrains Mono';color:#75736C"><span>500</span><span>BUDGET / PERS.</span><span>1 500 €</span></div>
+<div style="position:relative;display:flex;flex-direction:column;gap:12px;padding:8px 0">
+<div style="position:absolute;left:30%;width:30%;top:0;bottom:0;background:rgba(47,107,79,.1);border-left:1px dashed #2F6B4F;border-right:1px dashed #2F6B4F"></div>
+<div style="position:relative;display:flex;align-items:center;gap:8px"><span style="width:62px;font:400 18px 'Instrument Serif'">Portugal</span><div style="flex:1;position:relative;height:1px;background:#151515"><div style="position:absolute;left:24%;top:-5px;width:11px;height:11px;border-radius:50%;background:#151515"></div></div><span style="width:44px;text-align:right;font:400 12px 'JetBrains Mono'">780</span></div>
+<div style="position:relative;display:flex;align-items:center;gap:8px"><span style="width:62px;font:400 18px 'Instrument Serif'">Croatie</span><div style="flex:1;position:relative;height:1px;background:#151515"><div style="position:absolute;left:34%;top:-5px;width:11px;height:11px;border-radius:50%;background:#151515"></div></div><span style="width:44px;text-align:right;font:400 12px 'JetBrains Mono'">860</span></div>
+<div style="position:relative;display:flex;align-items:center;gap:8px"><span style="width:62px;font:400 18px 'Instrument Serif'">Grèce</span><div style="flex:1;position:relative;height:1px;background:#151515"><div style="position:absolute;left:52%;top:-5px;width:11px;height:11px;border-radius:50%;background:#C8402A"></div></div><span style="width:44px;text-align:right;font:400 12px 'JetBrains Mono';color:#C8402A">940</span></div>
+</div>
+<div style="font:400 10px 'JetBrains Mono';color:#2F6B4F">ZONE = FOURCHETTE DU GROUPE 800–1 100 €</div>
+</div>
+<div style="height:96px;background:repeating-linear-gradient(135deg,#E3DFD5 0 7px,#D9D5CA 7px 14px);display:flex;align-items:flex-end;padding:8px"><span style="font:400 10px 'JetBrains Mono';background:#F4F2EC;padding:2px 6px">photo plein cadre · Portugal</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #151515;padding-bottom:6px"><span style="font:400 28px 'Instrument Serif'">Portugal</span><span style="font:400 11px 'JetBrains Mono'">MAI–SEPT.</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12.5px;line-height:1.4"><div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'JetBrains Mono';color:#2F6B4F">POUR</span><span>Vols directs depuis Lyon¹</span><span>Plage + ville à 1 h²</span></div><div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'JetBrains Mono';color:#C8402A">CONTRE</span><span>Foule en juillet³</span><span>Logements chers à Lisbonne</span></div></div>
+<div style="font:400 10.5px/1.6 'JetBrains Mono';color:#75736C">¹ skyscanner.fr ² visitportugal.com ³ +1 source</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55;color:#3a3935">Comparaison d'abord : graphique « dot plot » des 3 budgets sur une même échelle avec la fourchette du groupe en bande. Tap sur une ligne → fiche détaillée dessous, sources en notes de bas de page.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.06em"><span style="color:#C8402A">04</span> — VOTE</div>
+<div style="width:340px;height:720px;border-radius:44px;background:#151515;padding:7px;box-sizing:border-box">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#F4F2EC;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px 'JetBrains Mono'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:10px 22px 22px;display:flex;flex-direction:column;gap:16px">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">SCRUTIN · 3/6 BULLETINS</div>
+<div style="font:400 40px/0.98 'Instrument Serif'">Où allons-<br>nous ?</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #151515">
+<div style="display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid #D9D5CA"><span style="font:400 11px 'JetBrains Mono';color:#75736C">A</span><span style="flex:1;font:400 30px 'Instrument Serif';color:#C8402A">Portugal</span><div style="width:22px;height:22px;border-radius:50%;border:1px solid #C8402A;display:flex;align-items:center;justify-content:center"><div style="width:12px;height:12px;border-radius:50%;background:#C8402A"></div></div></div>
+<div style="display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid #D9D5CA"><span style="font:400 11px 'JetBrains Mono';color:#75736C">B</span><span style="flex:1;font:400 30px 'Instrument Serif'">Croatie</span><div style="width:22px;height:22px;border-radius:50%;border:1px solid #151515"></div></div>
+<div style="display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid #D9D5CA"><span style="font:400 11px 'JetBrains Mono';color:#75736C">C</span><span style="flex:1;font:400 30px 'Instrument Serif'">Grèce</span><div style="width:22px;height:22px;border-radius:50%;border:1px solid #151515"></div></div>
+</div>
+<div style="font-size:13px;line-height:1.5;color:#75736C">Dépouillement automatique au sixième bulletin. Jusque-là, aucun résultat partiel n'est visible.</div>
+<div style="margin-top:auto;height:54px;background:#151515;color:#F4F2EC;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font:500 15px 'Geist'"><span>Déposer mon bulletin</span><span>→</span></div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55;color:#3a3935">Métaphore du scrutin. Noms de pays en très grand = cibles de 64 px. Une seule couleur pour la sélection. Compteur de bulletins en mono en surtitre.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.06em"><span style="color:#C8402A">05</span> — PLAN FINAL</div>
+<div style="width:340px;height:720px;border-radius:44px;background:#151515;padding:7px;box-sizing:border-box">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#F4F2EC;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px 'JetBrains Mono'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:10px 22px 22px;display:flex;flex-direction:column;gap:14px">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">12–19.07.27 · 6 VOYAGEURS · LISBONNE → COMPORTA</div>
+<div style="font:400 44px/0.95 'Instrument Serif'">Portugal,<br><i>sept jours.</i></div>
+<div style="display:flex;flex-direction:column;font:400 13px 'JetBrains Mono';border-top:1px solid #151515">
+<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #D9D5CA"><span>Vols ×6</span><span>1 140</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #D9D5CA"><span>Hébergements 7 n.</span><span>2 520</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #D9D5CA"><span>Transports locaux</span><span>780</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #D9D5CA"><span>Activités + repas</span><span>1 800</span></div>
+<div style="display:flex;justify-content:space-between;padding:9px 0 4px;font-weight:500"><span>Total</span><span>6 240 €</span></div>
+<div style="display:flex;justify-content:space-between;padding:0 0 8px;color:#75736C"><span>Budget du groupe</span><span>6 600 €</span></div>
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid #151515;color:#2F6B4F;font-weight:500"><span>Écart</span><span>−360 € · −5 %</span></div>
+</div>
+<div style="display:flex;gap:18px;font-size:14px;border-bottom:1px solid #D9D5CA"><span style="border-bottom:2px solid #151515;padding-bottom:7px">Itinéraire</span><span style="color:#75736C">Vols</span><span style="color:#75736C">Hôtels</span></div>
+<div style="display:flex;gap:14px"><span style="font:400 26px/1 'Instrument Serif';color:#C8402A;width:24px">1</span><div style="flex:1;font-size:13px;line-height:1.45"><b style="font-weight:500">Lisbonne.</b> Vol LYS–LIS 09:40, Alfama, dîner à Graça.</div></div>
+<div style="display:flex;gap:14px"><span style="font:400 26px/1 'Instrument Serif';color:#C8402A;width:24px">2</span><div style="flex:1;font-size:13px;line-height:1.45"><b style="font-weight:500">Sintra.</b> Train depuis Rossio, Palais de Pena.</div></div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55;color:#3a3935">Le budget est un grand livre comptable : postes, total, budget, écart en couleur (vert/vermillon) avec % — lisible d'un coup d'œil, vérifiable ligne à ligne. Itinéraire numéroté façon guide.</div></sc-if>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:400 44px 'Instrument Serif'">États à gérer</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid #151515;border-bottom:1px solid #151515">
+<div style="padding:22px 20px 22px 0;display:flex;flex-direction:column;gap:12px;border-right:1px solid #D9D5CA">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">I. FORMULAIRE INCOMPLET</div>
+<div style="display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #C8402A;padding-bottom:7px"><span style="font:400 11px 'JetBrains Mono';color:#C8402A">02 BUDGET PAR PERSONNE *</span><span style="font-size:16px;color:#B5B2AA">—</span></div>
+<div style="font:400 12px 'JetBrains Mono';color:#C8402A">Requis. Une estimation suffit.</div>
+<div style="font-size:13px;line-height:1.5;color:#3a3935">Pas de validation agressive : les erreurs apparaissent à la soumission, le récapitulatif « 2 champs manquants : 02, 03 » est cliquable.</div>
+</div>
+<div style="padding:22px 20px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #D9D5CA">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">II. ATTENTE</div>
+<div style="font:400 30px/1 'Instrument Serif'">4 sur 6.<br><i>Karim, Inès ?</i></div>
+<div style="font:400 12px 'JetBrains Mono'">DERNIÈRE ACTIVITÉ IL Y A 2 H</div>
+<div style="font:500 14px 'Geist';color:#C8402A;text-decoration:underline">Envoyer un rappel</div>
+<div style="font-size:13px;line-height:1.5;color:#3a3935">Ton neutre, aucune culpabilisation. Délai limite optionnel fixé par l'organisateur, affiché en compte à rebours discret.</div>
+</div>
+<div style="padding:22px 20px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #D9D5CA">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">III. GÉNÉRATION IA</div>
+<div style="font:400 26px/1.1 'Instrument Serif'"><i>« Nous comparons 14 pays au regard de vos six réponses. »</i></div>
+<div style="height:2px;background:#D9D5CA;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:58%;background:#151515"></div></div>
+<div style="display:flex;justify-content:space-between;font:400 11px 'JetBrains Mono';color:#75736C"><span>ÉTAPE 3/4 — SAISONS</span><span>~1 MIN</span></div>
+<div style="font-size:13px;line-height:1.5;color:#3a3935">Fil d'activité en texte (« Lecture de visitportugal.com… ») pour montrer le travail réel. Notification à la fin, page reprenable.</div>
+</div>
+<div style="padding:22px 20px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #D9D5CA">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">IV. ÉGALITÉ</div>
+<div style="display:flex;flex-direction:column;font:400 13px 'JetBrains Mono'"><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #D9D5CA"><span>PORTUGAL</span><span>3</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #D9D5CA"><span>GRÈCE</span><span>3</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;color:#75736C"><span>CROATIE</span><span>0</span></div></div>
+<div style="font:400 24px 'Instrument Serif'">Ex æquo.</div>
+<div style="font-size:13px;line-height:1.5;color:#3a3935">Second tour entre les deux, ou départage par le critère « meilleur ajustement budget » calculé par l'IA — choix laissé à l'organisateur.</div>
+</div>
+<div style="padding:22px 0 22px 20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:400 11px 'JetBrains Mono';color:#75736C">V. DÉPASSEMENT · ERREUR</div>
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid #151515;border-bottom:1px solid #151515;font:500 14px 'JetBrains Mono';color:#C8402A"><span>Écart</span><span>+1 080 € · +16 %</span></div>
+<div style="font-size:13px;line-height:1.5">Postes responsables surlignés ; « Proposer une version ajustée » relance l'agent avec contrainte.</div>
+<div style="font-size:13px;line-height:1.5;color:#3a3935;border-top:1px solid #D9D5CA;padding-top:10px"><b style="font-weight:500">Erreur :</b> « La recherche s'est interrompue à l'étape vols. » Reprise à partir de la dernière étape réussie.</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:400 44px 'Instrument Serif'">Moments forts</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
+<div style="display:flex;flex-direction:column;gap:10px;border-top:3px solid #151515;padding-top:16px"><div style="font:400 28px 'Instrument Serif'">La ligne qui se trace</div><div style="font-size:15px;line-height:1.55;color:#3a3935">Chaque soumission dessine un segment de la jauge collective, de gauche à droite, comme un trait de plume. Le dernier segment fait basculer le titre en « Au complet. ».</div><div style="font:400 11px 'JetBrains Mono';color:#75736C">EASE-OUT · 600 MS</div></div>
+<div style="display:flex;flex-direction:column;gap:10px;border-top:3px solid #C8402A;padding-top:16px"><div style="font:400 28px 'Instrument Serif'">Le dépouillement</div><div style="font-size:15px;line-height:1.55;color:#3a3935">Les décomptes défilent en odomètre mono, puis le nom gagnant s'écrit en grand serif lettre par lettre, la photo plein cadre se dévoile en volet vertical.</div><div style="font:400 11px 'JetBrains Mono';color:#75736C">1,8 S · SYNCHRONISÉ</div></div>
+<div style="display:flex;flex-direction:column;gap:10px;border-top:3px solid #2F6B4F;padding-top:16px"><div style="font:400 28px 'Instrument Serif'">Le grand livre</div><div style="font-size:15px;line-height:1.55;color:#3a3935">À l'arrivée du plan, les postes s'ajoutent un à un, le total s'incrémente, puis la ligne « Écart » apparaît en couleur. On comprend d'où vient le chiffre.</div><div style="font:400 11px 'JetBrains Mono';color:#75736C">STAGGER 120 MS</div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Carnet de voyage illustré</div>
+<div class="dv-card" style="width:2040px;background:#E9DCC2;padding:56px;box-sizing:border-box;display:flex;flex-direction:column;gap:56px;font-family:'Work Sans',sans-serif;color:#1F3A5F">
+
+<div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px 'Caveat';color:#C1462F">Direction C</div>
+<div style="font:400 72px/0.95 'Young Serif'">Carnet</div>
+<p style="margin:0;font-size:18px;line-height:1.55;max-width:560px;text-wrap:pretty">Le voyage commence dans un carnet qu'on remplit à plusieurs. Papier kraft, tampons, billets perforés, polaroids scotchés et annotations manuscrites : chaque étape laisse une trace qu'on a envie de garder et de partager.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:600 12px 'Work Sans';text-transform:uppercase;letter-spacing:.12em;opacity:.7">Palette</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#E9DCC2;border:2px dashed #1F3A5F"></div><span style="font:500 12px 'JetBrains Mono'">#E9DCC2</span><span style="font:600 16px 'Caveat'">kraft</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#FBF5E6"></div><span style="font:500 12px 'JetBrains Mono'">#FBF5E6</span><span style="font:600 16px 'Caveat'">page</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#1F3A5F"></div><span style="font:500 12px 'JetBrains Mono'">#1F3A5F</span><span style="font:600 16px 'Caveat'">encre</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#C1462F"></div><span style="font:500 12px 'JetBrains Mono'">#C1462F</span><span style="font:600 16px 'Caveat'">tampon</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#5E7A3A"></div><span style="font:500 12px 'JetBrains Mono'">#5E7A3A</span><span style="font:600 16px 'Caveat'">olive</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:76px;height:76px;border-radius:50%;background:#D8A23E"></div><span style="font:500 12px 'JetBrains Mono'">#D8A23E</span><span style="font:600 16px 'Caveat'">ocre</span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px 'Work Sans';text-transform:uppercase;letter-spacing:.12em;opacity:.7">Typo · icônes · images</div>
+<div style="font:400 32px 'Young Serif'">Young Serif</div>
+<div style="font-size:14px;opacity:.75;margin-top:-6px">Titres, noms de destinations</div>
+<div style="font:700 30px/1 'Caveat';color:#C1462F">Caveat — annotations</div>
+<div style="font:500 18px 'Work Sans'">Work Sans — interface lisible</div>
+<div style="font-size:14px;line-height:1.55">Icônes dessinées à l'encre (trait irrégulier) commandées à un·e illustrateur·rice. Photos en polaroid avec scotch washi, tampons ronds pour statuts et prix. Le manuscrit reste décoratif : jamais pour une info critique.</div>
+</div>
+</div>
+
+<div style="display:flex;gap:44px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 22px 'Caveat'"><span style="color:#C1462F">p.1</span> Création du groupe</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1F3A5F;padding:9px;box-sizing:border-box;box-shadow:0 24px 50px -28px rgba(31,58,95,.6)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FBF5E6;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'Work Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:12px 20px 20px;display:flex;flex-direction:column;gap:18px">
+<div style="background:#1F3A5F;color:#FBF5E6;border-radius:6px 16px 16px 6px;padding:20px 18px;border-left:10px solid #C1462F;display:flex;flex-direction:column;gap:6px;box-shadow:0 6px 0 -2px #D9CBB0"><span style="font:600 11px 'Work Sans';letter-spacing:.14em;opacity:.7">CARNET N°1</span><span style="font:400 26px/1.1 'Young Serif'">Été 2027 entre potes</span><span style="font:700 20px 'Caveat';color:#D8A23E">où qu'on aille…</span></div>
+<div style="position:relative;border:2px dashed #1F3A5F;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;background:#F3E9D2">
+<div style="font:600 12px 'Work Sans';letter-spacing:.12em">BILLET D'EMBARQUEMENT</div>
+<div style="font:500 15px 'JetBrains Mono'">escapade.app/j/K7Q2</div>
+<div style="display:flex;gap:8px"><div style="flex:1;height:42px;border-radius:10px;background:#C1462F;color:#FBF5E6;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">Partager</div><div style="flex:1;height:42px;border-radius:10px;border:2px solid #1F3A5F;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">Copier</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font:700 20px 'Caveat'">Les voyageurs à bord</div>
+<div style="display:flex;gap:10px"><div style="width:52px;height:52px;border-radius:50%;border:2.5px solid #C1462F;color:#C1462F;display:flex;align-items:center;justify-content:center;font:400 20px 'Young Serif';transform:rotate(-8deg)">M</div><div style="width:52px;height:52px;border-radius:50%;border:2.5px solid #5E7A3A;color:#5E7A3A;display:flex;align-items:center;justify-content:center;font:400 20px 'Young Serif';transform:rotate(6deg)">L</div><div style="width:52px;height:52px;border-radius:50%;border:2.5px solid #D8A23E;color:#B5832A;display:flex;align-items:center;justify-content:center;font:400 20px 'Young Serif';transform:rotate(-3deg)">S</div><div style="width:52px;height:52px;border-radius:50%;border:2px dashed rgba(31,58,95,.35)"></div></div></div>
+<div style="margin-top:auto;height:54px;border-radius:12px;background:#1F3A5F;color:#FBF5E6;display:flex;align-items:center;justify-content:center;font:600 16px 'Work Sans'">Ouvrir le carnet</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55">Couverture de carnet = identité du voyage. Le lien devient un billet perforé. Chaque membre = un tampon de passeport à sa couleur, légèrement de travers.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 22px 'Caveat'"><span style="color:#C1462F">p.2</span> Saisie des préférences</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1F3A5F;padding:9px;box-sizing:border-box;box-shadow:0 24px 50px -28px rgba(31,58,95,.6)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:repeating-linear-gradient(180deg,#FBF5E6 0 31px,#E8DEC8 31px 32px);display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'Work Sans';background:#FBF5E6"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:8px 20px 20px;display:flex;flex-direction:column;gap:13px">
+<div style="display:flex;align-items:center;justify-content:space-between;background:#FBF5E6"><span style="font:700 20px 'Caveat'">4 tampons sur 6</span><div style="display:flex;gap:4px"><div style="width:22px;height:22px;border-radius:50%;background:#C1462F"></div><div style="width:22px;height:22px;border-radius:50%;background:#5E7A3A"></div><div style="width:22px;height:22px;border-radius:50%;background:#D8A23E"></div><div style="width:22px;height:22px;border-radius:50%;background:#1F3A5F"></div><div style="width:22px;height:22px;border-radius:50%;border:1.5px dashed #1F3A5F"></div><div style="width:22px;height:22px;border-radius:50%;border:1.5px dashed #1F3A5F"></div></div></div>
+<div style="font:400 26px 'Young Serif';background:#FBF5E6">Ta page, Inès</div>
+<div style="background:#FBF5E6;border-radius:12px;padding:12px;border:1.5px solid #D9CBB0;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'Work Sans'">Pays rêvé *</span><span style="font-size:16px;border-bottom:1.5px solid #1F3A5F;padding-bottom:4px">Portugal</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between"><span style="font:600 12px 'Work Sans'">Budget / pers. *</span><span style="font:700 16px 'Caveat';color:#5E7A3A">rien que pour toi ✎</span></div><span style="font:500 16px 'JetBrains Mono';border-bottom:1.5px solid #1F3A5F;padding-bottom:4px">900 €</span></div>
+<div style="display:flex;gap:12px"><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'Work Sans'">Du *</span><span style="font-size:15px;border-bottom:1.5px solid #1F3A5F;padding-bottom:4px">12 juil.</span></div><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'Work Sans'">Au *</span><span style="font-size:15px;border-bottom:1.5px solid #1F3A5F;padding-bottom:4px">19 juil.</span></div></div>
+</div>
+<div style="background:#FBF5E6;display:flex;flex-direction:column;gap:8px"><span style="font:600 12px 'Work Sans'">Style <span style="opacity:.55;font-weight:400">· facultatif</span></span><div style="display:flex;flex-wrap:wrap;gap:6px"><div style="padding:6px 12px;border-radius:6px;border:1.5px solid #1F3A5F;font:500 13px 'Work Sans'">Aventure</div><div style="padding:6px 12px;border-radius:6px;background:#D8A23E;border:1.5px solid #1F3A5F;font:600 13px 'Work Sans';transform:rotate(-2deg)">Détente</div><div style="padding:6px 12px;border-radius:6px;background:#D8A23E;border:1.5px solid #1F3A5F;font:600 13px 'Work Sans';transform:rotate(2deg)">Culture</div><div style="padding:6px 12px;border-radius:6px;border:1.5px solid #1F3A5F;font:500 13px 'Work Sans'">Fête</div></div></div>
+<div style="background:#FBF5E6;display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'Work Sans'">Départ de <span style="opacity:.55;font-weight:400">· facultatif</span></span><span style="font-size:15px;border-bottom:1.5px solid rgba(31,58,95,.35);padding-bottom:4px">Lyon</span></div>
+<div style="margin-top:auto;height:54px;border-radius:12px;background:#C1462F;color:#FBF5E6;display:flex;align-items:center;justify-content:center;font:600 16px 'Work Sans'">Tamponner ma page</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55">Page lignée, champs groupés sur une fiche « papier » pour garder la lisibilité. Progression = tampons collectés. Note manuscrite rassurante à côté du budget.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 22px 'Caveat'"><span style="color:#C1462F">p.3</span> Suggestions de l'IA</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1F3A5F;padding:9px;box-sizing:border-box;box-shadow:0 24px 50px -28px rgba(31,58,95,.6)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#E9DCC2;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'Work Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:6px 18px 18px;display:flex;flex-direction:column;gap:12px">
+<div style="font:400 24px 'Young Serif'">Trois cartes postales</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#FBF5E6;padding:6px;border:2px solid #C1462F;transform:rotate(-2deg);display:flex;flex-direction:column;gap:4px"><div style="height:44px;background:repeating-linear-gradient(135deg,#F0D9C4 0 5px,#E6C9AE 5px 10px)"></div><span style="font:400 12px 'Young Serif'">Portugal</span><span style="font:500 10px 'JetBrains Mono'">780 €</span></div>
+<div style="flex:1;background:#FBF5E6;padding:6px;transform:rotate(1.5deg);display:flex;flex-direction:column;gap:4px"><div style="height:44px;background:repeating-linear-gradient(135deg,#D8E2EA 0 5px,#C6D4DF 5px 10px)"></div><span style="font:400 12px 'Young Serif'">Grèce</span><span style="font:500 10px 'JetBrains Mono'">940 €</span></div>
+<div style="flex:1;background:#FBF5E6;padding:6px;transform:rotate(-1deg);display:flex;flex-direction:column;gap:4px"><div style="height:44px;background:repeating-linear-gradient(135deg,#DCE3CC 0 5px,#CBD6B5 5px 10px)"></div><span style="font:400 12px 'Young Serif'">Croatie</span><span style="font:500 10px 'JetBrains Mono'">860 €</span></div>
+</div>
+<div style="background:#FBF5E6;border-radius:4px;padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow:0 10px 20px -12px rgba(31,58,95,.5);position:relative">
+<div style="position:absolute;top:-9px;left:50%;margin-left:-34px;width:68px;height:18px;background:rgba(216,162,62,.7);transform:rotate(-3deg)"></div>
+<div style="height:118px;background:repeating-linear-gradient(135deg,#F0D9C4 0 7px,#E6C9AE 7px 14px);display:flex;align-items:flex-end;justify-content:space-between;padding:8px"><span style="font:500 10px 'JetBrains Mono';background:#FBF5E6;padding:2px 6px">polaroid · Lisbonne</span><div style="width:58px;height:58px;border-radius:50%;border:2.5px solid #C1462F;color:#C1462F;background:rgba(251,245,230,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(12deg)"><span style="font:600 14px 'JetBrains Mono'">780€</span><span style="font:600 8px 'Work Sans'">/PERS.</span></div></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 22px 'Young Serif'">Portugal</span><span style="font:700 17px 'Caveat';color:#5E7A3A">top : mai → sept.</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><div style="height:10px;position:relative;background:repeating-linear-gradient(90deg,#1F3A5F 0 1px,transparent 1px 10%);border-bottom:1.5px solid #1F3A5F"><div style="position:absolute;left:30%;width:30%;top:0;bottom:0;background:rgba(94,122,58,.3)"></div><div style="position:absolute;left:28%;top:-4px;width:3px;height:16px;background:#C1462F"></div></div><div style="display:flex;justify-content:space-between;font:500 10px 'JetBrains Mono'"><span>500</span><span style="color:#5E7A3A">votre fourchette</span><span>1 500</span></div></div>
+<div style="font-size:13px;line-height:1.4;display:flex;flex-direction:column;gap:2px"><span><b style="color:#5E7A3A">✓</b> Vols directs depuis Lyon</span><span><b style="color:#5E7A3A">✓</b> Plage et ville à 1 h</span><span><b style="color:#C1462F">✗</b> Foule en juillet</span></div>
+<div style="font:600 12px 'Work Sans';text-decoration:underline">Voir les 4 sources</div>
+</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55">Bandeau de 3 mini-cartes = comparaison rapide (prix visible sur chacune), carte agrandie dessous. Budget en tampon + règle graduée avec la fourchette du groupe surlignée.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 22px 'Caveat'"><span style="color:#C1462F">p.4</span> Vote</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1F3A5F;padding:9px;box-sizing:border-box;box-shadow:0 24px 50px -28px rgba(31,58,95,.6)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#E9DCC2;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'Work Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:6px 20px 20px;display:flex;flex-direction:column;gap:14px">
+<div style="font:400 26px 'Young Serif'">Pose ton tampon</div>
+<div style="font:700 19px 'Caveat';margin-top:-8px">3 tampons dans l'urne sur 6</div>
+<div style="background:#FBF5E6;padding:12px;display:flex;align-items:center;gap:12px;position:relative;transform:rotate(-1deg);border:2px solid #C1462F"><div style="width:64px;height:64px;background:repeating-linear-gradient(135deg,#F0D9C4 0 6px,#E6C9AE 6px 12px)"></div><div style="flex:1;display:flex;flex-direction:column"><span style="font:400 20px 'Young Serif'">Portugal</span><span style="font:500 12px 'JetBrains Mono'">780 € · mai–sept.</span></div><div style="width:56px;height:56px;border-radius:50%;border:3px double #C1462F;color:#C1462F;display:flex;align-items:center;justify-content:center;font:700 13px 'Work Sans';transform:rotate(-14deg)">MON<br>VOTE</div></div>
+<div style="background:#FBF5E6;padding:12px;display:flex;align-items:center;gap:12px;transform:rotate(.8deg)"><div style="width:64px;height:64px;background:repeating-linear-gradient(135deg,#D8E2EA 0 6px,#C6D4DF 6px 12px)"></div><div style="flex:1;display:flex;flex-direction:column"><span style="font:400 20px 'Young Serif'">Grèce</span><span style="font:500 12px 'JetBrains Mono'">940 € · juin–sept.</span></div><div style="width:56px;height:56px;border-radius:50%;border:2px dashed rgba(31,58,95,.35)"></div></div>
+<div style="background:#FBF5E6;padding:12px;display:flex;align-items:center;gap:12px;transform:rotate(-.6deg)"><div style="width:64px;height:64px;background:repeating-linear-gradient(135deg,#DCE3CC 0 6px,#CBD6B5 6px 12px)"></div><div style="flex:1;display:flex;flex-direction:column"><span style="font:400 20px 'Young Serif'">Croatie</span><span style="font:500 12px 'JetBrains Mono'">860 € · juin–sept.</span></div><div style="width:56px;height:56px;border-radius:50%;border:2px dashed rgba(31,58,95,.35)"></div></div>
+<div style="font:700 18px 'Caveat';text-align:center;opacity:.8">Les cartes seront retournées quand tout le monde aura voté</div>
+<div style="margin-top:auto;height:54px;border-radius:12px;background:#1F3A5F;color:#FBF5E6;display:flex;align-items:center;justify-content:center;font:600 16px 'Work Sans'">Glisser dans l'urne</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55">Tap sur une carte = tampon « mon vote » qui s'imprime. Zone de tampon vide en pointillé = affordance claire. Confirmation explicite ensuite.</div></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;width:340px">
+<div style="font:700 22px 'Caveat'"><span style="color:#C1462F">p.5</span> Plan final</div>
+<div style="width:340px;height:720px;border-radius:46px;background:#1F3A5F;padding:9px;box-sizing:border-box;box-shadow:0 24px 50px -28px rgba(31,58,95,.6)">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FBF5E6;display:flex;flex-direction:column">
+<div style="height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:600 13px 'Work Sans'"><span>9:41</span><span>●●● ▮</span></div>
+<div style="flex:1;padding:6px 18px 18px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font:400 28px 'Young Serif'">Portugal</span><span style="font:700 18px 'Caveat';color:#C1462F">12 → 19 juil.</span></div>
+<div style="background:#1F3A5F;color:#FBF5E6;border-radius:10px;display:flex;overflow:hidden"><div style="flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font:600 10px 'Work Sans';letter-spacing:.12em;opacity:.7">VOL ALLER</span><span style="font:500 18px 'JetBrains Mono'">LYS → LIS</span><span style="font-size:12px;opacity:.8">sam. 12 · 09:40 · direct · 190 €</span></div><div style="width:64px;border-left:2px dashed rgba(251,245,230,.5);display:flex;align-items:center;justify-content:center;font:600 11px 'JetBrains Mono'">×6</div></div>
+<div style="background:#fff;padding:12px 14px;display:flex;flex-direction:column;gap:5px;font:500 13px 'JetBrains Mono';box-shadow:0 8px 16px -10px rgba(31,58,95,.45);transform:rotate(.6deg)">
+<div style="text-align:center;font:600 11px 'Work Sans';letter-spacing:.14em;padding-bottom:4px;border-bottom:1.5px dashed #1F3A5F">ADDITION DU VOYAGE</div>
+<div style="display:flex;justify-content:space-between"><span>Vols</span><span>1 140</span></div>
+<div style="display:flex;justify-content:space-between"><span>Hôtels</span><span>2 520</span></div>
+<div style="display:flex;justify-content:space-between"><span>Sur place</span><span>2 580</span></div>
+<div style="display:flex;justify-content:space-between;border-top:1.5px dashed #1F3A5F;padding-top:5px;font-weight:600"><span>TOTAL</span><span>6 240 €</span></div>
+<div style="display:flex;justify-content:space-between;opacity:.7"><span>Budget</span><span>6 600 €</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:#5E7A3A;font-weight:600">Reste 360 €</span><span style="border:2.5px solid #5E7A3A;color:#5E7A3A;padding:3px 8px;font:700 11px 'Work Sans';transform:rotate(-6deg)">DANS LE BUDGET</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;gap:10px;align-items:flex-start"><span style="font:700 22px/1 'Caveat';color:#C1462F;width:44px">Jour 1</span><span style="flex:1;font-size:13px;line-height:1.4">Lisbonne — Alfama, dîner à Graça</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start"><span style="font:700 22px/1 'Caveat';color:#C1462F;width:44px">Jour 2</span><span style="flex:1;font-size:13px;line-height:1.4">Sintra en train, Palais de Pena</span></div>
+</div>
+</div></div></div>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="font-size:14px;line-height:1.55">Chaque type d'info a son objet : vol = carte d'embarquement, budget = addition avec tampon d'écart (vert / rouge « HORS BUDGET »), itinéraire = journal manuscrit (titres seuls).</div></sc-if>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:400 38px 'Young Serif'">États à gérer</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px">
+<div style="background:#FBF5E6;padding:20px;display:flex;flex-direction:column;gap:12px;transform:rotate(-.6deg)">
+<div style="font:700 20px 'Caveat';color:#C1462F">Formulaire incomplet</div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'Work Sans'">Dates *</span><span style="font-size:15px;border-bottom:2px solid #C1462F;padding-bottom:4px;opacity:.45">jj / mm</span><span style="font:500 13px 'Work Sans';color:#C1462F">Il manque tes dates pour tamponner.</span></div>
+<div style="height:46px;border-radius:12px;border:2px dashed #C1462F;color:#C1462F;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">2 cases à remplir</div>
+<div style="font-size:13px;line-height:1.5">Message d'erreur en Work Sans, jamais en manuscrit. Le tampon de soumission reste « fantôme » tant que c'est incomplet.</div>
+</div>
+<div style="background:#FBF5E6;padding:20px;display:flex;flex-direction:column;gap:12px;transform:rotate(.5deg)">
+<div style="font:700 20px 'Caveat';color:#C1462F">Attente des autres</div>
+<div style="display:flex;gap:6px"><div style="width:40px;height:40px;border-radius:50%;background:#C1462F"></div><div style="width:40px;height:40px;border-radius:50%;background:#5E7A3A"></div><div style="width:40px;height:40px;border-radius:50%;background:#D8A23E"></div><div style="width:40px;height:40px;border-radius:50%;background:#1F3A5F"></div><div style="width:40px;height:40px;border-radius:50%;border:2px dashed #1F3A5F"></div></div>
+<div style="font:400 18px 'Young Serif'">Le carnet attend Karim.</div>
+<div style="height:46px;border-radius:12px;background:#D8A23E;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">Lui envoyer une carte</div>
+<div style="font-size:13px;line-height:1.5">Relance sous forme de « carte postale » partageable, plus douce qu'une notif.</div>
+</div>
+<div style="background:#1F3A5F;color:#FBF5E6;padding:20px;display:flex;flex-direction:column;gap:12px;transform:rotate(-.4deg)">
+<div style="font:700 20px 'Caveat';color:#D8A23E">Génération IA</div>
+<div style="font:400 22px/1.15 'Young Serif'">On écrit vos cartes postales…</div>
+<div style="display:flex;gap:6px"><div style="flex:1;height:54px;border:1.5px solid #FBF5E6;background:rgba(251,245,230,.15)"></div><div style="flex:1;height:54px;border:1.5px dashed rgba(251,245,230,.5)"></div><div style="flex:1;height:54px;border:1.5px dashed rgba(251,245,230,.3)"></div></div>
+<div style="font-size:13px;line-height:1.5;opacity:.85">Les cartes apparaissent une par une dès qu'elles sont prêtes (streaming) : on lit la 1re pendant que les autres s'écrivent. « Environ 2 min — on vous écrit quand c'est fini. »</div>
+</div>
+<div style="background:#FBF5E6;padding:20px;display:flex;flex-direction:column;gap:12px;transform:rotate(.6deg)">
+<div style="font:700 20px 'Caveat';color:#C1462F">Égalité</div>
+<div style="font:400 22px 'Young Serif'">Portugal 3 · Grèce 3</div>
+<div style="height:46px;border-radius:12px;background:#C1462F;color:#FBF5E6;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">Second tour</div>
+<div style="height:46px;border-radius:12px;border:2px solid #1F3A5F;display:flex;align-items:center;justify-content:center;font:600 14px 'Work Sans'">Pile ou face</div>
+<div style="font-size:13px;line-height:1.5">Pièce de monnaie illustrée lancée en direct pour tout le groupe ; résultat consigné dans le carnet.</div>
+</div>
+<div style="background:#FBF5E6;padding:20px;display:flex;flex-direction:column;gap:12px;transform:rotate(-.5deg)">
+<div style="font:700 20px 'Caveat';color:#C1462F">Budget dépassé · erreur</div>
+<div style="display:flex;justify-content:space-between;align-items:center;font:600 14px 'JetBrains Mono'"><span>+1 080 €</span><span style="border:2.5px solid #C1462F;color:#C1462F;padding:3px 8px;font:700 11px 'Work Sans';transform:rotate(-6deg)">HORS BUDGET</span></div>
+<div style="font-size:13px;line-height:1.5">Pistes notées en marge : « 2 nuits à Comporta → 1 », « auberge à Lisbonne » — chacune recalcule l'addition.</div>
+<div style="font-size:13px;line-height:1.5;border-top:1.5px dashed #1F3A5F;padding-top:10px"><b>Erreur :</b> page « déchirée » + « Le carnet s'est coincé, on réessaie ? » Réponses conservées.</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:400 38px 'Young Serif'">Moments forts</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+<div style="background:#FBF5E6;padding:26px;display:flex;flex-direction:column;gap:10px;border-top:6px solid #C1462F"><div style="font:400 24px 'Young Serif'">Le coup de tampon</div><div style="font-size:15px;line-height:1.55">À la soumission, un tampon descend, écrase (scale 1.15 → 1) et laisse une encre qui bave légèrement. Les autres voient le tampon apparaître sur leur bandeau en temps réel.</div><div style="font:500 12px 'JetBrains Mono';opacity:.7">350 ms · haptique medium · son « thud »</div></div>
+<div style="background:#FBF5E6;padding:26px;display:flex;flex-direction:column;gap:10px;border-top:6px solid #D8A23E"><div style="font:400 24px 'Young Serif'">Les cartes se retournent</div><div style="font-size:15px;line-height:1.55">Révélation du vote : les cartes postales se retournent une à une (flip 3D), montrant au dos le nombre de tampons. La gagnante se scotche en grand au centre de la page.</div><div style="font:500 12px 'JetBrains Mono';opacity:.7">flip 500 ms × 3 · stagger 400 ms</div></div>
+<div style="background:#FBF5E6;padding:26px;display:flex;flex-direction:column;gap:10px;border-top:6px solid #5E7A3A"><div style="font:400 24px 'Young Serif'">Le carnet se relie</div><div style="font-size:15px;line-height:1.55">À l'arrivée du plan, les pages des étapes 1 à 4 se rassemblent et se relient ; le plan s'ouvre en double page. Export en PDF souvenir à partager.</div><div style="font:500 12px 'JetBrains Mono';opacity:.7">page-turn 700 ms</div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div id="reco" style="margin-top:56px;max-width:2040px;background:#1a1a1a;color:#F4F2EC;border-radius:8px;padding:48px 56px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;box-sizing:border-box">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.1em;color:#FFC93C">RECOMMANDATION MVP</div>
+<div style="font:800 52px/1 'Bricolage Grotesque';letter-spacing:-.02em">Partir sur <a class="dv-oid" href="#1a" style="font-size:24px;vertical-align:middle;background:#FFC93C;color:#1a1a1a">1a</a> Confetti, en empruntant deux pièces à <a class="dv-oid" href="#1b" style="font-size:24px;vertical-align:middle;background:#F4F2EC;color:#1a1a1a">1b</a>.</div>
+<div style="display:flex;flex-direction:column;gap:12px;font-size:17px;line-height:1.55;max-width:760px">
+<div><b>Le vrai risque du produit, c'est l'abandon.</b> Le parcours dépend du participant le plus lent, deux fois (préférences, vote). Confetti rend la progression collective visible et sympa, et rend la relance facile : c'est la direction qui pousse le plus à finir.</div>
+<div><b>Peu coûteuse à construire.</b> Cartes, chips, barres, pastilles d'initiales : composants standards, aucune illustration à commander. <a class="dv-oid" href="#1c">1c</a> demande un·e illustrateur·rice, des polices manuscrites peu lisibles sur petit écran et des animations plus lourdes.</div>
+<div><b>Ce qu'on prend à Atlas :</b> le graphique à points de l'étape 3 (3 budgets sur une même échelle, la meilleure aide à la comparaison) et le grand livre de l'étape 5 (postes → total → écart). Intégrés dans le style Confetti, ils apportent la rigueur qui manque aux chiffres.</div>
+<div style="opacity:.75"><a class="dv-oid" href="#1c">1c</a> Carnet reste une bonne piste pour une V2 « souvenir » (export PDF du voyage).</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:500 12px 'JetBrains Mono';letter-spacing:.1em;opacity:.6">RÈGLES COMMUNES AUX 3 DIRECTIONS</div>
+<div style="display:flex;flex-direction:column;border-top:1px solid rgba(244,242,236,.2);font-size:15px;line-height:1.5">
+<div style="padding:12px 0;border-bottom:1px solid rgba(244,242,236,.2)"><b>Budget privé :</b> on n'affiche qu'une fourchette du groupe arrondie à 100 €, et seulement à partir de 3 réponses. À 2, on écrit juste « dans le budget de chacun : oui / non ».</div>
+<div style="padding:12px 0;border-bottom:1px solid rgba(244,242,236,.2)"><b>Statut sans contenu :</b> les avatars montrent qui a soumis ou voté, jamais quoi.</div>
+<div style="padding:12px 0;border-bottom:1px solid rgba(244,242,236,.2)"><b>Attente longue :</b> on affiche les vraies étapes et une durée estimée, on peut quitter la page, une notification arrive à la fin et la page reprend où elle en était.</div>
+<div style="padding:12px 0;border-bottom:1px solid rgba(244,242,236,.2)"><b>Écart budgétaire :</b> en montant, en % et en couleur, avec des ajustements chiffrés proposés en cas de dépassement.</div>
+<div style="padding:12px 0"><b>Mobile :</b> cibles de 44 px minimum, une action principale par écran, en bas, à portée de pouce.</div>
+</div>
+</div>
+</div>
+<p class="dv-next">Pistes : « approfondir <a class="dv-oid" href="#1a">1a</a> avec la comparaison de <a class="dv-oid" href="#1b">1b</a> » · « prototype cliquable du vote » · « version desktop de l'étape 3 »</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showNotes: this.props.showNotes ?? true };
+  }
+}
+</script>
+</body>
+</html>

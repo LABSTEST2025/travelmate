@@ -1,0 +1,30 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Checkpoints LangGraph (SQLite + fichiers annexes -wal, -shm, -journal)
+*.sqlite
+*.sqlite-*
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+
+# Outils
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Éditeurs et système
+.vscode/
+.idea/
+.DS_Store
+
+# Sauvegardes draw.io
+*.drawio.bkp
+.$*.drawio

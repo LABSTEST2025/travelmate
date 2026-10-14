@@ -1,0 +1,27 @@
+[project]
+name = "travel-agent"
+version = "0.1.0"
+description = "Agent de voyage conversationnel (LangGraph)"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.2",
+    "langgraph-checkpoint-sqlite>=2",
+    "langchain-openai>=0.2",
+    "langchain-tavily>=0.1",
+    "pydantic>=2",
+    "python-dotenv>=1",
+    "langsmith>=0.14.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["travel_agent*"]
