@@ -619,3 +619,16 @@ def test_pwa_manifest_and_service_worker_are_served_from_the_root(client):
     assert worker.headers["cache-control"] == "no-cache"
     assert '"/api/"' in worker.text  # l'API n'est jamais mise en cache
     assert 'rel="manifest"' in visitor.get("/").text
+
+
+# --- T52 : reprise --------------------------------------------------------------------------------
+
+
+def test_visiting_renews_the_member_cookie_only(client):
+    organizer = client()
+    trip_id = _create(organizer)
+    token = organizer.cookies.get(f"escapade_{trip_id}")
+
+    renewed = organizer.get(f"/api/trips/{trip_id}").headers.get("set-cookie", "")
+    assert f"escapade_{trip_id}={token}" in renewed and "Max-Age=7776000" in renewed and "HttpOnly" in renewed
+    assert "set-cookie" not in client().get(f"/api/trips/{trip_id}").headers

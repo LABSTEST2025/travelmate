@@ -198,6 +198,15 @@ function renderHome() {
   );
 }
 
+// Ce navigateur a-t-il déjà ouvert ce voyage en tant que membre ? (liste « Tes voyages »)
+const knownHere = (tripId) => (storage("escapade_trips") || []).some((t) => t.id === tripId);
+
+function lostCookieCard() {
+  return h("section", { class: "card coral stack narrow", role: "status" },
+    h("h3", {}, "On ne te reconnaît plus sur ce navigateur"),
+    h("p", {}, "Tu avais déjà ouvert ce voyage ici, mais le cookie qui t'identifiait a disparu (cookies effacés, navigation privée ou plus de 90 jours sans visite)."));
+}
+
 function rememberTrip(view) {
   const trips = (storage("escapade_trips") || []).filter((trip) => trip.id !== view.id);
   storage("escapade_trips", [{ id: view.id, name: view.name }, ...trips].slice(0, 8));
@@ -326,6 +335,7 @@ function screenJoin(view) {
     await act(() => api("POST", `/trips/${view.id}/members`, { name }), { success: "Bienvenue dans la bande !" }).catch(() => {});
   }
   return [
+    knownHere(view.id) ? lostCookieCard() : null,
     h("section", { class: "stack narrow" },
       h("p", { class: "eyebrow" }, `${organizer?.name || "Quelqu'un"} t'invite`),
       h("h1", {}, view.name),
@@ -338,15 +348,18 @@ function screenJoin(view) {
         h("input", { id: "join-name", name: "name", type: "text", maxlength: "40", autocomplete: "given-name", required: true })),
       h("button", { class: "btn primary block", type: "submit", "aria-disabled": trip.ui.busy ? "true" : null },
         trip.ui.busy ? "Un instant…" : "Rejoindre la bande"),
-      h("p", { class: "small muted" }, "Pas de compte : ce navigateur se souviendra de toi.")),
+      h("p", { class: "small muted" }, "Pas de compte : ce navigateur se souviendra de toi."),
+      h("p", { class: "small muted" }, knownHere(view.id)
+        ? "Rejoindre à nouveau te fera apparaître une deuxième fois dans la bande : demande à l'organisateur·rice de ne pas tenir compte de l'ancienne version."
+        : "Déjà dans la bande sur un autre appareil ? Ouvre plutôt le lien depuis celui-ci : sinon tu apparaîtras deux fois.")),
   ];
 }
 
 function screenClosed(view) {
-  return h("section", { class: "card stack narrow" },
+  return h("section", { class: "stack narrow" }, knownHere(view.id) ? lostCookieCard() : null, h("div", { class: "card stack" },
     h("h2", {}, "Ce voyage a déjà commencé"),
     h("p", {}, "Il n'est plus possible de le rejoindre."),
-    h("p", { class: "muted" }, "Tu en fais partie ? Ouvre le lien depuis le navigateur que tu as utilisé la première fois : c'est lui qui se souvient de toi."));
+    h("p", { class: "muted" }, "Tu en fais partie ? Ouvre le lien depuis le navigateur que tu as utilisé la première fois : c'est lui qui se souvient de toi.")));
 }
 
 // --- Étapes 1 et 2 : invitation, envies, attente -------------------------------------------------------

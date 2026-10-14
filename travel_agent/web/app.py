@@ -104,6 +104,16 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
     def view(trip: TripRecord, member: Member | None) -> dict:
         return trip_view(trip, member, agent_state(trip))
 
+    def set_member_cookie(response: Response, trip_id: str, token: str) -> None:
+        response.set_cookie(
+            cookie_name(trip_id),
+            token,
+            max_age=_COOKIE_MAX_AGE_S,
+            httponly=True,
+            samesite="lax",
+            secure=secure_cookies,
+        )
+
     def add_member(trip: TripRecord, name: str, response: Response, *, organizer: bool = False) -> Member:
         token = secrets.token_urlsafe(32)
         member = Member(
@@ -114,14 +124,7 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
             is_organizer=organizer,
         )
         trip.members.append(member)
-        response.set_cookie(
-            cookie_name(trip.id),
-            token,
-            max_age=_COOKIE_MAX_AGE_S,
-            httponly=True,
-            samesite="lax",
-            secure=secure_cookies,
-        )
+        set_member_cookie(response, trip.id, token)
         return member
 
     # --- Agent ------------------------------------------------------------------------
@@ -164,9 +167,13 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         return view(trip, organizer)
 
     @api.get("/trips/{trip_id}")
-    def get_trip(trip_id: str, request: Request) -> dict:
+    def get_trip(trip_id: str, request: Request, response: Response) -> dict:
         trip = load(trip_id)
-        return view(trip, current_member(trip, request))
+        member = current_member(trip, request)
+        if member:
+            # Expiration glissante : chaque visite renouvelle le cookie (un voyage se prépare sur des mois).
+            set_member_cookie(response, trip.id, request.cookies[cookie_name(trip.id)])
+        return view(trip, member)
 
     @api.post("/trips/{trip_id}/members")
     def join_trip(trip_id: str, body: JoinIn, request: Request, response: Response) -> dict:
