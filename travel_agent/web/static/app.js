@@ -133,7 +133,8 @@ function topbar(tripName) {
 }
 
 function avatar(member, { size = "", pending = false, check = false } = {}) {
-  const classes = ["avatar", size, pending && "pending", check && "check"].filter(Boolean).join(" ");
+  const arriving = trip.fx?.newMembers?.has(member.id);
+  const classes = ["avatar", size, pending && "pending", check && "check", arriving && "drop"].filter(Boolean).join(" ");
   return h("span", { class: classes, style: pending ? null : `background:${member.color}`, title: member.name, "aria-hidden": "true" },
     initial(member.name));
 }
@@ -266,6 +267,7 @@ async function refresh() {
 function setView(view, force = false) {
   const json = JSON.stringify(view);
   if (!force && json === trip.json) return;
+  trip.fx = trip.view ? effectsBetween(trip.view, view) : null;  // jamais d'effet au premier affichage
   trip.json = json;
   trip.view = view;
   if (view.me) rememberTrip(view);
@@ -304,6 +306,42 @@ function renderTrip() {
   else if (view.status === "reviewing" || view.status === "done") screen = screenPlan(view);
   else screen = screenError(view);
   mount(topbar(view.name), screen);
+  if (trip.fx) playEffects(trip.fx, view);
+  trip.fx = null;  // chaque effet ne se joue qu'une fois
+}
+
+// --- Moments forts (désactivés avec prefers-reduced-motion) -----------------------------------------------
+
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function effectsBetween(before, after) {
+  const known = new Set(before.members.map((m) => m.id));
+  const answered = (view) => view.members.filter((m) => m.submitted).length;
+  return {
+    newMembers: new Set(after.members.filter((m) => !known.has(m.id)).map((m) => m.id)),
+    lastAnswer: after.status === "collecting" && after.members.length > 1
+      && answered(before) < before.members.length && answered(after) === after.members.length,
+    reveal: !before.vote?.results && !!after.vote?.results,
+  };
+}
+
+function playEffects(fx, view) {
+  const newcomers = view.members.filter((m) => fx.newMembers.has(m.id) && m.id !== view.me?.id);
+  if (newcomers.length) toast(`${newcomers.map((m) => m.name).join(", ")} ${newcomers.length > 1 ? "ont" : "a"} rejoint !`);
+  if (fx.lastAnswer) confetti(view.members.map((m) => m.color));
+}
+
+function confetti(colors) {
+  if (reducedMotion()) return;
+  const layer = h("div", { class: "confetti", "aria-hidden": "true" });
+  for (let i = 0; i < 70; i++) {
+    layer.append(h("span", {
+      style: `left:${Math.random() * 100}%;background:${colors[i % colors.length]};`
+        + `animation-delay:${Math.random() * 0.4}s;--drift:${(Math.random() - 0.5) * 160}px;--spin:${Math.random() * 720}deg`,
+    }));
+  }
+  document.body.append(layer);
+  setTimeout(() => layer.remove(), 2200);
 }
 
 const organizerOf = (view) => view.members.find((m) => m.is_organizer);
@@ -617,7 +655,7 @@ function resultsView(vote) {
   if (!vote?.results) return null;
   const total = Math.max(1, ...Object.values(vote.results));
   const winner = winnerOf(vote.results);
-  return h("div", { class: "results", role: "list", "aria-label": "Résultats du vote" },
+  return h("div", { class: trip.fx?.reveal ? "results reveal" : "results", role: "list", "aria-label": "Résultats du vote" },
     Object.entries(vote.results).map(([country, count]) =>
       h("div", { class: `result-row${country === winner ? " winner" : ""}`, role: "listitem" },
         h("span", {}, country),
