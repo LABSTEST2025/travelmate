@@ -14,6 +14,9 @@ from travel_agent.tools.search import search_activities, search_hotels
 # Part du budget total du groupe allouée à l'hébergement (les vols et les activités se partagent le reste).
 _HOTEL_BUDGET_SHARE = 0.5
 _ITINERARY_ATTEMPTS = 2
+# En dessous, le « prix » n'est pas un vrai hôtel (un modèle a déjà répondu « aucune proposition » à 0,05 €).
+_HOTEL_MIN_EUR_PER_NIGHT_PER_PERSON = 10
+_HOTEL_ATTEMPTS = 3
 
 _STAY_PROMPT = (
     "Choisis la ville où un groupe de {group_size} personne(s) logera pendant {num_days} jours en {country} : "
@@ -21,9 +24,10 @@ _STAY_PROMPT = (
 )
 
 _HOTEL_PROMPT = (
-    "Propose un hôtel pour {group_size} personne(s). Destination : {place}. Du {check_in} au {check_out}. Le prix total du séjour "
-    "pour tout le groupe ne doit pas dépasser {budget_eur:.0f} EUR. Ne mentionne pas ce plafond "
-    "dans les notes : elles sont visibles par tout le groupe.\n"
+    "Propose un hôtel pour {group_size} personne(s). Destination : {place}{city_rule}. Du {check_in} au {check_out}. Le prix total du séjour "
+    "pour tout le groupe ne doit pas dépasser {budget_eur:.0f} EUR. Les notes (2 phrases) décrivent "
+    "l'hôtel pour le groupe, sans commentaire sur ta démarche et sans mentionner ce plafond : elles sont "
+    "visibles par tout le groupe.\n"
     "Informations : {info}{feedback_part}"
 )
 
@@ -73,12 +77,17 @@ def _place(state: TravelState) -> str:
 
 
 def _build_hotel(
-    place: str, group_size: int, check_in, check_out, budget_eur: float, query_result: dict, feedback: str | None
+    place: str, city: str | None, group_size: int, check_in, check_out, budget_eur: float, query_result: dict,
+    feedback: str | None,
 ) -> dict:
     feedback_part = _feedback_part(feedback)
+    if city and feedback:
+        feedback_part += f" (la ville de séjour, {city}, en tient déjà compte)"
     prompt = _HOTEL_PROMPT.format(
         group_size=group_size,
         place=place,
+        # Sans cette règle, un ajustement (« au bord de la mer ») a déjà donné un hôtel dans une autre ville.
+        city_rule=f" : l'hôtel doit se trouver à {city} même, jamais dans une autre ville" if city else "",
         check_in=check_in.isoformat(),
         check_out=check_out.isoformat(),
         budget_eur=budget_eur,
@@ -86,7 +95,14 @@ def _build_hotel(
         feedback_part=feedback_part,
     )
     llm = with_structured_retry(get_llm(temperature=0.2), _HotelDraft)
-    draft = llm.invoke(prompt)
+    minimum = _HOTEL_MIN_EUR_PER_NIGHT_PER_PERSON * max((check_out - check_in).days, 1) * group_size
+    for _ in range(_HOTEL_ATTEMPTS):
+        draft = llm.invoke(prompt)
+        if draft.price_eur >= minimum:
+            break
+    else:
+        # Mieux vaut un run en échec (l'organisateur peut réessayer) qu'un plan au total absurde.
+        raise ValueError(f"Prix d'hôtel invraisemblable après {_HOTEL_ATTEMPTS} tentatives : {draft.price_eur} EUR")
     return {
         "name": draft.name,
         "price_eur": draft.price_eur,
@@ -164,7 +180,7 @@ def hotels(state: TravelState) -> dict:
     budget_eur = sum(trip.budget_eur for trip in trips) * _HOTEL_BUDGET_SHARE
     city = state.get("stay_city")
     query_result = search_hotels(selected_country, budget_eur, zones=[city] if city else None)
-    hotel = _build_hotel(_place(state), len(trips), check_in, check_out, budget_eur, query_result, feedback)
+    hotel = _build_hotel(_place(state), city, len(trips), check_in, check_out, budget_eur, query_result, feedback)
     return {"hotels": [hotel]}
 
 

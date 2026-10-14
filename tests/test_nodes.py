@@ -247,7 +247,7 @@ def test_all_branches_target_the_stay_city(llm, search):
     itinerary(state)
 
     assert flight["destination"] == "Lisbonne (Portugal)"
-    assert "Destination : Lisbonne (Portugal)" in llm.prompts("_HotelDraft")[0]
+    assert "Destination : Lisbonne (Portugal) : l'hôtel doit se trouver à Lisbonne même" in llm.prompts("_HotelDraft")[0]
     assert "avec Lisbonne comme ville d'arrivée" in llm.prompts("_ItineraryDraft")[0]
     assert ("activities", ("Portugal", "culture")) in search.calls
 
@@ -258,3 +258,28 @@ def test_branches_fall_back_to_the_country_without_stay_city(llm):
 
     assert flight["destination"] == "Portugal"
     assert "Destination : Portugal." in llm.prompts("_HotelDraft")[0]
+
+
+def test_hotel_retries_an_implausible_price(llm):
+    llm.responses["_HotelDraft"] = [
+        {"name": "Aucune proposition possible", "price_eur": 0.05, "notes": ""},
+        {"name": "Riad Zahra", "price_eur": 700, "notes": "Dans la médina."},
+    ]
+
+    (hotel,) = hotels(_planning_state(make_trip()))["hotels"]
+
+    assert hotel["name"] == "Riad Zahra" and len(llm.prompts("_HotelDraft")) == 2
+
+
+def test_hotel_gives_up_after_repeated_implausible_prices(llm):
+    llm.responses["_HotelDraft"] = {"name": "Rien", "price_eur": 1, "notes": ""}
+
+    with pytest.raises(ValueError, match="invraisemblable"):
+        hotels(_planning_state(make_trip()))
+    assert len(llm.prompts("_HotelDraft")) == 3
+
+
+def test_hotel_knows_the_city_already_reflects_the_feedback(llm):
+    hotels(_planning_state(make_trip()) | {"stay_city": "Essaouira", "feedback": "au bord de la mer"})
+
+    assert "(la ville de séjour, Essaouira, en tient déjà compte)" in llm.prompts("_HotelDraft")[0]
