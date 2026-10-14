@@ -10,6 +10,7 @@ from travel_agent.state import CountryOverview, TravelState, TripPreferences
 from travel_agent.tools.search import search_country_overview
 
 _MAX_CANDIDATES = 3
+_MAX_POINTS = 3  # pros et cons par pays : au-delà, les fiches deviennent illisibles sur mobile
 _CANDIDATES_ATTEMPTS = 2
 
 
@@ -18,11 +19,11 @@ class _CandidateCountries(BaseModel):
 
 
 class _OverviewDraft(BaseModel):
-    pros: list[str]
-    cons: list[str]
+    pros: list[str] = Field(description="3 points forts au plus, phrases courtes")
+    cons: list[str] = Field(description="3 points faibles au plus, phrases courtes")
     # Strictement positif : un modèle gratuit renvoie parfois 0, ce qui déclenche une nouvelle tentative.
     estimated_budget_eur: float = Field(gt=0, description="Budget estimé par personne, vols compris, en EUR")
-    best_period: str
+    best_period: str = Field(description="Période courte, ex. « mai – sept. »")
 
 
 _CANDIDATES_PROMPT = (
@@ -37,8 +38,9 @@ _CANDIDATES_PROMPT = (
 
 _OVERVIEW_PROMPT = (
     "Résume les informations suivantes sur {country} pour un groupe de voyageurs partant de {origins}, "
-    "pour {num_days} jours. Produis des pros, des cons, un budget estimé par personne en EUR "
-    "(vols, hébergement et vie sur place compris) et la meilleure période pour y aller.\n\n"
+    "pour {num_days} jours. Donne au plus 3 points forts et 3 points faibles utiles à des touristes "
+    "(12 mots maximum chacun), un budget estimé par personne en EUR (vols, hébergement et vie sur place "
+    "compris) et la meilleure période en quelques mots (ex. « mai – sept. »).\n\n"
     "Informations : {info}"
 )
 
@@ -104,7 +106,14 @@ def _build_overview(item: dict, trips: list[TripPreferences]) -> CountryOverview
     )
     llm = with_structured_retry(get_llm(temperature=0.2), _OverviewDraft)
     draft = llm.invoke(prompt)
-    return CountryOverview(country=item["country"], sources=item.get("sources", []), **draft.model_dump())
+    return CountryOverview(
+        country=item["country"],
+        pros=draft.pros[:_MAX_POINTS],
+        cons=draft.cons[:_MAX_POINTS],
+        estimated_budget_eur=draft.estimated_budget_eur,
+        best_period=draft.best_period,
+        sources=item.get("sources", []),
+    )
 
 
 def research(state: TravelState) -> dict:

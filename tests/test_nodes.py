@@ -200,3 +200,23 @@ def test_research_completes_a_short_list_of_countries(llm):
 
     assert [r["country"] for r in result["research"]] == ["Portugal", "Italie", "Grèce"]
     assert len(llm.prompts("_CandidateCountries")) == 2
+
+
+def test_hotel_price_must_be_positive():
+    from travel_agent.subgraphs.planning import _HotelDraft
+
+    with pytest.raises(ValidationError):
+        _HotelDraft(name="ibis", price_eur=0, notes="")
+
+
+def test_overview_keeps_three_points_at_most(llm):
+    llm.responses["_OverviewDraft"] = {
+        "pros": [f"pro {i}" for i in range(6)], "cons": [f"con {i}" for i in range(5)],
+        "estimated_budget_eur": 900, "best_period": "mai – sept.",
+    }
+    state = {"preferences": make_group(), "research": [{"country": "Portugal", "answer": "", "sources": []}]}
+
+    (overview,) = suggest(state)["overviews"]
+
+    assert overview.pros == ["pro 0", "pro 1", "pro 2"] and len(overview.cons) == 3
+    assert "au plus 3 points forts" in llm.prompts("_OverviewDraft")[0]

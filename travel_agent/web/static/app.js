@@ -846,6 +846,9 @@ function flightItem(flight) {
     h("div", { class: "row", style: "justify-content:space-between" },
       h("strong", {}, `${flight.origin} → ${flight.destination}`),
       h("span", { class: "price", style: "font-size:1.2rem" }, eur(flight.price_eur))),
+    flight.origin_airports?.length
+      ? h("p", { class: "small muted" }, `${flight.origin_airports.join(", ")} → ${flight.destination_airports.join(", ")}`)
+      : null,
     h("p", { class: "small" }, `Aller ${shortDate(flight.departure_date)} · retour ${shortDate(flight.return_date)}${flight.airline ? ` · ${flight.airline}` : ""}`),
     flight.stub ? h("span", { class: "badge outline" }, "Prix factice (démo)") : null,
     flight.estimated && range ? h("p", { class: "small muted" }, `Estimation · fourchette habituelle ${eur(range[0])} – ${eur(range[1])}`) : null);

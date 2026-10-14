@@ -3,7 +3,7 @@ from typing import Literal
 
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from travel_agent.llm import get_llm, with_structured_retry
 from travel_agent.state import TravelState
@@ -31,7 +31,8 @@ _ITINERARY_PROMPT = (
 
 class _HotelDraft(BaseModel):
     name: str
-    price_eur: float
+    # Strictement positif : un modèle a déjà renvoyé 0 €, ce qui faussait le total du voyage.
+    price_eur: float = Field(gt=0, description="Prix total du séjour pour tout le groupe, en EUR")
     notes: str
 
 
