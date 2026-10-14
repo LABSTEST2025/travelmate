@@ -29,7 +29,8 @@ def test_full_trip_is_planned_after_country_choice(app):
     result = _start(app, make_group(make_trip(budget_eur=3000)))
 
     payload = result["__interrupt__"][0].value
-    assert [o["country"] for o in payload["trips"][0]["overviews"]] == ["Espagne", "Portugal", "Grèce"]
+    assert [o["country"] for o in payload["overviews"]] == ["Espagne", "Portugal", "Grèce"]
+    assert "3000" not in str(payload)  # aucun budget individuel dans l'interruption
 
     result = _resume(app, {"selected_country": "Portugal"})
 
@@ -48,7 +49,7 @@ def test_country_feedback_loops_back_to_research(app, llm):
     result = _resume(app, {"feedback": "plus nordique"})
 
     payload = result["__interrupt__"][0].value
-    assert [o["country"] for o in payload["trips"][0]["overviews"]] == ["Croatie", "Islande"]
+    assert [o["country"] for o in payload["overviews"]] == ["Croatie", "Islande"]
     assert "plus nordique" in llm.prompts("_CandidateCountries")[-1]
 
 
