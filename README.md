@@ -30,6 +30,7 @@ cp .env.example .env   # puis renseigner les clés
 | `SQLITE_PATH` | Fichier SQLite (checkpoints de l'agent + voyages du site) |
 | `ENABLE_FINAL_HITL` | `true` : l'organisateur relit et valide le plan avant qu'il soit définitif |
 | `WEB_HOST`, `WEB_PORT`, `WEB_SECURE_COOKIES` | Serveur web (défaut `127.0.0.1:8000`) ; cookies `Secure` derrière HTTPS |
+| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | Traces LangSmith (optionnel). Les budgets y sont masqués ; `LANGSMITH_REDACT_BUDGETS=false` pour les voir en local |
 | `PORT`, `WEB_FORWARDED_ALLOW_IPS` | Hébergement : port imposé par la plateforme (prioritaire sur `WEB_PORT`) ; proxys dont on accepte `X-Forwarded-For` (défaut `127.0.0.1`) |
 
 Ne jamais committer `.env` ni le fichier SQLite (déjà dans `.gitignore`).

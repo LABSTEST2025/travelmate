@@ -12,6 +12,7 @@ from langgraph.store.sqlite import SqliteStore
 
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
+from travel_agent.tracing import configure_tracing
 from travel_agent.web.app import create_app
 from travel_agent.web.repository import TripRepository
 from travel_agent.web.runner import TripRunner
@@ -23,6 +24,7 @@ def build_app() -> FastAPI:
     """Application branchée sur le fichier SQLite de `SQLITE_PATH` : checkpoints de l'agent et
     voyages (store LangGraph) partagent le même fichier."""
     load_dotenv()
+    configure_tracing()
     sqlite_path = os.environ.get("SQLITE_PATH", "checkpoints.sqlite")
     # Hébergé, le fichier vit sur un volume monté (ex. /data) : le dossier peut ne pas encore exister.
     os.makedirs(os.path.dirname(sqlite_path) or ".", exist_ok=True)

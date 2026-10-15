@@ -112,6 +112,7 @@ travel_agent/
 ├── graph.py            # graphe parent + compile(checkpointer=SqliteSaver)
 ├── state.py            # TravelState + modèles Pydantic
 ├── llm.py              # client OpenRouter
+├── tracing.py          # client LangSmith qui masque les budgets dans les traces
 ├── subgraphs/
 │   ├── suggestion.py   # Graph 1
 │   └── planning.py     # Graph 2
@@ -166,6 +167,8 @@ WEB_PORT=8000            # optionnel
 WEB_SECURE_COOKIES=false # true derrière HTTPS
 WEB_FORWARDED_ALLOW_IPS=127.0.0.1 # proxys de confiance (X-Forwarded-For) ; * dans l'image Docker
 PORT=                    # fourni par l'hébergeur, prioritaire sur WEB_PORT
+LANGSMITH_TRACING=false  # optionnel ; budgets masqués dans les traces (travel_agent/tracing.py)
+LANGSMITH_REDACT_BUDGETS=true # false seulement pour déboguer en local
 ```
 
 Ne jamais committer `.env` ni le fichier SQLite.

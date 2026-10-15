@@ -9,8 +9,10 @@ from langgraph.types import Command
 
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import TripPreferences, TripResponseModelGroup, get_checkpoint_serde
+from travel_agent.tracing import configure_tracing
 
 load_dotenv()
+configure_tracing()
 
 
 def _prompt_date(label: str) -> date:
