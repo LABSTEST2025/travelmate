@@ -1,0 +1,13 @@
+.env
+.env.*
+*.sqlite
+*.sqlite-*
+.venv/
+.git/
+.pytest_cache/
+__pycache__/
+*.egg-info/
+tests/
+design/
+docs/
+*.drawio

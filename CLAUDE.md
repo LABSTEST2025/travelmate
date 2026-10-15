@@ -135,7 +135,9 @@ travel_agent/
 tests/                  # dont test_api.py (API web) et test_e2e.py (parcours complet)
 docs/checklist-navigateur.md
 diagrams.drawio         # diagramme d'architecture
-README.md               # installation et lancement
+README.md               # installation, lancement et déploiement Railway
+Dockerfile              # image du site (uv), une seule instance, SQLite sur /data
+railway.json            # build Docker, healthcheck /api/health, 1 réplique
 .env.example
 ```
 
@@ -162,6 +164,8 @@ ENABLE_FINAL_HITL=false
 WEB_HOST=127.0.0.1       # optionnel, serveur web
 WEB_PORT=8000            # optionnel
 WEB_SECURE_COOKIES=false # true derrière HTTPS
+WEB_FORWARDED_ALLOW_IPS=127.0.0.1 # proxys de confiance (X-Forwarded-For) ; * dans l'image Docker
+PORT=                    # fourni par l'hébergeur, prioritaire sur WEB_PORT
 ```
 
 Ne jamais committer `.env` ni le fichier SQLite.

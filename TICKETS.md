@@ -173,7 +173,7 @@ Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (
 | ID | Ticket | Statut | Prérequis |
 |---|---|---|---|
 | B01 | **Notifications push** (fin de génération, rappel de vote) : clés VAPID, stockage des abonnements, gestionnaire `push` du service worker. iPhone : iOS 16.4+ et site ajouté à l'écran d'accueil | todo | B02 |
-| B02 | Hébergement en ligne en HTTPS avec un domaine (nécessaire pour le push et pour tester sur téléphone hors du réseau local) | todo | — |
+| B02 | Hébergement en ligne en HTTPS sur Railway : `Dockerfile` (uv), `railway.json`, volume `/data` pour SQLite, `PORT` et en-têtes du proxy, section « Déploiement » du README. Reste à créer le projet Railway (compte de l'utilisateur) ; image non construite localement (pas d'accès Docker) | done | — |
 | B03 | Relance des retardataires : message pré-écrit à partager, limité à 1 toutes les 12 h | standby | — |
 | B04 | Postes « transports locaux » et « activités + repas » dans le budget | todo | — |
 | B05 | Ajustements chiffrés en cas de dépassement (« 6 nuits au lieu de 7 : −140 € ») | todo | B04 |

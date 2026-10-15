@@ -24,6 +24,8 @@ def build_app() -> FastAPI:
     voyages (store LangGraph) partagent le même fichier."""
     load_dotenv()
     sqlite_path = os.environ.get("SQLITE_PATH", "checkpoints.sqlite")
+    # Hébergé, le fichier vit sur un volume monté (ex. /data) : le dossier peut ne pas encore exister.
+    os.makedirs(os.path.dirname(sqlite_path) or ".", exist_ok=True)
 
     checkpoint_conn = sqlite3.connect(sqlite_path, check_same_thread=False)
     graph = build_travel_graph().compile(checkpointer=SqliteSaver(checkpoint_conn, serde=get_checkpoint_serde()))
@@ -49,10 +51,15 @@ def build_app() -> FastAPI:
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO)
+    load_dotenv()
     uvicorn.run(
         build_app(),
         host=os.environ.get("WEB_HOST", "127.0.0.1"),
-        port=int(os.environ.get("WEB_PORT", "8000")),
+        # `PORT` est imposé par les hébergeurs (Railway, Render) ; `WEB_PORT` sert en local.
+        port=int(os.environ.get("PORT") or os.environ.get("WEB_PORT", "8000")),
+        # Derrière le proxy HTTPS de l'hébergeur : vraie IP du visiteur et schéma https.
+        proxy_headers=True,
+        forwarded_allow_ips=os.environ.get("WEB_FORWARDED_ALLOW_IPS", "127.0.0.1"),
     )
 
 

@@ -30,6 +30,7 @@ cp .env.example .env   # puis renseigner les clés
 | `SQLITE_PATH` | Fichier SQLite (checkpoints de l'agent + voyages du site) |
 | `ENABLE_FINAL_HITL` | `true` : l'organisateur relit et valide le plan avant qu'il soit définitif |
 | `WEB_HOST`, `WEB_PORT`, `WEB_SECURE_COOKIES` | Serveur web (défaut `127.0.0.1:8000`) ; cookies `Secure` derrière HTTPS |
+| `PORT`, `WEB_FORWARDED_ALLOW_IPS` | Hébergement : port imposé par la plateforme (prioritaire sur `WEB_PORT`) ; proxys dont on accepte `X-Forwarded-For` (défaut `127.0.0.1`) |
 
 Ne jamais committer `.env` ni le fichier SQLite (déjà dans `.gitignore`).
 
@@ -47,6 +48,29 @@ Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → une fiche par p
 **Installer l'application (PWA)** : Chrome / Edge proposent l'installation dans la barre d'adresse ; sur
 iPhone, « Partager » puis « Sur l'écran d'accueil ». Hors `localhost`, l'installation et le mode hors ligne
 exigent HTTPS.
+
+## Déploiement (Railway)
+
+Le dépôt contient un `Dockerfile` et un `railway.json` (build Docker, une seule instance, vérification de
+santé sur `/api/health`).
+
+1. Sur Railway : **New Project → Deploy from GitHub repo**, choisir ce dépôt.
+2. **Volume** : clic droit sur le service → *Attach volume*, point de montage **`/data`**. Sans volume, les
+   voyages disparaissent à chaque déploiement.
+3. **Variables** : `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `TAVILY_API_KEY`, `SERPAPI_API_KEY`,
+   `ENABLE_FINAL_HITL` (et les variables LangSmith si besoin). L'image fixe déjà `WEB_HOST=0.0.0.0`,
+   `WEB_SECURE_COOKIES=true`, `WEB_FORWARDED_ALLOW_IPS=*` et `SQLITE_PATH=/data/checkpoints.sqlite`.
+4. **Settings → Networking → Generate Domain** : URL en HTTPS `*.up.railway.app` (ou un domaine à soi).
+
+À savoir :
+
+- **Une seule instance**, jamais de mise à l'échelle horizontale : SQLite et le verrou de `TripRepository`.
+- **Un déploiement coupe les générations en cours** : le voyage passe en erreur et l'organisateur le
+  relance avec « Réessayer » (reprise au dernier checkpoint). Éviter de déployer pendant qu'un groupe génère.
+- **Limites d'usage (T59)** : à mettre en place avant de partager un lien public, sinon n'importe qui peut
+  consommer les quotas SerpApi et OpenRouter.
+- **Sauvegarde** : le volume contient tout (voyages et checkpoints) ; Railway propose des sauvegardes du
+  volume dans ses réglages.
 
 ## Ligne de commande
 
