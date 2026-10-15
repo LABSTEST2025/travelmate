@@ -283,7 +283,7 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         require_status(trip, "reviewing")
         # Valider ne rejoue que guard_out : le brouillon a déjà été chiffré et contrôlé (plan_check).
         runner.submit(
-            trip.id, "planning", Command(resume={"approved": True}), done_steps=("flights", "hotels", "itinerary", "plan_check")
+            trip.id, "planning", Command(resume={"approved": True}), done_steps=("flights", "hotels", "itinerary", "daily_costs", "plan_check")
         )
         return view(trip, organizer)
 

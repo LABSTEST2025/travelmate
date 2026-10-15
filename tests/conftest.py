@@ -37,7 +37,13 @@ DEFAULT_LLM_RESPONSES: dict[str, dict] = {
     "_HotelDraft": {"name": "Hôtel Test", "price_eur": 800, "notes": "Centre-ville"},
     "_ItineraryDraft": {"days": [{"day": 1, "activities": ["Visite du centre"]}]},
     "_AirportCodes": {"codes": ["CDG", "ORY"]},
+    "_DailyCostsDraft": {
+        "standard": {"transport_eur": 10, "meals_eur": 30, "activities_eur": 20},
+        "economy": {"transport_eur": 5, "meals_eur": 15, "activities_eur": 10},
+    },
 }
+DAILY_EUR = 60  # dépenses sur place par personne et par jour, niveau standard du faux LLM
+ECONOMY_DAILY_EUR = 30
 
 
 class FakeLLM:
@@ -112,6 +118,7 @@ def search(monkeypatch) -> FakeSearch:
     monkeypatch.setattr(suggestion, "search_country_overview", fake.make("country"))
     monkeypatch.setattr(planning, "search_hotels", fake.make("hotels"))
     monkeypatch.setattr(planning, "search_activities", fake.make("activities"))
+    monkeypatch.setattr(planning, "search_daily_costs", fake.make("daily_costs"))
     return fake
 
 

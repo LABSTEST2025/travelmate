@@ -88,29 +88,40 @@ def _vote_view(trip: TripRecord, me: Member | None, agent: AgentState) -> dict:
     }
 
 
-def _traveler_shares(flights: list[dict], hotels_total: float, total: float, count: int) -> list[float]:
-    """Part de chaque participant : son vol + sa part d'hébergement. Les fournisseurs de vols
-    renvoient un vol par voyageur, dans l'ordre de `group_travel` (= `participants`)."""
-    if len(flights) != count:
+_DAILY_LABELS = {"transport_eur": "Transports sur place", "meals_eur": "Repas", "activities_eur": "Activités"}
+
+
+def _traveler_shares(flights: list[dict], hotels_total: float, daily: dict, total: float, count: int) -> list[float]:
+    """Part de chaque participant : son vol + sa part d'hébergement + ses dépenses sur place. Vols et
+    dépenses sur place sont rendus par voyageur, dans l'ordre de `group_travel` (= `participants`)."""
+    per_traveler = daily.get("per_traveler_eur") or [daily.get("total_eur", 0) / count] * count
+    if len(flights) != count or len(per_traveler) != count:
         return [total / count] * count
-    return [flight.get("price_eur", 0) + hotels_total / count for flight in flights]
+    return [flight.get("price_eur", 0) + hotels_total / count + own for flight, own in zip(flights, per_traveler)]
 
 
 def _plan_view(trip: TripRecord, me: Member | None, plan: dict) -> dict:
     flights, hotels = plan.get("flights", []), plan.get("hotels", [])
     flights_total = sum(f.get("price_eur", 0) for f in flights)
     hotels_total = sum(h.get("price_eur", 0) for h in hotels)
-    total = plan.get("total_cost_eur") or flights_total + hotels_total
+    daily = plan.get("daily_costs") or {}
+    total = plan.get("total_cost_eur") or flights_total + hotels_total + daily.get("total_eur", 0)
     count = max(len(trip.participants), 1)
     budgets = _budgets(trip)
-    shares = _traveler_shares(flights, hotels_total, total, count)
+    shares = _traveler_shares(flights, hotels_total, daily, total, count)
 
     view = {
         "selected_country": plan["selected_country"],
         "ledger": [
             {"label": "Vols", "amount_eur": round(flights_total, 2)},
             {"label": "Hébergement", "amount_eur": round(hotels_total, 2)},
+            *(
+                {"label": label, "amount_eur": daily["lines_eur"][key]}
+                for key, label in _DAILY_LABELS.items()
+                if key in daily.get("lines_eur", {})
+            ),
         ],
+        "daily_level": daily.get("level"),
         "total_cost_eur": round(total, 2),
         "per_person_eur": round(total / count, 2),
         "within_each_budget": len(budgets) == len(shares) and all(s <= b for s, b in zip(shares, budgets)),

@@ -10,7 +10,7 @@ from travel_agent.guardrails.output import check_plan
 from travel_agent.llm import get_llm, with_structured_retry
 from travel_agent.state import TravelState
 from travel_agent.tools.flights import FlightsSearchError, get_flights_provider
-from travel_agent.tools.search import search_activities, search_hotels
+from travel_agent.tools.search import search_activities, search_daily_costs, search_hotels
 
 # Part du budget total du groupe allouée à l'hébergement (les vols et les activités se partagent le reste).
 _HOTEL_BUDGET_SHARE = 0.5
@@ -38,6 +38,26 @@ _ITINERARY_PROMPT = (
     "numérotés de 1 à {num_days}.\n"
     "Informations : {info}{feedback_part}"
 )
+
+
+_DAILY_COSTS_PROMPT = (
+    "Estime les dépenses sur place d'un touriste à {place}, en EUR par personne et par jour, pour deux "
+    "niveaux de confort : « standard » et « économique ». Postes : transports locaux, repas, activités "
+    "(entrées, visites). Hors hébergement et vols.\n"
+    "Informations : {info}"
+)
+
+
+class _DayCosts(BaseModel):
+    # Plafonds : au-delà, le modèle a donné un coût du séjour et non d'une journée (nouvelle tentative).
+    transport_eur: float = Field(ge=0, le=150, description="Transports locaux, EUR par personne et par jour")
+    meals_eur: float = Field(gt=0, le=250, description="Repas, EUR par personne et par jour")
+    activities_eur: float = Field(ge=0, le=250, description="Entrées et visites, EUR par personne et par jour")
+
+
+class _DailyCostsDraft(BaseModel):
+    standard: _DayCosts
+    economy: _DayCosts
 
 
 class _StayDraft(BaseModel):
@@ -145,6 +165,33 @@ def _build_itinerary(
     return best
 
 
+def daily_costs(state: TravelState) -> dict:
+    """Dépenses sur place (transports locaux, repas, activités) pour tout le groupe, au niveau de confort
+    choisi (`daily_level`). Le niveau économique est aussi chiffré : c'est une piste d'économie (B05)."""
+    trips = state["preferences"].group_travel
+    query_result = search_daily_costs(state["selected_country"], state.get("stay_city"))
+    prompt = _DAILY_COSTS_PROMPT.format(place=_place(state), info=query_result.get("answer") or "")
+    draft = with_structured_retry(get_llm(temperature=0.1), _DailyCostsDraft).invoke(prompt)
+    standard = draft.standard.model_dump()
+    # Un niveau « économique » plus cher que le standard n'a pas de sens : on le borne poste par poste.
+    economy = {key: min(value, standard[key]) for key, value in draft.economy.model_dump().items()}
+    level = state.get("daily_level") or "standard"
+    per_day = economy if level == "economy" else standard
+    days = [(trip.end_date - trip.start_date).days + 1 for trip in trips]
+    return {
+        "daily_costs": {
+            "level": level,
+            "per_day_eur": per_day,
+            # Dans l'ordre de `group_travel` : la part de chacun dépend de la durée de son séjour.
+            "per_traveler_eur": [round(sum(per_day.values()) * d, 2) for d in days],
+            "lines_eur": {key: round(value * sum(days), 2) for key, value in per_day.items()},
+            "total_eur": round(sum(per_day.values()) * sum(days), 2),
+            "economy_total_eur": round(sum(economy.values()) * sum(days), 2),
+            "sources": query_result.get("sources", []),
+        }
+    }
+
+
 def planner(state: TravelState) -> dict:
     """Choisit la ville de séjour avant de lancer les trois branches en parallèle : vols, hôtel et
     itinéraire convergent ainsi vers la même ville (sinon : vols vers Lisbonne, hôtel à Porto…)."""
@@ -210,8 +257,10 @@ def itinerary(state: TravelState) -> dict:
 
 
 def aggregate(state: TravelState) -> dict:
-    total_cost_eur = sum(f.get("price_eur", 0) for f in state.get("flights", [])) + sum(
-        h.get("price_eur", 0) for h in state.get("hotels", [])
+    total_cost_eur = (
+        sum(f.get("price_eur", 0) for f in state.get("flights", []))
+        + sum(h.get("price_eur", 0) for h in state.get("hotels", []))
+        + (state.get("daily_costs") or {}).get("total_eur", 0)
     )
     return {"total_cost_eur": round(total_cost_eur, 2)}
 
@@ -233,6 +282,7 @@ def hitl_final(state: TravelState) -> Command[Literal["planner", "__end__"]]:
         "flights": state.get("flights", []),
         "hotels": state.get("hotels", []),
         "itinerary": state.get("itinerary", []),
+        "daily_costs": state.get("daily_costs"),
         "total_cost_eur": state["total_cost_eur"],
     }
     decision = interrupt(payload)
@@ -248,6 +298,7 @@ def build_planning_graph() -> StateGraph:
     graph.add_node("flights", flights)
     graph.add_node("hotels", hotels)
     graph.add_node("itinerary", itinerary)
+    graph.add_node("daily_costs", daily_costs)
     graph.add_node("aggregate", aggregate)
     graph.add_node("plan_check", plan_check)
     graph.add_node("hitl_final", hitl_final)
@@ -256,9 +307,11 @@ def build_planning_graph() -> StateGraph:
     graph.add_edge("planner", "flights")
     graph.add_edge("planner", "hotels")
     graph.add_edge("planner", "itinerary")
+    graph.add_edge("planner", "daily_costs")
     graph.add_edge("flights", "aggregate")
     graph.add_edge("hotels", "aggregate")
     graph.add_edge("itinerary", "aggregate")
+    graph.add_edge("daily_costs", "aggregate")
     graph.add_edge("aggregate", "plan_check")
 
     return graph

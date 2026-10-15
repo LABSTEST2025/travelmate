@@ -30,6 +30,8 @@ def input_node(state: TravelState) -> dict:
         "flights": state.get("flights") or [],
         "hotels": state.get("hotels") or [],
         "itinerary": state.get("itinerary") or [],
+        "daily_costs": None,
+        "daily_level": None,
         # Un nouveau run repart de zéro : un feedback laissé par un run précédent (ex. relance budget)
         # serait sinon pris pour un « autres idées » et exclurait tous les pays déjà proposés.
         "selected_country": None,

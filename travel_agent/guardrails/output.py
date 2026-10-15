@@ -82,6 +82,7 @@ def guard_out(state: TravelState) -> dict:
     flights = state.get("flights") or []
     hotels = state.get("hotels") or []
     itinerary = state.get("itinerary") or []
+    daily_costs = state.get("daily_costs")
     total_cost_eur = state.get("total_cost_eur")
 
     if state.get("guardrail_error"):
@@ -99,13 +100,14 @@ def guard_out(state: TravelState) -> dict:
             flights=flights,
             hotels=hotels,
             itinerary=itinerary,
+            daily_costs=daily_costs,
             total_cost_eur=total_cost_eur,
             budget_eur=group_budget_eur(state),
         )
     except ValidationError as exc:
         return {"guardrail_error": f"Plan final invalide : {exc}"}
 
-    known_urls = _collect_known_urls(flights, hotels, itinerary)
+    known_urls = _collect_known_urls(flights, hotels, itinerary, [daily_costs] if daily_costs else [])
     cleaned_plan = plan.model_copy(
         update={
             "flights": _strip_unknown_urls(plan.flights, known_urls),

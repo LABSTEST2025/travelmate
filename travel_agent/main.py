@@ -93,6 +93,14 @@ def _print_plan_details(plan: dict) -> None:
         )
         if hotel.get("notes"):
             print(f"    {hotel['notes']}")
+    daily = plan.get("daily_costs")
+    if daily:
+        lines = daily["lines_eur"]
+        print(
+            f"\nSur place ({'économique' if daily['level'] == 'economy' else 'standard'}) : "
+            f"transports {lines['transport_eur']:.0f} EUR, repas {lines['meals_eur']:.0f} EUR, "
+            f"activités {lines['activities_eur']:.0f} EUR"
+        )
     print("\nItinéraire :")
     for day in plan["itinerary"]:
         print(f"  Jour {day['day']} :")
@@ -111,7 +119,7 @@ def _print_final_plan(plan: dict) -> None:
     print(f"Pays : {plan['selected_country']}")
     print(f"Coût total : {plan['total_cost_eur']:.0f} EUR (budget : {plan['budget_eur']:.0f} EUR)")
     _print_plan_details(plan)
-    items = plan["flights"] + plan["hotels"] + plan["itinerary"]
+    items = plan["flights"] + plan["hotels"] + plan["itinerary"] + ([plan["daily_costs"]] if plan.get("daily_costs") else [])
     sources = sorted({url for item in items for url in item.get("sources", [])})
     if sources:
         print("\nSources :")

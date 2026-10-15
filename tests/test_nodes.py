@@ -6,7 +6,16 @@ from pydantic import ValidationError
 from tests.conftest import make_group, make_trip
 from travel_agent.state import CountryOverview
 from travel_agent.subgraphs import planning
-from travel_agent.subgraphs.planning import aggregate, flights, hotels, itinerary, plan_check, planner
+from travel_agent.subgraphs.planning import (
+    _DayCosts,
+    aggregate,
+    daily_costs,
+    flights,
+    hotels,
+    itinerary,
+    plan_check,
+    planner,
+)
 from travel_agent.subgraphs.suggestion import _OverviewDraft, research, suggest
 from travel_agent.tools.flights import FlightsSearchError
 
@@ -150,10 +159,48 @@ def test_itinerary_merges_group_styles(llm):
     assert "aventure, culture" in llm.prompts("_ItineraryDraft")[0]
 
 
-def test_aggregate_sums_flights_and_hotels():
-    state = {"flights": [{"price_eur": 120.5}, {"price_eur": 99.25}], "hotels": [{"price_eur": 700}]}
+def test_aggregate_sums_flights_hotels_and_on_site_costs():
+    state = {
+        "flights": [{"price_eur": 120.5}, {"price_eur": 99.25}],
+        "hotels": [{"price_eur": 700}],
+        "daily_costs": {"total_eur": 300},
+    }
 
-    assert aggregate(state) == {"total_cost_eur": 919.75}
+    assert aggregate(state) == {"total_cost_eur": 1219.75}
+
+
+def test_daily_costs_cover_each_traveler_stay(llm, search):
+    first = make_trip()  # 8 jours
+    second = make_trip(end_date=first.end_date + timedelta(days=2))  # 10 jours
+
+    costs = daily_costs(_planning_state(first, second) | {"stay_city": "Porto"})["daily_costs"]
+
+    assert costs["level"] == "standard" and costs["per_day_eur"]["meals_eur"] == 30
+    assert costs["per_traveler_eur"] == [480, 600]
+    assert costs["lines_eur"] == {"transport_eur": 180, "meals_eur": 540, "activities_eur": 360}
+    assert costs["total_eur"] == 1080 and costs["economy_total_eur"] == 540
+    assert costs["sources"] == ["https://example.com/daily_costs"]
+    assert search.calls[-1] == ("daily_costs", ("Portugal", "Porto"))
+    prompt = llm.prompts("_DailyCostsDraft")[0]
+    assert "Porto (Portugal)" in prompt and "budget" not in prompt.lower()  # aucun budget dans le prompt
+
+
+def test_daily_costs_economy_level_is_never_above_standard(llm):
+    llm.responses["_DailyCostsDraft"] = {
+        "standard": {"transport_eur": 10, "meals_eur": 30, "activities_eur": 20},
+        "economy": {"transport_eur": 12, "meals_eur": 15, "activities_eur": 10},
+    }
+
+    costs = daily_costs(_planning_state(make_trip()) | {"daily_level": "economy"})["daily_costs"]
+
+    assert costs["level"] == "economy"
+    assert costs["per_day_eur"] == {"transport_eur": 10, "meals_eur": 15, "activities_eur": 10}
+    assert costs["total_eur"] == costs["economy_total_eur"] == 35 * 8
+
+
+def test_daily_costs_reject_a_whole_stay_given_as_a_day():
+    with pytest.raises(ValidationError):
+        _DayCosts(transport_eur=10, meals_eur=900, activities_eur=20)
 
 
 def test_check_routes_to_review_only_when_enabled(monkeypatch):

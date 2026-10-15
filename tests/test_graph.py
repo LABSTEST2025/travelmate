@@ -4,7 +4,7 @@ import pytest
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 
-from tests.conftest import make_group, make_trip
+from tests.conftest import DAILY_EUR, make_group, make_trip
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
 from travel_agent.tools.flights import StubFlightsProvider
@@ -39,7 +39,9 @@ def test_full_trip_is_planned_after_country_choice(app):
     assert result["guardrail_error"] is None
     plan = result["final_plan"]
     assert plan["selected_country"] == "Portugal"
-    assert plan["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800  # vol du stub + hôtel
+    # vol du stub + hôtel + dépenses sur place (8 jours)
+    assert plan["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800 + DAILY_EUR * 8
+    assert plan["daily_costs"]["level"] == "standard" and plan["daily_costs"]["economy_total_eur"] == 30 * 8
     assert plan["budget_eur"] == 3000
 
 
@@ -92,7 +94,7 @@ def test_final_hitl_adjustments_loop_back_to_planner(app, llm, monkeypatch):
     _start(app, make_group(make_trip(budget_eur=3000)))
 
     result = _resume(app, {"selected_country": "Portugal"})
-    assert result["__interrupt__"][0].value["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800
+    assert result["__interrupt__"][0].value["total_cost_eur"] == StubFlightsProvider.PRICE_EUR + 800 + DAILY_EUR * 8
 
     result = _resume(app, {"approved": False, "feedback": "un hôtel avec piscine"})
     assert "__interrupt__" in result

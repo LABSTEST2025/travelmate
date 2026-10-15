@@ -29,6 +29,12 @@ def search_hotels(country: str, budget_eur: float, zones: list[str] | None = Non
     return _run(query)
 
 
+def search_daily_costs(country: str, city: str | None = None) -> dict:
+    place = f"à {city} ({country})" if city else f"en {country}"
+    query = f"Prix des transports en commun, des repas au restaurant et des visites {place} pour un touriste"
+    return _run(query)
+
+
 def search_activities(country: str, travel_style: str | None = None, city: str | None = None) -> dict:
     style_part = f" de style {travel_style}" if travel_style else ""
     place = f"à {city} et ses environs ({country})" if city else f"en {country}"

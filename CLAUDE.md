@@ -36,9 +36,10 @@ Utilisateur
                          └───────────────────────────┬────────┘  │ refus / feedback
                                                      │ pays validé
                          ┌──── Graph 2 : planification ─────────────────────────────────────┐
-                         │ planner ─┬─► flights ──┐                                          │
-                         │    ▲     ├─► hotels ───┼─► aggregate ─► plan_check ─► hitl_final  │◄─┐ ajustements
-                         │    │     └─► itinerary ┘                    │                     │
+                         │ planner ─┬─► flights ─────┐                                       │
+                         │    ▲     ├─► hotels ──────┤                                       │
+                         │    │     ├─► itinerary ───┼─► aggregate ─► plan_check ─► hitl_final │◄─┐ ajustements
+                         │    │     └─► daily_costs ─┘                 │                     │
                          │    └──── budget dépassé (≤ 2 relances) ─────┘                     │
                          └───────────────────────────┬──────────────────────────────────────┘
                                                      ▼
@@ -58,11 +59,12 @@ Utilisateur
 - `hitl_country` : appelle `interrupt()` avec les overviews, puis reprend avec `Command(resume=...)`. Si l'utilisateur choisit un pays, on passe à Graph 2. S'il refuse ou fait un retour, on revient à `research` avec ce feedback.
 
 **Graph 2 : planification**
-- `planner` : choisit la **ville de séjour** (`stay_city`, en tenant compte du feedback), puis lance les trois branches **en parallèle** (arêtes multiples). Vols, hôtel et itinéraire visent tous cette ville.
+- `planner` : choisit la **ville de séjour** (`stay_city`, en tenant compte du feedback), puis lance les quatre branches **en parallèle** (arêtes multiples). Vols, hôtel, itinéraire et dépenses sur place visent tous cette ville.
 - `flights` : estime le prix des vols via SerpApi (Google Flights), ou le stub sans clé. En cas d'échec, écrit un message dans `guardrail_error` et le graphe s'arrête.
 - `hotels` : appelle Tavily, filtre selon le budget et les zones.
 - `itinerary` : appelle Tavily pour les activités et le LLM pour le programme jour par jour.
-- `aggregate` : fan-in. Assemble les trois résultats et calcule le coût total.
+- `daily_costs` : appelle Tavily puis le LLM pour les dépenses sur place par personne et par jour (transports locaux, repas, activités), en niveau standard et économique ; applique le niveau choisi (`daily_level`) à la durée du séjour de chaque voyageur. Aucun budget dans le prompt.
+- `aggregate` : fan-in. Assemble les résultats et calcule le coût total (vols + hôtel + dépenses sur place).
 - `plan_check` : contrôle le brouillon **avant** qu'il soit montré : cohérence des dates (l'hôtel du groupe couvre du premier départ au dernier retour, sinon erreur) et total ≤ budget du groupe. Si le budget est dépassé, il renvoie vers `planner` avec une consigne de budget (`budget_note`, distincte du `feedback` du groupe, qui reste dans les prompts ; 2 relances au maximum, `MAX_PLAN_RETRIES`). Relances épuisées : le brouillon est montré quand même au HITL final (écart affiché), ou c'est une erreur si le HITL final est désactivé.
 - `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide (définitif, seul `guard_out` tourne ensuite) ou demande des ajustements, ce qui ramène à `planner` avec de nouvelles relances budget (`budget_note` effacée, `plan_retries` à 0).
 

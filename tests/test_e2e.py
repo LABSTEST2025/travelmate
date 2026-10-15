@@ -84,6 +84,6 @@ def test_full_journey_with_four_members(journey, client, llm):
     for name in BUDGETS:
         plan = _view(members[name], trip_id)["plan"]
         assert plan["group_budget_eur"] == 4900 and plan["within_my_budget"] is True
-        assert [line["label"] for line in plan["ledger"]] == ["Vols", "Hébergement"]
+        assert [line["label"] for line in plan["ledger"]] == ["Vols", "Hébergement", "Transports sur place", "Repas", "Activités"]
     assert _view(karim, trip_id)["plan"]["my_share_eur"] is None  # pas participant
     _assert_no_budget_leak(trip_id, members, visitor)

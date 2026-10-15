@@ -15,7 +15,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 from langgraph.store.sqlite import SqliteStore
 
-from tests.conftest import make_group, make_trip
+from tests.conftest import DAILY_EUR, make_group, make_trip
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
 from travel_agent.tools.flights import StubFlightsProvider
@@ -25,6 +25,7 @@ from travel_agent.web.runner import RUN_FAILED_MESSAGE, RUN_STOPPED_MESSAGE, Tri
 
 HOTEL_EUR = 800  # prix de l'hôtel renvoyé par le faux LLM (conftest.py)
 FLIGHT_EUR = StubFlightsProvider.PRICE_EUR
+ON_SITE_EUR = DAILY_EUR * 8  # dépenses sur place par personne pour les 8 jours de `_prefs`
 
 
 @pytest.fixture
@@ -425,15 +426,19 @@ def test_plan_ledger_for_a_group_of_three(client):
 
     plan = members[1].get(f"/api/trips/{trip_id}").json()["plan"]
 
-    total = 3 * FLIGHT_EUR + HOTEL_EUR
+    total = 3 * FLIGHT_EUR + HOTEL_EUR + 3 * ON_SITE_EUR
     assert plan["ledger"] == [
         {"label": "Vols", "amount_eur": 3 * FLIGHT_EUR},
         {"label": "Hébergement", "amount_eur": HOTEL_EUR},
+        {"label": "Transports sur place", "amount_eur": 3 * 8 * 10},
+        {"label": "Repas", "amount_eur": 3 * 8 * 30},
+        {"label": "Activités", "amount_eur": 3 * 8 * 20},
     ]
+    assert plan["daily_level"] == "standard"
     assert plan["total_cost_eur"] == total and plan["per_person_eur"] == round(total / 3, 2)
     assert plan["group_budget_eur"] == 4200 and plan["gap_eur"] == total - 4200
     assert plan["gap_pct"] == round((total - 4200) / 4200 * 100, 1)
-    assert plan["my_share_eur"] == round(FLIGHT_EUR + HOTEL_EUR / 3, 2) and plan["within_my_budget"]
+    assert plan["my_share_eur"] == round(FLIGHT_EUR + HOTEL_EUR / 3 + ON_SITE_EUR, 2) and plan["within_my_budget"]
     assert plan["within_each_budget"] and len(plan["itinerary"]) == 1
 
 
@@ -455,7 +460,7 @@ def test_final_review_by_the_organizer(client, llm, monkeypatch):
     _vote(organizer, trip_id, "Portugal")
     view = _vote(friend, trip_id, "Portugal").json()
 
-    assert view["status"] == "reviewing" and view["plan"]["total_cost_eur"] == 2 * FLIGHT_EUR + HOTEL_EUR
+    assert view["status"] == "reviewing" and view["plan"]["total_cost_eur"] == 2 * (FLIGHT_EUR + ON_SITE_EUR) + HOTEL_EUR
     assert friend.post(f"/api/trips/{trip_id}/plan/approve").status_code == 403
 
     view = organizer.post(f"/api/trips/{trip_id}/plan/adjust", json={"feedback": "avec piscine"}).json()
@@ -525,7 +530,7 @@ def test_steps_already_done_are_shown_as_done(graph):
 
     runner.submit("t", "planning", None, done_steps=("flights", "hotels", "itinerary"))
 
-    assert [step["done"] for step in runner.state("t").progress] == [True, True, True, False]
+    assert [step["done"] for step in runner.state("t").progress] == [True, True, True, False, False]
 
 
 # --- T43 : front servi par FastAPI ----------------------------------------------------------------

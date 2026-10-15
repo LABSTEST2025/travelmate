@@ -36,6 +36,7 @@ class FinalPlan(BaseModel):
     itinerary: list[dict]
     total_cost_eur: float
     budget_eur: float
+    daily_costs: dict | None = None  # transports locaux, repas, activités (B04)
 
 
 CHECKPOINT_MODELS = (
@@ -62,6 +63,8 @@ class TravelState(TypedDict):
     flights: list[dict]
     hotels: list[dict]
     itinerary: list[dict]
+    daily_costs: dict | None  # dépenses sur place du groupe, écrites par la branche `daily_costs`
+    daily_level: str | None  # "standard" (défaut) ou "economy" : niveau de confort des dépenses sur place
     total_cost_eur: float | None
     final_plan: dict | None
     plan_retries: int
