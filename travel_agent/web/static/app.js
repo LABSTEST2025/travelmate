@@ -1044,12 +1044,67 @@ function screenPlan(view) {
         dates.length ? `${shortDate(dates[0])} → ${fullDateFormat.format(parseDate(ends[ends.length - 1]))} · ` : "",
         plural(view.vote?.voters_total || 1, "voyageur", "voyageurs"))),
     reviewing ? reviewActions(view) : null,
+    reviewing ? null : h("section", { class: "card soft stack" },
+      button("Télécharger le carnet (PDF)", () => printCarnet(view), { kind: "dark", block: true }),
+      h("p", { class: "small muted" }, "Dans la fenêtre d'impression, choisis « Enregistrer en PDF ».")),
     h("div", { class: "split" },
       h("div", { class: "aside stack" },
         budgetBlock(view),
         view.vote?.results ? h("section", { class: "card soft stack", "aria-labelledby": "results-title" }, h("h3", { id: "results-title" }, "Le vote a parlé"), resultsView(view.vote)) : null),
       planTabs(view)),
   ];
+}
+
+// --- Carnet souvenir (B07) : page imprimable, enregistrée en PDF par le navigateur -----------------------------
+// Aucun budget individuel : seulement les coûts du plan et le coût par personne.
+
+const CARNET_FONTS = "https://fonts.googleapis.com/css2?family=Young+Serif&family=Work+Sans:wght@400;600&family=Caveat:wght@600&display=swap";
+
+function carnetPage(view) {
+  const plan = view.plan;
+  const travelers = view.members.filter((m) => m.submitted).map((m) => m.name);
+  const dates = [...plan.flights.map((f) => f.departure_date), ...plan.hotels.map((x) => x.check_in)].filter(Boolean).sort();
+  const ends = [...plan.flights.map((f) => f.return_date), ...plan.hotels.map((x) => x.check_out)].filter(Boolean).sort();
+  const sources = [...new Set([...plan.hotels, ...plan.itinerary].flatMap((item) => item.sources || []).map(safeUrl).filter(Boolean))];
+  return h("article", { id: "carnet", "aria-hidden": "true" },
+    h("header", { class: "carnet-cover" },
+      h("p", { class: "carnet-kicker" }, "Carnet de voyage"),
+      h("h1", {}, plan.selected_country),
+      h("p", { class: "carnet-hand" }, view.name),
+      dates.length ? h("p", {}, `${fullDateFormat.format(parseDate(dates[0]))} → ${fullDateFormat.format(parseDate(ends[ends.length - 1]))}`) : null,
+      h("ul", { class: "carnet-stamps" }, travelers.map((name) => h("li", {}, name)))),
+    h("section", {},
+      h("h2", {}, "Jour par jour"),
+      h("ol", { class: "carnet-days" }, plan.itinerary.map((day) =>
+        h("li", {}, h("h3", {}, `Jour ${day.day}`), h("ul", {}, day.activities.map((a) => h("li", {}, a))))))),
+    h("section", { class: "carnet-break" },
+      h("h2", {}, "Vols"),
+      h("ul", { class: "carnet-list" }, plan.flights.map((f) => h("li", {},
+        h("strong", {}, `${f.origin} → ${f.destination}`), ` · aller ${shortDate(f.departure_date)}, retour ${shortDate(f.return_date)} · ${eur(f.price_eur)}`))),
+      h("h2", {}, "Hébergement"),
+      h("ul", { class: "carnet-list" }, plan.hotels.map((x) => h("li", {},
+        h("strong", {}, x.name), x.check_in ? ` · du ${shortDate(x.check_in)} au ${shortDate(x.check_out)}` : "", ` · ${eur(x.price_eur)}`,
+        x.notes ? h("p", {}, x.notes) : null))),
+      h("h2", {}, "Le budget"),
+      h("table", { class: "carnet-ledger" }, h("tbody", {},
+        plan.ledger.map((line) => h("tr", {}, h("td", {}, line.label), h("td", {}, eur(line.amount_eur)))),
+        h("tr", { class: "total" }, h("td", {}, "Total"), h("td", {}, eur(plan.total_cost_eur))),
+        h("tr", {}, h("td", {}, "Par personne"), h("td", {}, eur(plan.per_person_eur))))),
+      sources.length ? h("section", { class: "carnet-sources" }, h("h2", {}, "Sources"),
+        h("ul", {}, sources.map((url) => h("li", {}, h("a", { href: url }, hostname(url)))))) : null),
+    h("footer", {}, "Préparé avec Escapade · estimations, à vérifier avant de réserver"));
+}
+
+async function printCarnet(view) {
+  if (!document.getElementById("carnet-fonts")) {
+    document.head.append(h("link", { id: "carnet-fonts", rel: "stylesheet", href: CARNET_FONTS }));
+  }
+  document.getElementById("carnet")?.remove();
+  document.body.append(carnetPage(view));
+  // Les polices du carnet doivent être chargées avant l'impression (sans bloquer plus de 3 s hors ligne).
+  await Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 3000))]);
+  window.addEventListener("afterprint", () => document.getElementById("carnet")?.remove(), { once: true });
+  window.print();
 }
 
 // --- Erreur ---------------------------------------------------------------------------------------------------

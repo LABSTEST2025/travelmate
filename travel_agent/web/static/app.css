@@ -312,6 +312,50 @@ details summary { cursor: pointer; font-weight: 600; min-height: var(--target); 
   position: absolute; top: -16px; width: 10px; height: 14px; border-radius: 3px; border: 1.5px solid var(--ink);
   animation: fall 1.6s cubic-bezier(.25, .6, .4, 1) both;
 }
+/* --- Carnet souvenir (B07) : direction Carnet, visible uniquement à l'impression ------------------ */
+/* Textes colorés en variantes foncées de la palette Carnet (contraste ≥ 4,5:1 sur le kraft). */
+
+#carnet { display: none; }
+
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body > *:not(#carnet) { display: none !important; }
+  body { background: #FBF5E6; }
+  #carnet {
+    display: block; color: #1F3A5F; font: 400 10.5pt/1.5 'Work Sans', sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  #carnet h1, #carnet h2, #carnet h3 { font-family: 'Young Serif', Georgia, serif; font-weight: 400; margin: 0 0 6pt; }
+  #carnet h2 { font-size: 16pt; margin-top: 14pt; border-bottom: 1.5pt dashed #D9CBB0; padding-bottom: 3pt; }
+  #carnet h3 { font-size: 11.5pt; }
+  #carnet a { color: #1F3A5F; }
+  .carnet-cover {
+    background: #E9DCC2; border-radius: 6pt; padding: 22pt 24pt; margin-bottom: 10pt; break-inside: avoid;
+  }
+  .carnet-cover h1 { font-size: 34pt; line-height: 1.1; }
+  .carnet-kicker { text-transform: uppercase; letter-spacing: .18em; font-size: 8.5pt; font-weight: 600; color: #A3361F; margin: 0 0 6pt; }
+  .carnet-hand { font-family: 'Caveat', cursive; font-size: 18pt; color: #4A6030; margin: 0 0 4pt; }
+  .carnet-stamps { list-style: none; display: flex; flex-wrap: wrap; gap: 8pt; padding: 0; margin: 10pt 0 0; }
+  .carnet-stamps li {
+    border: 1.5pt solid #C1462F; color: #A3361F; border-radius: 999px; padding: 2pt 10pt; font-weight: 600;
+    transform: rotate(-3deg);
+  }
+  .carnet-stamps li:nth-child(even) { transform: rotate(2deg); }
+  .carnet-days { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 18pt; }
+  .carnet-days > li { break-inside: avoid; margin-bottom: 10pt; padding-left: 10pt; border-left: 2pt solid #D8A23E; }
+  .carnet-days ul, .carnet-sources ul { margin: 0; padding-left: 14pt; }
+  .carnet-break { break-before: page; }
+  .carnet-list { list-style: none; padding: 0; margin: 0 0 6pt; }
+  .carnet-list li { margin-bottom: 6pt; break-inside: avoid; }
+  .carnet-list p { margin: 2pt 0 0; }
+  .carnet-ledger { border-collapse: collapse; min-width: 60%; }
+  .carnet-ledger td { padding: 3pt 0; border-bottom: .75pt solid #D9CBB0; }
+  .carnet-ledger td:last-child { text-align: right; padding-left: 24pt; font-variant-numeric: tabular-nums; }
+  .carnet-ledger .total td { font-weight: 600; border-bottom: 1.5pt solid #1F3A5F; }
+  .carnet-sources { font-size: 9pt; }
+  #carnet footer { margin-top: 18pt; font-size: 8.5pt; color: #5F5D57; }
+}
+
 @keyframes fall { to { transform: translate(var(--drift), 105vh) rotate(var(--spin)); } }
 
 @media (prefers-reduced-motion: reduce) {

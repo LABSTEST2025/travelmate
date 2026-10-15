@@ -178,7 +178,7 @@ Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (
 | B04 | Postes « transports locaux », « repas » et « activités » dans le budget : branche parallèle `daily_costs` (Tavily + LLM, EUR par personne et par jour, niveaux standard et économique, aucun budget dans le prompt), coût total et part de chacun selon la durée de son séjour, lignes dans le grand livre | done | — |
 | B05 | Pistes d'économie chiffrées sur un brouillon hors budget : « dépenses sur place en mode économique : −X € » et « hôtel plus simple (−30 %) : −Y € », montants tirés des prix du plan (jamais des budgets), cochées par l'organisateur puis recalcul (`POST /plan/savings`, l'ajustement précédent reste). « 6 nuits au lieu de 7 » écarté : les dates viennent des membres et les vols suivent | done | B04 |
 | B06 | QR code d'invitation | standby | — |
-| B07 | Export PDF souvenir du voyage (direction Carnet) | todo | — |
+| B07 | Export PDF souvenir (direction Carnet) : bouton « Télécharger le carnet (PDF) » sur le plan validé, page imprimable (couverture kraft, tampons des voyageurs, jour par jour, vols, hôtel, budget, sources) enregistrée en PDF par le navigateur ; aucun budget individuel. Rendu vérifié dans Chromium | done | — |
 | B08 | App native Expo branchée sur la même API, si l'usage le justifie | standby | B02 |
 | B09 | Nationalité des voyageurs : le LLM cite parfois des règles de visa d'une autre nationalité (sources Tavily canadiennes). **Reporté** : on laisse en l'état pour le moment | standby | — |
 
