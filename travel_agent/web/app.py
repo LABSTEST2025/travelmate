@@ -16,6 +16,7 @@ from travel_agent.web.models import (
     AVATAR_COLORS,
     CreateTripIn,
     FeedbackIn,
+    SavingsIn,
     JoinIn,
     Member,
     PreferencesIn,
@@ -25,7 +26,7 @@ from travel_agent.web.models import (
 )
 from travel_agent.web.repository import TripRepository, hash_token, new_id
 from travel_agent.web.runner import AgentState, Status, TripBusyError, TripRunner
-from travel_agent.web.views import trip_view, vote_options
+from travel_agent.web.views import savings_options, trip_view, vote_options
 
 MAX_MEMBERS = 20
 STATIC_DIR = Path(__file__).parent / "static"
@@ -294,6 +295,18 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         organizer = require_organizer(trip, request)
         require_status(trip, "reviewing")
         runner.submit(trip.id, "planning", Command(resume={"approved": False, "feedback": feedback}))
+        return view(trip, organizer)
+
+    @api.post("/trips/{trip_id}/plan/savings")
+    def apply_savings(trip_id: str, body: SavingsIn, request: Request) -> dict:
+        """Pistes d'économie chiffrées (B05) : pas de texte libre, donc pas de passage au classifieur."""
+        trip = load(trip_id)
+        organizer = require_organizer(trip, request)
+        agent = require_status(trip, "reviewing")
+        available = {option["id"] for option in savings_options(agent.interrupt or {})}
+        if not set(body.options) <= available:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Cette piste d'économie n'est plus disponible.")
+        runner.submit(trip.id, "planning", Command(resume={"approved": False, "savings": sorted(set(body.options))}))
         return view(trip, organizer)
 
     app.include_router(api)

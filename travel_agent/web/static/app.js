@@ -218,7 +218,7 @@ function rememberTrip(view) {
 const trip = { id: null, view: null, json: "", timer: null, ui: null };
 
 function freshUi() {
-  return { busy: false, editing: false, draft: null, formError: null, showErrors: false, vote: null, feedback: "", showFeedback: false, adjust: "", tab: "days" };
+  return { busy: false, editing: false, draft: null, formError: null, showErrors: false, vote: null, feedback: "", showFeedback: false, adjust: "", savings: [], tab: "days" };
 }
 
 async function openTrip(id) {
@@ -972,6 +972,37 @@ function planTabs(view) {
     h("div", { id: "plan-panel", role: "tabpanel", "aria-labelledby": `tab-${trip.ui.tab}`, tabindex: "0" }, panel));
 }
 
+// Pistes d'économie chiffrées (B05) : proposées seulement quand le brouillon dépasse le budget.
+function savingsForm(view) {
+  const options = view.plan.savings || [];
+  if (!options.length) return null;
+  const chosen = trip.ui.savings.filter((id) => options.some((o) => o.id === id));
+  const total = options.filter((o) => chosen.includes(o.id)).reduce((sum, o) => sum + o.saving_eur, 0);
+  function toggle(id, checked) {
+    trip.ui.savings = checked ? [...chosen, id] : chosen.filter((other) => other !== id);
+    renderTrip();
+  }
+  async function apply(event) {
+    event.preventDefault();
+    if (!chosen.length) {
+      toast("Choisis au moins une piste.", true);
+      return;
+    }
+    await act(() => api("POST", `/trips/${view.id}/plan/savings`, { options: chosen })).catch(() => {});
+    trip.ui.savings = [];
+  }
+  return h("form", { class: "stack", onsubmit: apply, novalidate: true },
+    h("fieldset", { class: "vote-options savings" },
+      h("legend", { style: "font-weight:700;margin-bottom:8px" }, "Pistes d'économie"),
+      options.map((option) => h("div", { class: "vote-option" },
+        h("input", { type: "checkbox", id: `saving-${option.id}`, checked: chosen.includes(option.id), onchange: (e) => toggle(option.id, e.target.checked) }),
+        h("label", { for: `saving-${option.id}` },
+          h("span", {}, h("span", { class: "name" }, option.label), h("br"), h("span", { class: "small" }, `≈ −${eur(option.saving_eur)}`)),
+          h("span", { class: "tick", "aria-hidden": "true" }, chosen.includes(option.id) ? "✓" : ""))))),
+    h("button", { class: "btn block", type: "submit", "aria-disabled": trip.ui.busy ? "true" : null },
+      chosen.length ? `Recalculer le plan (≈ −${eur(total)})` : "Recalculer le plan"));
+}
+
 function reviewActions(view) {
   const organizer = organizerOf(view);
   if (!view.me.is_organizer) {
@@ -991,6 +1022,7 @@ function reviewActions(view) {
   }
   return h("section", { class: "card sun stack", "aria-labelledby": "review-title" },
     h("h3", { id: "review-title" }, "Ce plan vous va ?"),
+    savingsForm(view),
     button("Valider ce plan", () => act(() => api("POST", `/trips/${view.id}/plan/approve`), { success: "Plan validé !" }).catch(() => {}), { kind: "dark", block: true, busy: trip.ui.busy }),
     h("form", { class: "stack", onsubmit: adjust, novalidate: true },
       h("div", { class: "field" },

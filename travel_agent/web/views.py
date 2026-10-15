@@ -9,6 +9,7 @@ Règles de confidentialité (cf. design « Règles communes ») :
 import math
 
 from travel_agent.state import TripPreferences
+from travel_agent.subgraphs.planning import HOTEL_SAVING_SHARE
 from travel_agent.web.models import Member, TripRecord
 from travel_agent.web.runner import AgentState
 
@@ -88,6 +89,27 @@ def _vote_view(trip: TripRecord, me: Member | None, agent: AgentState) -> dict:
     }
 
 
+def savings_options(plan: dict) -> list[dict]:
+    """Pistes d'économie chiffrées pour un plan hors budget (B05). Les montants viennent des prix du
+    plan, jamais des budgets : les afficher ne révèle rien du budget de quiconque."""
+    options = []
+    daily = plan.get("daily_costs") or {}
+    if daily.get("level") == "standard" and daily.get("economy_total_eur", 0) < daily.get("total_eur", 0):
+        options.append({
+            "id": "economy",
+            "label": "Repas, transports et activités en mode économique",
+            "saving_eur": round(daily["total_eur"] - daily["economy_total_eur"]),
+        })
+    hotels_total = sum(h.get("price_eur", 0) for h in plan.get("hotels", []))
+    if hotels_total:
+        options.append({
+            "id": "hotel",
+            "label": f"Hôtel plus simple (−{round(HOTEL_SAVING_SHARE * 100)} %)",
+            "saving_eur": round(hotels_total * HOTEL_SAVING_SHARE),
+        })
+    return options
+
+
 _DAILY_LABELS = {"transport_eur": "Transports sur place", "meals_eur": "Repas", "activities_eur": "Activités"}
 
 
@@ -142,6 +164,8 @@ def _plan_view(trip: TripRecord, me: Member | None, plan: dict) -> dict:
             "gap_eur": round(gap, 2),
             "gap_pct": round(gap / group_budget * 100, 1) if group_budget else None,
         }
+    over_budget = view["gap_eur"] > 0 if view["gap_eur"] is not None else not view["within_each_budget"]
+    view["savings"] = savings_options(plan) if over_budget else []
     if me and me.id in trip.participants:
         my_share = shares[trip.participants.index(me.id)]
         view |= {

@@ -65,6 +65,7 @@ class TravelState(TypedDict):
     itinerary: list[dict]
     daily_costs: dict | None  # dépenses sur place du groupe, écrites par la branche `daily_costs`
     daily_level: str | None  # "standard" (défaut) ou "economy" : niveau de confort des dépenses sur place
+    hotel_max_eur: float | None  # plafond d'hôtel choisi comme piste d'économie au HITL final (B05)
     total_cost_eur: float | None
     final_plan: dict | None
     plan_retries: int

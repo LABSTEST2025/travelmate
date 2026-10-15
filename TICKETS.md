@@ -176,7 +176,7 @@ Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (
 | B02 | Hébergement en ligne en HTTPS sur Railway : `Dockerfile` (uv), `railway.json`, volume `/data` pour SQLite, `PORT` et en-têtes du proxy, section « Déploiement » du README. Reste à créer le projet Railway (compte de l'utilisateur) ; image non construite localement (pas d'accès Docker) | done | — |
 | B03 | Relance des retardataires : message pré-écrit à partager, limité à 1 toutes les 12 h | standby | — |
 | B04 | Postes « transports locaux », « repas » et « activités » dans le budget : branche parallèle `daily_costs` (Tavily + LLM, EUR par personne et par jour, niveaux standard et économique, aucun budget dans le prompt), coût total et part de chacun selon la durée de son séjour, lignes dans le grand livre | done | — |
-| B05 | Ajustements chiffrés en cas de dépassement (« 6 nuits au lieu de 7 : −140 € ») | todo | B04 |
+| B05 | Pistes d'économie chiffrées sur un brouillon hors budget : « dépenses sur place en mode économique : −X € » et « hôtel plus simple (−30 %) : −Y € », montants tirés des prix du plan (jamais des budgets), cochées par l'organisateur puis recalcul (`POST /plan/savings`, l'ajustement précédent reste). « 6 nuits au lieu de 7 » écarté : les dates viennent des membres et les vols suivent | done | B04 |
 | B06 | QR code d'invitation | standby | — |
 | B07 | Export PDF souvenir du voyage (direction Carnet) | todo | — |
 | B08 | App native Expo branchée sur la même API, si l'usage le justifie | standby | B02 |

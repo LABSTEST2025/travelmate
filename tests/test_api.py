@@ -15,7 +15,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 from langgraph.store.sqlite import SqliteStore
 
-from tests.conftest import DAILY_EUR, make_group, make_trip
+from tests.conftest import DAILY_EUR, ECONOMY_DAILY_EUR, make_group, make_trip
 from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
 from travel_agent.tools.flights import StubFlightsProvider
@@ -469,6 +469,40 @@ def test_final_review_by_the_organizer(client, llm, monkeypatch):
     view = organizer.post(f"/api/trips/{trip_id}/plan/approve").json()
     assert view["status"] == "done" and view["plan"]["selected_country"] == "Portugal"
     assert organizer.post(f"/api/trips/{trip_id}/plan/approve").status_code == 409
+
+
+def test_savings_options_on_an_over_budget_draft(client, llm, monkeypatch):
+    """B05 : pistes chiffrées sur les prix du plan (jamais sur les budgets), appliquées par l'organisateur."""
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    trip_id, (organizer, friend) = _launched(client, [900, 900])
+    _vote(organizer, trip_id, "Portugal")
+    view = _vote(friend, trip_id, "Portugal").json()
+
+    plan = view["plan"]
+    assert view["status"] == "reviewing" and plan["within_each_budget"] is False
+    economy_saving = 2 * 8 * (DAILY_EUR - ECONOMY_DAILY_EUR)
+    assert plan["savings"] == [
+        {"id": "economy", "label": "Repas, transports et activités en mode économique", "saving_eur": economy_saving},
+        {"id": "hotel", "label": "Hôtel plus simple (−30 %)", "saving_eur": 240},
+    ]
+    assert friend.post(f"/api/trips/{trip_id}/plan/savings", json={"options": ["economy"]}).status_code == 403
+    assert organizer.post(f"/api/trips/{trip_id}/plan/savings", json={"options": ["spa"]}).status_code == 422
+
+    view = organizer.post(f"/api/trips/{trip_id}/plan/savings", json={"options": ["economy", "hotel"]}).json()
+
+    assert view["status"] == "reviewing" and view["plan"]["daily_level"] == "economy"
+    assert "ne doit pas dépasser 560 EUR" in llm.prompts("_HotelDraft")[-1]  # 800 € − 30 %
+    assert view["plan"]["within_each_budget"] and view["plan"]["savings"] == []  # 2 × (250 + 240) + 800 ≤ 900 × 2
+    response = organizer.post(f"/api/trips/{trip_id}/plan/savings", json={"options": ["economy"]})
+    assert response.status_code == 422
+
+
+def test_no_savings_options_when_the_plan_fits(client):
+    trip_id, members = _launched(client, [1500, 1500, 1500])
+    for member in members:
+        _vote(member, trip_id, "Portugal")
+
+    assert members[0].get(f"/api/trips/{trip_id}").json()["plan"]["savings"] == []
 
 
 # --- T40 : avancement de la génération ---------------------------------------------------------

@@ -14,6 +14,8 @@ from travel_agent.tools.search import search_activities, search_daily_costs, sea
 
 # Part du budget total du groupe allouée à l'hébergement (les vols et les activités se partagent le reste).
 _HOTEL_BUDGET_SHARE = 0.5
+# Piste d'économie « hôtel plus simple » (B05) : nouveau plafond en part du prix de l'hôtel actuel.
+HOTEL_SAVING_SHARE = 0.3
 _ITINERARY_ATTEMPTS = 2
 # En dessous, le « prix » n'est pas un vrai hôtel (un modèle a déjà répondu « aucune proposition » à 0,05 €).
 _HOTEL_MIN_EUR_PER_NIGHT_PER_PERSON = 10
@@ -233,6 +235,8 @@ def hotels(state: TravelState) -> dict:
     check_in = min(trip.start_date for trip in trips)
     check_out = max(trip.end_date for trip in trips)
     budget_eur = sum(trip.budget_eur for trip in trips) * _HOTEL_BUDGET_SHARE
+    if state.get("hotel_max_eur"):
+        budget_eur = min(budget_eur, state["hotel_max_eur"])  # piste d'économie choisie au HITL final
     city = state.get("stay_city")
     query_result = search_hotels(selected_country, budget_eur, zones=[city] if city else None)
     hotel = _build_hotel(
@@ -288,8 +292,17 @@ def hitl_final(state: TravelState) -> Command[Literal["planner", "__end__"]]:
     decision = interrupt(payload)
     if decision.get("approved"):
         return Command(goto=END)
-    # Nouvel ajustement : nouvelle consigne du groupe, et ses propres relances budget.
-    return Command(goto="planner", update={"feedback": decision.get("feedback", ""), "budget_note": None, "plan_retries": 0})
+    # Nouvel ajustement ou pistes d'économie : ses propres relances budget.
+    update = {"budget_note": None, "plan_retries": 0}
+    if decision.get("savings"):
+        # Pistes chiffrées (B05) : l'ajustement précédent du groupe reste en vigueur.
+        if "economy" in decision["savings"]:
+            update["daily_level"] = "economy"
+        if "hotel" in decision["savings"]:
+            hotel_eur = sum(h.get("price_eur", 0) for h in state.get("hotels", []))
+            update["hotel_max_eur"] = round(hotel_eur * (1 - HOTEL_SAVING_SHARE), 2)
+        return Command(goto="planner", update=update)
+    return Command(goto="planner", update=update | {"feedback": decision.get("feedback", "")})
 
 
 def build_planning_graph() -> StateGraph:

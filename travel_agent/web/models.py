@@ -83,3 +83,7 @@ class TieIn(_In):
 
 class FeedbackIn(_In):
     feedback: str = Field(min_length=1, max_length=500)
+
+
+class SavingsIn(_In):
+    options: list[Literal["economy", "hotel"]] = Field(min_length=1, max_length=2)

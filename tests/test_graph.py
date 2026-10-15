@@ -174,6 +174,21 @@ def test_new_adjustment_gets_its_own_budget_retries(app, llm, monkeypatch):
     assert "Contrainte de budget" not in llm.prompts("_HotelDraft")[-2]  # l'ancienne consigne est effacée
 
 
+def test_savings_keep_the_previous_adjustment(app, llm, monkeypatch):
+    """B05 : une piste d'économie change le niveau ou le plafond, sans effacer l'ajustement du groupe."""
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    _start(app, make_group(make_trip(budget_eur=3000)))
+    _resume(app, {"selected_country": "Portugal"})
+    _resume(app, {"approved": False, "feedback": "près de la plage"})
+
+    result = _resume(app, {"approved": False, "savings": ["economy", "hotel"]})
+
+    payload = result["__interrupt__"][0].value
+    assert payload["daily_costs"]["level"] == "economy"
+    hotel_prompt = llm.prompts("_HotelDraft")[-1]
+    assert "ne doit pas dépasser 560 EUR" in hotel_prompt and "près de la plage" in hotel_prompt
+
+
 def test_flights_error_reaches_the_user(app, monkeypatch):
     from travel_agent.subgraphs import planning
     from travel_agent.tools.flights import FlightsSearchError

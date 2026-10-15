@@ -4,7 +4,7 @@
 // - API : jamais interceptée ni mise en cache (données d'un voyage, cookies).
 // Changer VERSION purge les anciens caches à l'activation.
 
-const VERSION = "escapade-v2";
+const VERSION = "escapade-v3";
 const SHELL = [
   "/",
   "/static/app.css",
