@@ -58,7 +58,7 @@ def check_plan(state: TravelState, *, can_review: bool) -> dict:
     """Contrôle du brouillon avant qu'il soit montré au groupe (fin de Graph 2).
 
     - dates incohérentes : erreur, le plan n'est pas montré ;
-    - budget dépassé : nouvelle planification avec un feedback (ni `final_plan` ni `guardrail_error`),
+    - budget dépassé : nouvelle planification avec une `budget_note` (le retour du groupe est gardé),
       dans la limite de MAX_PLAN_RETRIES. Relances épuisées : le brouillon est montré tel quel si le
       groupe peut le relire (`can_review`), sinon c'est une erreur.
     """
@@ -72,7 +72,7 @@ def check_plan(state: TravelState, *, can_review: bool) -> dict:
     error = f"Le coût total ({total:.0f} EUR) dépasse le budget ({budget:.0f} EUR)."
     retries = state.get("plan_retries") or 0
     if retries < MAX_PLAN_RETRIES:
-        return {"plan_retries": retries + 1, "feedback": f"{error} Réduis le coût de l'hébergement et des activités."}
+        return {"plan_retries": retries + 1, "budget_note": f"{error} Réduis le coût de l'hébergement et des activités."}
     return {} if can_review else {"guardrail_error": error}
 
 

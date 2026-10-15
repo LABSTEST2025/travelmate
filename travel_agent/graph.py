@@ -35,6 +35,7 @@ def input_node(state: TravelState) -> dict:
         "selected_country": None,
         "stay_city": None,
         "feedback": None,
+        "budget_note": None,
         "total_cost_eur": None,
         "final_plan": None,
         "plan_retries": 0,

@@ -136,6 +136,42 @@ def test_over_budget_draft_is_shown_for_review_once_retries_are_exhausted(app, l
     assert len(llm.prompts("_HotelDraft")) == 3  # plan initial + 2 relances, aucune après validation
 
 
+def test_budget_retry_keeps_the_group_adjustment(app, llm, monkeypatch):
+    """T64 : la relance budget s'ajoute à l'ajustement demandé au lieu de le remplacer."""
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    _start(app, make_group(make_trip(budget_eur=3000)))
+    _resume(app, {"selected_country": "Portugal"})
+    llm.responses["_StayDraft"] = lambda prompt: {"city": "Porto" if "Porto" in prompt else "Lisbonne"}
+    llm.responses["_HotelDraft"] = [
+        {"name": "Palace", "price_eur": 5000, "notes": ""},
+        {"name": "Auberge", "price_eur": 500, "notes": ""},
+    ]
+
+    result = _resume(app, {"approved": False, "feedback": "plutôt Porto, avec piscine"})
+
+    payload = result["__interrupt__"][0].value
+    assert payload["hotels"][0]["name"] == "Auberge"
+    assert payload["flights"][0]["destination"] == "Porto (Portugal)"
+    retry_prompt = llm.prompts("_HotelDraft")[-1]
+    assert "plutôt Porto, avec piscine" in retry_prompt and "dépasse le budget" in retry_prompt
+
+
+def test_new_adjustment_gets_its_own_budget_retries(app, llm, monkeypatch):
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    llm.responses["_HotelDraft"] = {"name": "Palace", "price_eur": 5000, "notes": ""}
+    _start(app, make_group(make_trip(budget_eur=2000)))
+    _resume(app, {"selected_country": "Portugal"})  # plan initial + 2 relances, toutes hors budget
+    llm.responses["_HotelDraft"] = [
+        {"name": "Palace bis", "price_eur": 5000, "notes": ""},
+        {"name": "Auberge", "price_eur": 500, "notes": ""},
+    ]
+
+    result = _resume(app, {"approved": False, "feedback": "plus calme"})
+
+    assert result["__interrupt__"][0].value["hotels"][0]["name"] == "Auberge"
+    assert "Contrainte de budget" not in llm.prompts("_HotelDraft")[-2]  # l'ancienne consigne est effacée
+
+
 def test_flights_error_reaches_the_user(app, monkeypatch):
     from travel_agent.subgraphs import planning
     from travel_agent.tools.flights import FlightsSearchError

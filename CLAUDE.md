@@ -63,8 +63,8 @@ Utilisateur
 - `hotels` : appelle Tavily, filtre selon le budget et les zones.
 - `itinerary` : appelle Tavily pour les activités et le LLM pour le programme jour par jour.
 - `aggregate` : fan-in. Assemble les trois résultats et calcule le coût total.
-- `plan_check` : contrôle le brouillon **avant** qu'il soit montré : cohérence des dates (l'hôtel du groupe couvre du premier départ au dernier retour, sinon erreur) et total ≤ budget du groupe. Si le budget est dépassé, il renvoie vers `planner` avec un feedback (2 relances au maximum, `MAX_PLAN_RETRIES`). Relances épuisées : le brouillon est montré quand même au HITL final (écart affiché), ou c'est une erreur si le HITL final est désactivé.
-- `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide (définitif, seul `guard_out` tourne ensuite) ou demande des ajustements, ce qui ramène à `planner`.
+- `plan_check` : contrôle le brouillon **avant** qu'il soit montré : cohérence des dates (l'hôtel du groupe couvre du premier départ au dernier retour, sinon erreur) et total ≤ budget du groupe. Si le budget est dépassé, il renvoie vers `planner` avec une consigne de budget (`budget_note`, distincte du `feedback` du groupe, qui reste dans les prompts ; 2 relances au maximum, `MAX_PLAN_RETRIES`). Relances épuisées : le brouillon est montré quand même au HITL final (écart affiché), ou c'est une erreur si le HITL final est désactivé.
+- `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide (définitif, seul `guard_out` tourne ensuite) ou demande des ajustements, ce qui ramène à `planner` avec de nouvelles relances budget (`budget_note` effacée, `plan_retries` à 0).
 
 ## État (proposition)
 

@@ -100,7 +100,7 @@ def test_check_plan_asks_for_replanning_when_over_budget():
 
     assert "guardrail_error" not in result
     assert result["plan_retries"] == 1
-    assert "dépasse le budget" in result["feedback"]
+    assert "dépasse le budget" in result["budget_note"] and "feedback" not in result
 
 
 def test_check_plan_without_review_fails_when_retries_are_exhausted():

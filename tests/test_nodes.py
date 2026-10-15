@@ -171,7 +171,7 @@ def test_check_replans_an_over_budget_draft_before_review(monkeypatch):
     command = plan_check(state)
 
     assert command.goto == "planner"
-    assert command.update["plan_retries"] == 1 and "dépasse le budget" in command.update["feedback"]
+    assert command.update["plan_retries"] == 1 and "dépasse le budget" in command.update["budget_note"]
 
 
 def test_research_never_returns_an_empty_list(llm):
