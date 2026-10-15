@@ -281,8 +281,10 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
         trip = load(trip_id)
         organizer = require_organizer(trip, request)
         require_status(trip, "reviewing")
-        # Valider ne rejoue que guard_out : vols, hébergement et programme sont déjà faits.
-        runner.submit(trip.id, "planning", Command(resume={"approved": True}), done_steps=("flights", "hotels", "itinerary"))
+        # Valider ne rejoue que guard_out : le brouillon a déjà été chiffré et contrôlé (plan_check).
+        runner.submit(
+            trip.id, "planning", Command(resume={"approved": True}), done_steps=("flights", "hotels", "itinerary", "plan_check")
+        )
         return view(trip, organizer)
 
     @api.post("/trips/{trip_id}/plan/adjust")

@@ -160,24 +160,26 @@ Référence visuelle : `design/Escapade Directions.dc.html`, direction **1a Conf
 
 | T58 | Garde-fou sur les textes libres du site (`guard_in` ne voit que `messages`, que le site n'envoie pas) : champs courts (pays, ville, style) validés strictement (lettres, espaces, tirets, apostrophes, ≤ 60 car.) ; « Autres idées » et « ajustement » passés au classifieur LLM existant (hors sujet, injection) avant de lancer l'agent, avec masquage des PII ; textes délimités dans les prompts comme « retour du groupe, pas des instructions ». Fonction partagée dans `guardrails/input.py` | M | done | — |
 | T59 | Limites d'usage : par IP (création de voyages, lancements de l'agent), par voyage (tours d'« autres idées » et d'ajustements), plafond quotidien de runs et réserve de crédits SerpApi. **Standby** : pas de limite tant que le site n'est pas déployé (à faire avec B02) | M | standby | B02 |
-| T60 | Confidentialité des traces LangSmith (budgets individuels envoyés dans les traces) : masquer les budgets (`hide_inputs`, API à vérifier) ou couper le traçage en production. **Standby** : on garde le comportement actuel pour le moment | S | standby | B02 |
+| T60 | Confidentialité des traces LangSmith (budgets individuels envoyés dans les traces) : masquer les budgets (`hide_inputs`, API à vérifier) ou couper le traçage en production. **Décision** : masquer les budgets dans les traces en production (traçage conservé) | S | todo | B02 |
 | T61 | Durée de conservation : suppression automatique des voyages (store + checkpoints) et purge des anciens fils de la CLI. Durée et événement déclencheur à décider (1 h évoqué ; après le plan final, la dernière activité ou la création ?). **Standby** : ne rien supprimer pour le moment | S–M | standby | — |
+| T62 | Pays rêvés d'abord : au 1er tour, une fiche par pays souhaité distinct (fusion insensible à la casse, les plus cités en premier, sans plafond) ; si moins de 3 pays distincts, l'IA complète jusqu'à 3. Badges « Suggestion de l'IA » et « souhaité par N membres » (sans dévoiler qui ni aucun budget). « Autres idées » inchangé (nouveaux pays, sans reproposer). Textes de l'interface : « L'IA étudie vos destinations ». Aujourd'hui seul le pays le plus cité est garanti, le LLM remplace les autres | M | todo | — |
+| T63 | Valider le brouillon final relançait toute la planification : le contrôle du budget (`guard_out`) avait lieu après le HITL final et renvoyait vers `planner` (vols SerpApi, hôtel, itinéraire refaits, brouillon à revalider). Nouveau nœud `plan_check` dans Graph 2 (dates + budget, ≤ 2 relances) avant `hitl_final` ; validation définitive, `guard_out` ne fait plus que schéma et URLs ; relances épuisées : brouillon montré avec l'écart | M | done | — |
 
 Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (B03) ; le budget ne chiffre que vols et hôtel (B04).
 
 ## Backlog — après le MVP
 
-| ID | Ticket | Prérequis |
-|---|---|---|
-| B01 | **Notifications push** (fin de génération, rappel de vote) : clés VAPID, stockage des abonnements, gestionnaire `push` du service worker. iPhone : iOS 16.4+ et site ajouté à l'écran d'accueil | B02 |
-| B02 | Hébergement en ligne en HTTPS avec un domaine (nécessaire pour le push et pour tester sur téléphone hors du réseau local) | — |
-| B03 | Relance des retardataires : message pré-écrit à partager, limité à 1 toutes les 12 h | — |
-| B04 | Postes « transports locaux » et « activités + repas » dans le budget | — |
-| B05 | Ajustements chiffrés en cas de dépassement (« 6 nuits au lieu de 7 : −140 € ») | B04 |
-| B06 | QR code d'invitation | — |
-| B07 | Export PDF souvenir du voyage (direction Carnet) | — |
-| B08 | App native Expo branchée sur la même API, si l'usage le justifie | B02 |
-| B09 | Nationalité des voyageurs : le LLM cite parfois des règles de visa d'une autre nationalité (sources Tavily canadiennes). **Reporté** : on laisse en l'état pour le moment | — |
+| ID | Ticket | Statut | Prérequis |
+|---|---|---|---|
+| B01 | **Notifications push** (fin de génération, rappel de vote) : clés VAPID, stockage des abonnements, gestionnaire `push` du service worker. iPhone : iOS 16.4+ et site ajouté à l'écran d'accueil | todo | B02 |
+| B02 | Hébergement en ligne en HTTPS avec un domaine (nécessaire pour le push et pour tester sur téléphone hors du réseau local) | todo | — |
+| B03 | Relance des retardataires : message pré-écrit à partager, limité à 1 toutes les 12 h | standby | — |
+| B04 | Postes « transports locaux » et « activités + repas » dans le budget | todo | — |
+| B05 | Ajustements chiffrés en cas de dépassement (« 6 nuits au lieu de 7 : −140 € ») | todo | B04 |
+| B06 | QR code d'invitation | standby | — |
+| B07 | Export PDF souvenir du voyage (direction Carnet) | todo | — |
+| B08 | App native Expo branchée sur la même API, si l'usage le justifie | standby | B02 |
+| B09 | Nationalité des voyageurs : le LLM cite parfois des règles de visa d'une autre nationalité (sources Tavily canadiennes). **Reporté** : on laisse en l'état pour le moment | standby | — |
 
 ## Risques à surveiller
 

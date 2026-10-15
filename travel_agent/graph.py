@@ -30,7 +30,7 @@ def input_node(state: TravelState) -> dict:
         "flights": state.get("flights") or [],
         "hotels": state.get("hotels") or [],
         "itinerary": state.get("itinerary") or [],
-        # Un nouveau run repart de zéro : un feedback laissé par un run précédent (ex. guard_out)
+        # Un nouveau run repart de zéro : un feedback laissé par un run précédent (ex. relance budget)
         # serait sinon pris pour un « autres idées » et exclurait tous les pays déjà proposés.
         "selected_country": None,
         "stay_city": None,
@@ -46,13 +46,6 @@ def route_after_guard_in(state: TravelState) -> str:
     return END if state.get("guardrail_error") else "suggestion"
 
 
-def route_after_guard_out(state: TravelState) -> str:
-    # Ni plan ni erreur : guard_out demande une nouvelle planification avec un feedback.
-    if state.get("final_plan") is None and not state.get("guardrail_error"):
-        return "planning"
-    return END
-
-
 def build_travel_graph() -> StateGraph:
     graph = StateGraph(TravelState)
     graph.add_node("input", input_node)
@@ -66,6 +59,6 @@ def build_travel_graph() -> StateGraph:
     graph.add_conditional_edges("guard_in", route_after_guard_in, ["suggestion", END])
     graph.add_edge("suggestion", "planning")
     graph.add_edge("planning", "guard_out")
-    graph.add_conditional_edges("guard_out", route_after_guard_out, ["planning", END])
+    graph.add_edge("guard_out", END)
 
     return graph

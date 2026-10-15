@@ -26,11 +26,11 @@ STEPS: dict[Stage, tuple[tuple[str, str], ...]] = {
         ("flights", "Vols estimés"),
         ("hotels", "Hébergement choisi"),
         ("itinerary", "Programme jour par jour"),
-        ("guard_out", "Budget vérifié"),
+        ("plan_check", "Budget vérifié"),
     ),
 }
 # `planner` relance les branches (ajustement, dépassement de budget) : leurs étapes repartent à zéro.
-_REPLANNED_NODES = {"flights", "hotels", "itinerary", "guard_out"}
+_REPLANNED_NODES = {"flights", "hotels", "itinerary", "plan_check"}
 
 RUN_FAILED_MESSAGE = "L'agent n'a pas pu finir. Tes réponses sont gardées : tu peux réessayer."
 RUN_STOPPED_MESSAGE = "La génération a été interrompue. Tes réponses sont gardées : tu peux réessayer."

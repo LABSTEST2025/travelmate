@@ -35,14 +35,14 @@ Utilisateur
                          │ research ─► suggest ─► hitl_country │◄─┐
                          └───────────────────────────┬────────┘  │ refus / feedback
                                                      │ pays validé
-                         ┌──── Graph 2 : planification ───────────┐
-                         │ planner ─┬─► flights ──┐                │
-                         │          ├─► hotels ───┼─► aggregate ─► hitl_final │◄─┐ ajustements
-                         │          └─► itinerary ┘                │
-                         └───────────────────────────┬────────────┘
+                         ┌──── Graph 2 : planification ─────────────────────────────────────┐
+                         │ planner ─┬─► flights ──┐                                          │
+                         │    ▲     ├─► hotels ───┼─► aggregate ─► plan_check ─► hitl_final  │◄─┐ ajustements
+                         │    │     └─► itinerary ┘                    │                     │
+                         │    └──── budget dépassé (≤ 2 relances) ─────┘                     │
+                         └───────────────────────────┬──────────────────────────────────────┘
                                                      ▼
                                                [guard_out] ─► plan final
-                                                    └─ budget dépassé ─► planner (≤ 2 relances)
 ```
 
 ### Nœuds
@@ -50,7 +50,7 @@ Utilisateur
 **Graphe parent**
 - `input` : normalise les préférences dans l'état.
 - `guard_in` : guardrail d'entrée. Il rejette les demandes hors-sujet, détecte les tentatives de prompt injection, masque les PII et valide les champs (dates futures, budget > 0). En cas d'échec, il renvoie un message clair et **n'entre pas** dans Graph 1.
-- `guard_out` : guardrail de sortie. Il valide le plan contre le schéma Pydantic, vérifie la cohérence (l'hôtel du groupe couvre du premier départ au dernier retour, total ≤ budget) et retire les URLs non issues des résultats d'outils. Si le budget est dépassé, il renvoie vers `planner` avec un feedback (2 relances au maximum, `MAX_PLAN_RETRIES`).
+- `guard_out` : guardrail de sortie, après la validation du groupe. Il valide le plan contre le schéma Pydantic et retire les URLs non issues des résultats d'outils. Il ne renvoie jamais vers `planner` : un plan validé au HITL final est définitif.
 
 **Graph 1 : suggestion pays**
 - `research` : appelle Tavily pour chaque pays candidat (climat, coût, visa, sécurité).
@@ -63,7 +63,8 @@ Utilisateur
 - `hotels` : appelle Tavily, filtre selon le budget et les zones.
 - `itinerary` : appelle Tavily pour les activités et le LLM pour le programme jour par jour.
 - `aggregate` : fan-in. Assemble les trois résultats et calcule le coût total.
-- `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide ou demande des ajustements, ce qui ramène à `planner`.
+- `plan_check` : contrôle le brouillon **avant** qu'il soit montré : cohérence des dates (l'hôtel du groupe couvre du premier départ au dernier retour, sinon erreur) et total ≤ budget du groupe. Si le budget est dépassé, il renvoie vers `planner` avec un feedback (2 relances au maximum, `MAX_PLAN_RETRIES`). Relances épuisées : le brouillon est montré quand même au HITL final (écart affiché), ou c'est une erreur si le HITL final est désactivé.
+- `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide (définitif, seul `guard_out` tourne ensuite) ou demande des ajustements, ce qui ramène à `planner`.
 
 ## État (proposition)
 

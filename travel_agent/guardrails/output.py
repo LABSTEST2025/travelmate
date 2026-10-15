@@ -50,18 +50,30 @@ def _strip_unknown_urls(value, known_urls: set[str]):
     return value
 
 
-def _retry_or_fail(state: TravelState, error: str) -> dict:
-    """Erreur corrigeable par une nouvelle planification : on renvoie vers Graph 2 avec un
-    feedback (ni `final_plan` ni `guardrail_error`), dans la limite de MAX_PLAN_RETRIES."""
+def group_budget_eur(state: TravelState) -> float:
+    return sum(trip.budget_eur for trip in state["preferences"].group_travel)
+
+
+def check_plan(state: TravelState, *, can_review: bool) -> dict:
+    """Contrôle du brouillon avant qu'il soit montré au groupe (fin de Graph 2).
+
+    - dates incohérentes : erreur, le plan n'est pas montré ;
+    - budget dépassé : nouvelle planification avec un feedback (ni `final_plan` ni `guardrail_error`),
+      dans la limite de MAX_PLAN_RETRIES. Relances épuisées : le brouillon est montré tel quel si le
+      groupe peut le relire (`can_review`), sinon c'est une erreur.
+    """
+    if state.get("guardrail_error"):
+        return {}
+    if not _dates_are_consistent(state.get("flights") or [], state.get("hotels") or []):
+        return {"guardrail_error": "Incohérence entre les dates de vol et les dates d'hôtel."}
+    total, budget = state.get("total_cost_eur") or 0, group_budget_eur(state)
+    if total <= budget:
+        return {}
+    error = f"Le coût total ({total:.0f} EUR) dépasse le budget ({budget:.0f} EUR)."
     retries = state.get("plan_retries") or 0
-    if retries >= MAX_PLAN_RETRIES:
-        return {"guardrail_error": error, "final_plan": None}
-    return {
-        "guardrail_error": None,
-        "final_plan": None,
-        "plan_retries": retries + 1,
-        "feedback": f"{error} Réduis le coût de l'hébergement et des activités.",
-    }
+    if retries < MAX_PLAN_RETRIES:
+        return {"plan_retries": retries + 1, "feedback": f"{error} Réduis le coût de l'hébergement et des activités."}
+    return {} if can_review else {"guardrail_error": error}
 
 
 def guard_out(state: TravelState) -> dict:
@@ -88,19 +100,10 @@ def guard_out(state: TravelState) -> dict:
             hotels=hotels,
             itinerary=itinerary,
             total_cost_eur=total_cost_eur,
-            budget_eur=sum(trip.budget_eur for trip in preferences.group_travel),
+            budget_eur=group_budget_eur(state),
         )
     except ValidationError as exc:
         return {"guardrail_error": f"Plan final invalide : {exc}"}
-
-    if not _dates_are_consistent(flights, hotels):
-        return {"guardrail_error": "Incohérence entre les dates de vol et les dates d'hôtel."}
-
-    if plan.total_cost_eur > plan.budget_eur:
-        return _retry_or_fail(
-            state,
-            f"Le coût total ({plan.total_cost_eur:.0f} EUR) dépasse le budget ({plan.budget_eur:.0f} EUR).",
-        )
 
     known_urls = _collect_known_urls(flights, hotels, itinerary)
     cleaned_plan = plan.model_copy(

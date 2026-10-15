@@ -6,7 +6,7 @@ from pydantic import ValidationError
 from tests.conftest import make_group, make_trip
 from travel_agent.state import CountryOverview
 from travel_agent.subgraphs import planning
-from travel_agent.subgraphs.planning import aggregate, flights, hotels, itinerary, planner, route_after_aggregate
+from travel_agent.subgraphs.planning import aggregate, flights, hotels, itinerary, plan_check, planner
 from travel_agent.subgraphs.suggestion import _OverviewDraft, research, suggest
 from travel_agent.tools.flights import FlightsSearchError
 
@@ -142,11 +142,22 @@ def test_aggregate_sums_flights_and_hotels():
     assert aggregate(state) == {"total_cost_eur": 919.75}
 
 
-def test_route_after_aggregate(monkeypatch):
-    assert route_after_aggregate({}) == "__end__"
+def test_check_routes_to_review_only_when_enabled(monkeypatch):
+    state = {"preferences": make_group(make_trip(budget_eur=2000)), "total_cost_eur": 1000}
+    assert plan_check(state).goto == "__end__"
     monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
-    assert route_after_aggregate({}) == "hitl_final"
-    assert route_after_aggregate({"guardrail_error": "Aucun vol."}) == "__end__"
+    assert plan_check(state).goto == "hitl_final"
+    assert plan_check(state | {"guardrail_error": "Aucun vol."}).goto == "__end__"
+
+
+def test_check_replans_an_over_budget_draft_before_review(monkeypatch):
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    state = {"preferences": make_group(make_trip(budget_eur=2000)), "total_cost_eur": 2500, "plan_retries": 0}
+
+    command = plan_check(state)
+
+    assert command.goto == "planner"
+    assert command.update["plan_retries"] == 1 and "dépasse le budget" in command.update["feedback"]
 
 
 def test_research_never_returns_an_empty_list(llm):

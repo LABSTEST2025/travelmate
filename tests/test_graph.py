@@ -102,6 +102,40 @@ def test_final_hitl_adjustments_loop_back_to_planner(app, llm, monkeypatch):
     assert result["final_plan"]["selected_country"] == "Portugal"
 
 
+def test_over_budget_draft_is_replanned_before_review_and_approval_is_final(app, llm, monkeypatch):
+    """T63 : la relance budget a lieu avant le HITL final, valider ne relance plus la planification."""
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    llm.responses["_HotelDraft"] = [
+        {"name": "Palace", "price_eur": 5000, "notes": ""},
+        {"name": "Auberge", "price_eur": 500, "notes": ""},
+    ]
+    _start(app, make_group(make_trip(budget_eur=2000)))
+
+    result = _resume(app, {"selected_country": "Portugal"})
+    assert result["__interrupt__"][0].value["hotels"][0]["name"] == "Auberge"
+    hotel_calls = len(llm.prompts("_HotelDraft"))
+
+    result = _resume(app, {"approved": True})
+
+    assert result["final_plan"]["hotels"][0]["name"] == "Auberge"
+    assert len(llm.prompts("_HotelDraft")) == hotel_calls
+
+
+def test_over_budget_draft_is_shown_for_review_once_retries_are_exhausted(app, llm, monkeypatch):
+    monkeypatch.setenv("ENABLE_FINAL_HITL", "true")
+    llm.responses["_HotelDraft"] = {"name": "Palace", "price_eur": 5000, "notes": ""}
+    _start(app, make_group(make_trip(budget_eur=2000)))
+
+    result = _resume(app, {"selected_country": "Portugal"})
+    assert result["__interrupt__"][0].value["hotels"][0]["name"] == "Palace"
+
+    result = _resume(app, {"approved": True})
+
+    assert result["guardrail_error"] is None
+    assert result["final_plan"]["total_cost_eur"] > result["final_plan"]["budget_eur"]
+    assert len(llm.prompts("_HotelDraft")) == 3  # plan initial + 2 relances, aucune après validation
+
+
 def test_flights_error_reaches_the_user(app, monkeypatch):
     from travel_agent.subgraphs import planning
     from travel_agent.tools.flights import FlightsSearchError

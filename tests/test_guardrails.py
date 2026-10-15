@@ -4,7 +4,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 
 from tests.conftest import make_group, make_trip
 from travel_agent.guardrails.input import INJECTION_MESSAGE, OFF_TOPIC_MESSAGE, guard_in, screen_free_text
-from travel_agent.guardrails.output import MAX_PLAN_RETRIES, guard_out
+from travel_agent.guardrails.output import MAX_PLAN_RETRIES, check_plan, guard_out
 
 # --- guard_in ---------------------------------------------------------------
 
@@ -95,26 +95,36 @@ def test_guard_out_validates_plan_and_strips_unknown_urls():
     assert plan["itinerary"][0]["activities"] == ["https://flights.example et [URL retirée]"]
 
 
-def test_guard_out_asks_for_replanning_when_over_budget():
-    result = guard_out(_plan_state(total_cost_eur=2500))
+def test_check_plan_asks_for_replanning_when_over_budget():
+    result = check_plan(_plan_state(total_cost_eur=2500), can_review=True)
 
-    assert result["final_plan"] is None and result["guardrail_error"] is None
+    assert "guardrail_error" not in result
     assert result["plan_retries"] == 1
     assert "dépasse le budget" in result["feedback"]
 
 
-def test_guard_out_fails_when_retries_are_exhausted():
-    result = guard_out(_plan_state(total_cost_eur=2500, plan_retries=MAX_PLAN_RETRIES))
+def test_check_plan_without_review_fails_when_retries_are_exhausted():
+    result = check_plan(_plan_state(total_cost_eur=2500, plan_retries=MAX_PLAN_RETRIES), can_review=False)
 
-    assert result["final_plan"] is None
     assert "dépasse le budget" in result["guardrail_error"]
 
 
-def test_guard_out_rejects_inconsistent_dates():
+def test_check_plan_lets_the_group_review_an_over_budget_draft_once_retries_are_exhausted():
+    assert check_plan(_plan_state(total_cost_eur=2500, plan_retries=MAX_PLAN_RETRIES), can_review=True) == {}
+
+
+def test_check_plan_rejects_inconsistent_dates():
     state = _plan_state()
     state["hotels"][0]["check_in"] = "2099-01-01"
 
-    assert "Incohérence" in guard_out(state)["guardrail_error"]
+    assert "Incohérence" in check_plan(state, can_review=True)["guardrail_error"]
+
+
+def test_guard_out_never_asks_for_replanning():
+    """Après la relecture du groupe, un plan hors budget est accepté tel quel (le coût reste affiché)."""
+    result = guard_out(_plan_state(total_cost_eur=2500))
+
+    assert result["guardrail_error"] is None and result["final_plan"]["total_cost_eur"] == 2500
 
 
 def test_guard_out_accepts_group_with_different_dates():
@@ -127,7 +137,7 @@ def test_guard_out_accepts_group_with_different_dates():
     hotel = {"name": "H", "price_eur": 500, "check_in": first.start_date.isoformat(), "check_out": second.end_date.isoformat()}
     state = _plan_state(preferences=make_group(first, second), flights=flights, hotels=[hotel], total_cost_eur=700)
 
-    assert guard_out(state)["guardrail_error"] is None
+    assert check_plan(state, can_review=True) == {}
 
 
 def test_guard_out_keeps_an_error_raised_during_planning():

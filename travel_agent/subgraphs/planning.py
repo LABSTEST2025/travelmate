@@ -6,6 +6,7 @@ from langgraph.types import Command, interrupt
 from pydantic import BaseModel, Field
 
 from travel_agent.guardrails.input import short_text_error
+from travel_agent.guardrails.output import check_plan
 from travel_agent.llm import get_llm, with_structured_retry
 from travel_agent.state import TravelState
 from travel_agent.tools.flights import FlightsSearchError, get_flights_provider
@@ -206,10 +207,15 @@ def aggregate(state: TravelState) -> dict:
     return {"total_cost_eur": round(total_cost_eur, 2)}
 
 
-def route_after_aggregate(state: TravelState) -> str:
-    if state.get("guardrail_error") or not _final_hitl_enabled():
-        return END
-    return "hitl_final"
+def plan_check(state: TravelState) -> Command[Literal["planner", "hitl_final", "__end__"]]:
+    """Le brouillon est contrôlé avant d'être montré : une validation au HITL final est définitive."""
+    review = _final_hitl_enabled()
+    update = check_plan(state, can_review=review)
+    if "feedback" in update:
+        return Command(goto="planner", update=update)
+    if update.get("guardrail_error") or state.get("guardrail_error") or not review:
+        return Command(goto=END, update=update)
+    return Command(goto="hitl_final", update=update)
 
 
 def hitl_final(state: TravelState) -> Command[Literal["planner", "__end__"]]:
@@ -233,6 +239,7 @@ def build_planning_graph() -> StateGraph:
     graph.add_node("hotels", hotels)
     graph.add_node("itinerary", itinerary)
     graph.add_node("aggregate", aggregate)
+    graph.add_node("plan_check", plan_check)
     graph.add_node("hitl_final", hitl_final)
 
     graph.add_edge(START, "planner")
@@ -242,6 +249,6 @@ def build_planning_graph() -> StateGraph:
     graph.add_edge("flights", "aggregate")
     graph.add_edge("hotels", "aggregate")
     graph.add_edge("itinerary", "aggregate")
-    graph.add_conditional_edges("aggregate", route_after_aggregate, ["hitl_final", END])
+    graph.add_edge("aggregate", "plan_check")
 
     return graph
