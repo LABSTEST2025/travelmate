@@ -250,6 +250,7 @@ def test_launch_proposes_three_countries_for_the_group(client):
 
     assert view["status"] == "voting"
     assert [s["country"] for s in view["suggestions"]] == ["Portugal", "Grèce", "Croatie"]
+    assert [s["wished_by"] for s in view["suggestions"]] == [3, 0, 0]  # T62 : pays rêvé, puis suggestions de l'IA
     assert view["vote"] == {
         "round": 1,
         "options": ["Portugal", "Grèce", "Croatie"],

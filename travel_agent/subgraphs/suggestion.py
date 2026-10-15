@@ -32,8 +32,7 @@ _CANDIDATES_PROMPT = (
     "Envies des membres :\n{wishes}\n"
     "Budget par personne, vols compris : {budget_range}.\n"
     "{feedback_part}"
-    "Propose {max_candidates} pays qui conviennent au groupe entier, en privilégiant les pays souhaités "
-    "par plusieurs membres, sans reproposer : {excluded}."
+    "Propose {count} pays qui conviennent au groupe entier, sans reproposer : {excluded}."
 )
 
 _OVERVIEW_PROMPT = (
@@ -49,18 +48,26 @@ def _group_dates(trips: list[TripPreferences]) -> tuple:
     return min(trip.start_date for trip in trips), max(trip.end_date for trip in trips)
 
 
-def _most_wished_country(trips: list[TripPreferences]) -> str:
-    """Pays souhaité par le plus de membres ; à égalité, celui du premier membre."""
-    wished = [trip.preferred_country.strip() for trip in trips]
-    counts = Counter(country.casefold() for country in wished)
-    return max(wished, key=lambda country: counts[country.casefold()])  # max garde le premier ex æquo
+def _wished_countries(trips: list[TripPreferences]) -> Counter:
+    """Pays souhaités et nombre de membres pour chacun, les plus cités d'abord (à égalité, ordre
+    d'arrivée). Casse et espaces ignorés ; le nom affiché est la première saisie."""
+    names: dict[str, str] = {}
+    counts: Counter = Counter()
+    for trip in trips:
+        name = trip.preferred_country.strip()
+        key = name.casefold()
+        names.setdefault(key, name[:1].upper() + name[1:])
+        counts[key] += 1
+    return Counter({names[key]: count for key, count in counts.most_common()})
 
 
 def _contains(countries: list[str], country: str) -> bool:
     return country.casefold() in (c.casefold() for c in countries)
 
 
-def _generate_candidates(trips: list[TripPreferences], feedback: str | None, excluded: list[str]) -> list[str]:
+def _generate_candidates(
+    trips: list[TripPreferences], feedback: str | None, excluded: list[str], count: int = _MAX_CANDIDATES
+) -> list[str]:
     start, end = _group_dates(trips)
     wishes = "\n".join(
         f"- pays souhaité : {trip.preferred_country}, style : {trip.travel_style or 'non précisé'}, "
@@ -81,7 +88,7 @@ def _generate_candidates(trips: list[TripPreferences], feedback: str | None, exc
         wishes=wishes,
         budget_range=f"{min(budgets):.0f} à {max(budgets):.0f} EUR",
         feedback_part=feedback_part,
-        max_candidates=_MAX_CANDIDATES,
+        count=count,
         excluded=", ".join(excluded) or "aucun",
     )
     llm = with_structured_retry(get_llm(temperature=0.3), _CandidateCountries)
@@ -94,10 +101,10 @@ def _generate_candidates(trips: list[TripPreferences], feedback: str | None, exc
             proposed.append(country)
             if not _contains(countries, country) and not _contains(excluded, country):
                 countries.append(country)
-        if len(countries) >= _MAX_CANDIDATES:
+        if len(countries) >= count:
             break
     # Le LLM n'a proposé que des pays exclus : mieux vaut les reproposer que n'avoir rien à voter.
-    return (countries or list(dict.fromkeys(proposed)))[:_MAX_CANDIDATES]
+    return (countries or list(dict.fromkeys(proposed)))[:count]
 
 
 def _build_overview(item: dict, trips: list[TripPreferences]) -> CountryOverview:
@@ -118,20 +125,32 @@ def _build_overview(item: dict, trips: list[TripPreferences]) -> CountryOverview
         estimated_budget_eur=draft.estimated_budget_eur,
         best_period=draft.best_period,
         sources=item.get("sources", []),
+        wished_by=item.get("wished_by", 0),
     )
 
 
 def research(state: TravelState) -> dict:
-    """Une seule liste de pays pour tout le groupe (et non une par voyageur)."""
+    """Une seule liste de pays pour tout le groupe (et non une par voyageur).
+
+    1er tour : tous les pays rêvés (sans plafond), complétés par l'IA jusqu'à 3 pays.
+    « Autres idées » : 3 nouveaux pays proposés par l'IA selon le retour du groupe."""
     trips = state["preferences"].group_travel
     feedback = state.get("feedback")
-    excluded = sorted({o.country for o in state.get("overviews", [])}) if feedback else []
-    candidates = _generate_candidates(trips, feedback, excluded)
-    if not feedback:
-        favourite = _most_wished_country(trips)
-        if not _contains(candidates, favourite):
-            candidates = [favourite, *candidates][:_MAX_CANDIDATES]
-    return {"research": [{"country": country, **search_country_overview(country)} for country in candidates]}
+    wished = _wished_countries(trips)
+    if feedback:
+        excluded = sorted({o.country for o in state.get("overviews", [])})
+        candidates = _generate_candidates(trips, feedback, excluded)
+    else:
+        candidates = list(wished)
+        if len(candidates) < _MAX_CANDIDATES:
+            candidates += _generate_candidates(trips, None, candidates, _MAX_CANDIDATES - len(candidates))
+    wished_by = {country.casefold(): count for country, count in wished.items()}
+    return {
+        "research": [
+            {"country": country, "wished_by": wished_by.get(country.casefold(), 0), **search_country_overview(country)}
+            for country in candidates
+        ]
+    }
 
 
 def suggest(state: TravelState) -> dict:

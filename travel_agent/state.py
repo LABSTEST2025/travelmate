@@ -26,6 +26,7 @@ class CountryOverview(BaseModel):
     estimated_budget_eur: float
     best_period: str
     sources: list[str]
+    wished_by: int = 0  # membres ayant choisi ce pays comme pays rêvé ; 0 = suggestion de l'IA
 
 
 class FinalPlan(BaseModel):

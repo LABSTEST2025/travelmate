@@ -181,7 +181,7 @@ function renderHome() {
     h("section", { class: "stack narrow" },
       h("p", { class: "eyebrow" }, "Nouveau voyage"),
       h("h1", {}, "On part où,", h("br"), "la team ?"),
-      h("p", { class: "lead" }, "Chacun donne ses envies, l'IA propose trois pays, le groupe vote. Pas de compte : un lien suffit.")),
+      h("p", { class: "lead" }, "Chacun donne ses envies, l'IA étudie vos destinations, le groupe vote. Pas de compte : un lien suffit.")),
     h("form", { class: "card pop stack narrow", onsubmit: create, novalidate: true },
       h("div", { class: "field" },
         h("label", { for: "trip_name" }, "Nom du voyage"),
@@ -622,7 +622,7 @@ function waitingCard(view) {
           button("Lancer l'IA", launch, { kind: "primary", block: true, busy: trip.ui.busy, id: "launch" }),
           pending.length
             ? h("p", { class: "small muted" }, `Tu peux lancer sans attendre : ${pending.map((m) => m.name).join(", ")} ne ${pending.length > 1 ? "seront" : "sera"} pas pris en compte et ne pourra plus rejoindre.`)
-            : h("p", { class: "small muted" }, "L'IA va proposer trois pays au groupe (1 à 3 minutes)."),
+            : h("p", { class: "small muted" }, "L'IA va étudier vos destinations (1 à 3 minutes)."),
         ]
       : h("p", { class: "muted" }, `${organizer?.name || "L'organisateur·rice"} lancera l'IA quand la bande sera prête.`));
 }
@@ -728,11 +728,17 @@ function budgetBadge(suggestion, range) {
     : h("span", { class: "badge coral" }, "trop cher pour quelqu'un");
 }
 
+function originBadge(suggestion) {
+  return suggestion.wished_by
+    ? h("span", { class: "badge lilac" }, `souhaité par ${plural(suggestion.wished_by, "membre", "membres")}`)
+    : h("span", { class: "badge outline" }, "Suggestion de l'IA");
+}
+
 function countryCard(suggestion, range, index) {
   const sources = suggestion.sources.map(safeUrl).filter(Boolean);
   return h("article", { class: "card country-card", id: `country-${index}`, "aria-labelledby": `country-${index}-name`, tabindex: "-1" },
     h("h3", { id: `country-${index}-name` }, suggestion.country),
-    h("div", {}, budgetBadge(suggestion, range)),
+    h("div", { class: "row" }, originBadge(suggestion), budgetBadge(suggestion, range)),
     h("p", { class: "price" }, eur(suggestion.estimated_budget_eur), h("small", {}, " / pers. estimé")),
     h("p", { class: "muted small" }, h("strong", {}, "Quand partir : "), suggestion.best_period),
     suggestion.pros.length ? h("ul", { class: "pros", "aria-label": "Points forts" }, suggestion.pros.map((p) => h("li", {}, p))) : null,

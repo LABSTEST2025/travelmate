@@ -53,7 +53,7 @@ Utilisateur
 - `guard_out` : guardrail de sortie, après la validation du groupe. Il valide le plan contre le schéma Pydantic et retire les URLs non issues des résultats d'outils. Il ne renvoie jamais vers `planner` : un plan validé au HITL final est définitif.
 
 **Graph 1 : suggestion pays**
-- `research` : appelle Tavily pour chaque pays candidat (climat, coût, visa, sécurité).
+- `research` : choisit les pays candidats puis appelle Tavily pour chacun (climat, coût, visa, sécurité). Au 1er tour : **tous les pays rêvés** des membres (casse ignorée, les plus cités d'abord, sans plafond), complétés par le LLM jusqu'à 3 pays. Après un refus : 3 nouveaux pays du LLM selon le feedback. `wished_by` compte les membres qui ont rêvé de chaque pays (0 = suggestion de l'IA).
 - `suggest` : le LLM produit un `CountryOverview` par pays : pros, cons, budget estimé, meilleure période.
 - `hitl_country` : appelle `interrupt()` avec les overviews, puis reprend avec `Command(resume=...)`. Si l'utilisateur choisit un pays, on passe à Graph 2. S'il refuse ou fait un retour, on revient à `research` avec ce feedback.
 

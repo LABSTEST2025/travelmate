@@ -13,37 +13,51 @@ from travel_agent.tools.flights import FlightsSearchError
 # --- Graph 1 : suggestion ----------------------------------------------------
 
 
-def test_research_proposes_several_countries_with_preferred_first(llm, search):
+def test_research_completes_a_single_wish_with_ai_suggestions(llm, search):
     result = research({"preferences": make_group(make_trip(preferred_country="Espagne"))})
 
     assert [r["country"] for r in result["research"]] == ["Espagne", "Portugal", "Grèce"]
+    assert [r["wished_by"] for r in result["research"]] == [1, 0, 0]
     assert [args[0] for name, args in search.calls] == ["Espagne", "Portugal", "Grèce"]
-    assert "Retour du groupe" not in llm.prompts("_CandidateCountries")[0]
+    (prompt,) = llm.prompts("_CandidateCountries")
+    assert "Propose 2 pays" in prompt and "sans reproposer : Espagne" in prompt
+    assert "Retour du groupe" not in prompt
 
 
-def test_research_keeps_preferred_country_order_from_llm(llm):
-    llm.responses["_CandidateCountries"] = {"countries": ["Portugal", "espagne", "Italie", "Grèce"]}
+def test_research_ignores_ai_duplicates_of_wished_countries(llm):
+    llm.responses["_CandidateCountries"] = {"countries": ["espagne", "Italie", "Grèce"]}
 
     result = research({"preferences": make_group(make_trip(preferred_country="Espagne"))})
 
-    assert [r["country"] for r in result["research"]] == ["Portugal", "espagne", "Italie"]
+    assert [r["country"] for r in result["research"]] == ["Espagne", "Italie", "Grèce"]
 
 
-def test_research_makes_one_list_for_the_whole_group(llm):
-    llm.responses["_CandidateCountries"] = {"countries": ["Croatie", "Grèce", "Italie"]}
+def test_research_studies_every_wished_country_most_wished_first(llm):
+    """T62 : chaque pays rêvé a sa fiche, sans plafond ; l'IA n'est pas sollicitée au-delà de 3 pays."""
     group = make_group(
         make_trip(preferred_country="Japon", budget_eur=900, origin_city="Lyon"),
-        make_trip(preferred_country="Portugal", budget_eur=1500, travel_style="détente"),
+        make_trip(preferred_country="Islande"),
+        make_trip(preferred_country="Portugal", travel_style="détente"),
         make_trip(preferred_country="portugal ", budget_eur=1200),
+        make_trip(preferred_country="Maroc"),
     )
 
     result = research({"preferences": group})
 
-    # Le pays le plus demandé (2 fois, casse ignorée) passe en tête ; une seule liste pour 3 voyageurs.
-    assert [r["country"] for r in result["research"]] == ["Portugal", "Croatie", "Grèce"]
+    assert [(r["country"], r["wished_by"]) for r in result["research"]] == [
+        ("Portugal", 2), ("Japon", 1), ("Islande", 1), ("Maroc", 1)
+    ]
+    assert llm.prompts("_CandidateCountries") == []
+
+
+def test_research_capitalizes_a_lowercase_wish(llm):
+    group = make_group(make_trip(preferred_country="pays-bas"), make_trip(preferred_country="Pays-Bas"))
+
+    result = research({"preferences": group})
+
+    assert result["research"][0]["country"] == "Pays-bas" and result["research"][0]["wished_by"] == 2
     (prompt,) = llm.prompts("_CandidateCountries")
-    assert "3 personne(s)" in prompt and "900 à 1500 EUR" in prompt
-    assert "Japon" in prompt and "détente" in prompt and "Lyon" in prompt
+    assert "2 personne(s)" in prompt and "Propose 2 pays" in prompt
 
 
 def test_research_uses_feedback_and_excludes_previous_countries(llm):
@@ -58,7 +72,7 @@ def test_research_uses_feedback_and_excludes_previous_countries(llm):
     prompt = llm.prompts("_CandidateCountries")[0]
     assert "trop cher" in prompt and "Espagne, Portugal" in prompt
     # Un pays déjà proposé que le LLM renvoie quand même est écarté, et le pays souhaité n'est pas forcé.
-    assert [r["country"] for r in result["research"]] == ["Croatie", "Islande"]
+    assert [(r["country"], r["wished_by"]) for r in result["research"]] == [("Croatie", 0), ("Islande", 0)]
 
 
 def test_suggest_builds_one_overview_per_country(llm):
@@ -66,13 +80,13 @@ def test_suggest_builds_one_overview_per_country(llm):
     second = make_trip(origin_city="Lyon", end_date=first.end_date + timedelta(days=2))
     state = {
         "preferences": make_group(first, second),
-        "research": [{"country": "Portugal", "answer": "info", "sources": ["https://ok.example"]}],
+        "research": [{"country": "Portugal", "wished_by": 2, "answer": "info", "sources": ["https://ok.example"]}],
     }
 
     (overview,) = suggest(state)["overviews"]
 
     assert overview.country == "Portugal"
-    assert overview.sources == ["https://ok.example"]
+    assert overview.sources == ["https://ok.example"] and overview.wished_by == 2
     assert overview.estimated_budget_eur == 900
     prompt = llm.prompts("_OverviewDraft")[0]
     assert "Lyon, Paris" in prompt and "10 jours" in prompt

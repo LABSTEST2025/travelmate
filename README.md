@@ -42,7 +42,7 @@ uv run travel-web
 Puis ouvrir <http://127.0.0.1:8000>, créer un voyage et partager le lien `/t/{code}` avec le groupe. Pas de
 compte : chaque membre est reconnu par un cookie de son navigateur.
 
-Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → trois pays → vote secret → plan (1 à 3 min).
+Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → une fiche par pays rêvé (complétée par l'IA jusqu'à 3) → vote secret → plan (1 à 3 min).
 
 **Installer l'application (PWA)** : Chrome / Edge proposent l'installation dans la barre d'adresse ; sur
 iPhone, « Partager » puis « Sur l'écran d'accueil ». Hors `localhost`, l'installation et le mode hors ligne
