@@ -50,6 +50,18 @@ Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → une fiche par p
 iPhone, « Partager » puis « Sur l'écran d'accueil ». Hors `localhost`, l'installation et le mode hors ligne
 exigent HTTPS.
 
+## Notifications push (optionnel)
+
+Pour prévenir le groupe quand les idées ou le plan sont prêts :
+
+```bash
+uv run travel-vapid   # affiche VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY et VAPID_SUBJECT à copier dans .env
+```
+
+Les clés se génèrent **une seule fois** : en changer invalide les abonnements existants. Chaque membre active
+les notifications avec « Me prévenir » sur la page du voyage. Elles marchent sur `localhost` et en HTTPS ;
+sur iPhone, il faut iOS 16.4+ et le site ajouté à l'écran d'accueil.
+
 ## Déploiement (Railway)
 
 Le dépôt contient un `Dockerfile` et un `railway.json` (build Docker, une seule instance, vérification de
@@ -59,7 +71,7 @@ santé sur `/api/health`).
 2. **Volume** : clic droit sur le service → *Attach volume*, point de montage **`/data`**. Sans volume, les
    voyages disparaissent à chaque déploiement.
 3. **Variables** : `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `TAVILY_API_KEY`, `SERPAPI_API_KEY`,
-   `ENABLE_FINAL_HITL` (et les variables LangSmith si besoin). L'image fixe déjà `WEB_HOST=0.0.0.0`,
+   `ENABLE_FINAL_HITL` (et, si besoin, les variables LangSmith et `VAPID_*` pour les notifications). L'image fixe déjà `WEB_HOST=0.0.0.0`,
    `WEB_SECURE_COOKIES=true`, `WEB_FORWARDED_ALLOW_IPS=*` et `SQLITE_PATH=/data/checkpoints.sqlite`.
 4. **Settings → Networking → Generate Domain** : URL en HTTPS `*.up.railway.app` (ou un domaine à soi).
 

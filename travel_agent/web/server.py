@@ -14,6 +14,7 @@ from travel_agent.graph import build_travel_graph
 from travel_agent.state import get_checkpoint_serde
 from travel_agent.tracing import configure_tracing
 from travel_agent.web.app import create_app
+from travel_agent.web.push import PushConfig, PushNotifier
 from travel_agent.web.repository import TripRepository
 from travel_agent.web.runner import TripRunner
 
@@ -48,6 +49,7 @@ def build_app() -> FastAPI:
         TripRunner(graph, executor),
         secure_cookies=os.environ.get("WEB_SECURE_COOKIES", "false").lower() == "true",
         lifespan=lifespan,
+        notifier=PushNotifier(config) if (config := PushConfig.from_env()) else None,
     )
 
 

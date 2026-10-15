@@ -230,6 +230,7 @@ details summary { cursor: pointer; font-weight: 600; min-height: var(--target); 
 .vote-option input:focus-visible + label { outline: 3px solid var(--lilac); outline-offset: 3px; }
 .vote-option .tick { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; flex: none; }
 .vote-option input:checked + label .tick { background: var(--ink); color: var(--sun); }
+.push-hint { margin-top: 4px; }
 .vote-options.savings .name { font-family: inherit; font-size: 1rem; font-weight: 700; }
 .results { display: flex; flex-direction: column; gap: 8px; }
 .result-row { display: grid; grid-template-columns: 7.5rem 1fr 2rem; align-items: center; gap: 10px; font-weight: 600; }

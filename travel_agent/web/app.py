@@ -16,6 +16,8 @@ from travel_agent.web.models import (
     AVATAR_COLORS,
     CreateTripIn,
     FeedbackIn,
+    PushEndpointIn,
+    PushSubscriptionIn,
     SavingsIn,
     JoinIn,
     Member,
@@ -26,6 +28,7 @@ from travel_agent.web.models import (
 )
 from travel_agent.web.repository import TripRepository, hash_token, new_id
 from travel_agent.web.runner import AgentState, Status, TripBusyError, TripRunner
+from travel_agent.web.push import MAX_SUBSCRIPTIONS_PER_MEMBER, PushNotifier, subscription_error
 from travel_agent.web.views import savings_options, trip_view, vote_options
 
 MAX_MEMBERS = 20
@@ -39,7 +42,14 @@ def cookie_name(trip_id: str) -> str:
     return f"escapade_{trip_id}"
 
 
-def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies: bool = False, lifespan=None) -> FastAPI:
+def create_app(
+    repository: TripRepository,
+    runner: TripRunner,
+    *,
+    secure_cookies: bool = False,
+    lifespan=None,
+    notifier: PushNotifier | None = None,
+) -> FastAPI:
     app = FastAPI(title="Escapade", lifespan=lifespan)
     api = APIRouter(prefix="/api")
 
@@ -308,6 +318,64 @@ def create_app(repository: TripRepository, runner: TripRunner, *, secure_cookies
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Cette piste d'économie n'est plus disponible.")
         runner.submit(trip.id, "planning", Command(resume={"approved": False, "savings": sorted(set(body.options))}))
         return view(trip, organizer)
+
+    # --- Notifications push (B01) ----------------------------------------------------------
+
+    @api.get("/push/config")
+    def push_config() -> dict:
+        return {"public_key": notifier.config.public_key if notifier else None}
+
+    @api.post("/trips/{trip_id}/push")
+    def subscribe_push(trip_id: str, body: PushSubscriptionIn, request: Request) -> dict:
+        if notifier is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "Les notifications ne sont pas activées sur ce serveur.")
+        if error := subscription_error(body.endpoint):
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, error)
+        with editing(trip_id) as trip:
+            member = require_member(trip, request)
+            subscriptions = [s for s in trip.push_subscriptions.get(member.id, []) if s["endpoint"] != body.endpoint]
+            subscriptions.append(body.model_dump())
+            trip.push_subscriptions[member.id] = subscriptions[-MAX_SUBSCRIPTIONS_PER_MEMBER:]
+        return view(trip, member)
+
+    @api.post("/trips/{trip_id}/push/remove")
+    def unsubscribe_push(trip_id: str, body: PushEndpointIn, request: Request) -> dict:
+        with editing(trip_id) as trip:
+            member = require_member(trip, request)
+            remaining = [s for s in trip.push_subscriptions.get(member.id, []) if s["endpoint"] != body.endpoint]
+            trip.push_subscriptions[member.id] = remaining
+        return view(trip, member)
+
+    def notify_status(trip_id: str) -> None:
+        """Fin d'un run : prévient les membres concernés de la nouvelle étape du voyage."""
+        trip = repository.get(trip_id)
+        if notifier is None or trip is None or not trip.push_subscriptions:
+            return
+        agent = runner.state(trip_id)
+        organizer = [m.id for m in trip.members if m.is_organizer]
+        if agent.status == "voting":
+            recipients, title, body = trip.participants, "Les idées sont prêtes", "Découvre les destinations et vote pour ta préférée."
+        elif agent.status == "reviewing":
+            recipients, title, body = organizer, "Le brouillon du plan est prêt", "Relis-le, ajuste-le ou valide-le."
+        elif agent.status == "done":
+            country = (agent.values.get("final_plan") or {}).get("selected_country", "votre destination")
+            recipients, title, body = [m.id for m in trip.members], "Le plan est prêt !", f"Cap sur {country} : vols, hôtel et programme t'attendent."
+        elif agent.status == "error":
+            recipients, title, body = organizer, "La génération s'est interrompue", "Les réponses sont gardées : relance-la depuis le voyage."
+        else:
+            return
+        subscriptions = [s for member_id in recipients for s in trip.push_subscriptions.get(member_id, [])]
+        gone = notifier.send(subscriptions, f"{trip.name} · {title}", body, f"/t/{trip.id}")
+        if gone:
+            with repository.edit(trip_id) as fresh:
+                if fresh is not None:
+                    fresh.push_subscriptions = {
+                        member_id: [s for s in subs if s["endpoint"] not in gone]
+                        for member_id, subs in fresh.push_subscriptions.items()
+                    }
+
+    if notifier is not None:
+        runner.on_finish(notify_status)
 
     app.include_router(api)
 

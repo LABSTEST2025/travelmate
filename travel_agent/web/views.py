@@ -53,6 +53,8 @@ def _me_view(trip: TripRecord, me: Member) -> dict:
     preferences: TripPreferences | None = trip.preferences.get(me.id)
     return _member_view(trip, me) | {
         "is_participant": me.id in trip.participants,
+        # Ses propres abonnements push : le navigateur vérifie que le sien est bien enregistré.
+        "push_endpoints": [s["endpoint"] for s in trip.push_subscriptions.get(me.id, [])],
         "preferences": preferences.model_dump(mode="json") if preferences else None,
     }
 

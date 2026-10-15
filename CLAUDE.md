@@ -132,6 +132,7 @@ travel_agent/
 │   ├── repository.py   # voyages dans le store LangGraph (SqliteStore)
 │   ├── runner.py       # runs de l'agent en tâche de fond, statut du voyage
 │   ├── views.py        # vue renvoyée à un membre (règles de confidentialité des budgets)
+│   ├── push.py         # notifications Web Push (VAPID, envoi, services de push autorisés)
 │   ├── static/         # front sans build : index.html, app.css (Confetti), app.js (routage, écrans)
 │   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
@@ -153,6 +154,7 @@ railway.json            # build Docker, healthcheck /api/health, 1 réplique
 - **Front** (`web/static/`) : HTML/CSS/JS sans build, servi sur `/` et `/t/{code}`, rafraîchi toutes les 3 s. Tout texte venant de l'API passe par `textContent` (jamais `innerHTML`). Accents de la palette en aplats sous texte encre ; texte coloré en variantes foncées (contraste ≥ 4,5:1). Animations (arrivée d'un membre, confettis, révélation du vote) coupées avec `prefers-reduced-motion`. **Carnet souvenir** (plan validé) : page `#carnet` construite à la demande et visible seulement à l'impression (`@media print`, direction Carnet : kraft, Young Serif, Caveat décoratif) ; le navigateur l'enregistre en PDF. Aucun budget individuel dedans.
 - **PWA** : `/manifest.webmanifest` et `/sw.js` à la racine (un service worker ne contrôle que les pages sous son chemin). Interface en réseau d'abord avec cache de secours, polices en cache, **API jamais mise en cache**. Modifier `VERSION` dans `sw.js` purge les anciens caches.
 - **Textes libres** : pays, ville et style sont validés comme des noms (`short_text_error`) ; « autres idées » et ajustements passent par `screen_free_text` (PII masquées, classifieur hors sujet / injection) avant d'atteindre l'agent, et sont délimités dans les prompts comme des préférences, jamais des instructions.
+- **Notifications push** (`web/push.py`) : Web Push avec clés VAPID (`uv run travel-vapid`), abonnements par membre dans le `TripRecord`. Envoyées à la fin d'un run : idées prêtes (participants), brouillon prêt et échec (organisateur), plan prêt (tous). Contenu : titre, une phrase et le lien du voyage, jamais de budget ni de vote. Seuls les services de push des navigateurs sont acceptés comme `endpoint` (pas de requête vers une URL arbitraire) ; un 404/410 supprime l'abonnement. iPhone : iOS 16.4+ et site ajouté à l'écran d'accueil.
 - **Reprise** : le cookie d'un membre (90 jours) est renouvelé à chaque visite ; un cookie perdu est signalé si le navigateur connaît déjà le voyage.
 
 ## Variables d'environnement
@@ -171,6 +173,9 @@ WEB_FORWARDED_ALLOW_IPS=127.0.0.1 # proxys de confiance (X-Forwarded-For) ; * da
 PORT=                    # fourni par l'hébergeur, prioritaire sur WEB_PORT
 LANGSMITH_TRACING=false  # optionnel ; budgets masqués dans les traces (travel_agent/tracing.py)
 LANGSMITH_REDACT_BUDGETS=true # false seulement pour déboguer en local
+VAPID_PUBLIC_KEY=         # notifications push (uv run travel-vapid) ; vide = push désactivé
+VAPID_PRIVATE_KEY=
+VAPID_SUBJECT=            # mailto:… du responsable du site
 ```
 
 Ne jamais committer `.env` ni le fichier SQLite.

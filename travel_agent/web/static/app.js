@@ -223,6 +223,7 @@ function freshUi() {
 
 async function openTrip(id) {
   Object.assign(trip, { id, view: null, json: "", ui: freshUi() });
+  loadPushState();
   mount(topbar(), h("p", { class: "loading" }, "Chargement du voyage…"));
   await refresh();
   schedulePoll();
@@ -305,9 +306,73 @@ function renderTrip() {
   else if (view.status === "voting") screen = screenVoting(view);
   else if (view.status === "reviewing" || view.status === "done") screen = screenPlan(view);
   else screen = screenError(view);
-  mount(topbar(view.name), screen);
+  const waiting = view.me && !["done", "error"].includes(view.status);
+  mount(topbar(view.name), screen, waiting ? pushCard(view) : null);
   if (trip.fx) playEffects(trip.fx, view);
   trip.fx = null;  // chaque effet ne se joue qu'une fois
+}
+
+// --- Notifications push (B01) -----------------------------------------------------------------------------
+// Le navigateur a un seul abonnement (lié au service worker) ; on l'enregistre voyage par voyage.
+
+const push = { publicKey: undefined, endpoint: null };
+const pushSupported = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const isIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent);
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+
+async function loadPushState() {
+  try {
+    if (push.publicKey === undefined) push.publicKey = (await api("GET", "/push/config")).public_key;
+    if (pushSupported() && push.publicKey) {
+      const registration = await navigator.serviceWorker.ready;
+      push.endpoint = (await registration.pushManager.getSubscription())?.endpoint || null;
+    }
+  } catch { /* pas de notifications : l'appli marche sans */ }
+  renderTrip();
+}
+
+function applicationServerKey(base64url) {
+  const base64 = (base64url + "=".repeat((4 - (base64url.length % 4)) % 4)).replace(/-/g, "+").replace(/_/g, "/");
+  return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+}
+
+async function enablePush(view) {
+  const permission = await Notification.requestPermission();
+  if (permission !== "granted") {
+    toast("Notifications refusées : tu peux les autoriser dans les réglages du navigateur.", true);
+    renderTrip();
+    return;
+  }
+  try {
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription()
+      || await registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: applicationServerKey(push.publicKey) });
+    const { endpoint, keys } = subscription.toJSON();
+    push.endpoint = endpoint;
+    await act(() => api("POST", `/trips/${view.id}/push`, { endpoint, keys }), { success: "Tu seras prévenu·e à chaque étape." });
+  } catch (error) {
+    if (!(error instanceof ApiError)) toast("Impossible d'activer les notifications sur ce navigateur.", true);
+  }
+}
+
+function pushCard(view) {
+  if (push.publicKey === undefined || push.publicKey === null) return null;
+  if (!pushSupported()) {
+    return isIos() && !isStandalone()
+      ? h("p", { class: "small muted push-hint" }, "Pour être prévenu·e sur iPhone : « Partager » puis « Sur l'écran d'accueil », et ouvre Escapade depuis l'icône.")
+      : null;
+  }
+  if (Notification.permission === "denied") {
+    return h("p", { class: "small muted push-hint" }, "Notifications bloquées pour ce site dans ton navigateur.");
+  }
+  const subscribed = push.endpoint && view.me.push_endpoints.includes(push.endpoint);
+  if (subscribed) {
+    return h("div", { class: "row push-hint" },
+      h("p", { class: "small", style: "margin:0" }, "🔔 Tu seras prévenu·e à chaque étape."),
+      button("Ne plus me prévenir", () => act(() => api("POST", `/trips/${view.id}/push/remove`, { endpoint: push.endpoint })).catch(() => {}), { kind: "ghost", small: true }));
+  }
+  return h("div", { class: "push-hint" },
+    button("🔔 Me prévenir des prochaines étapes", () => enablePush(view), { kind: "ghost", small: true, busy: trip.ui.busy }));
 }
 
 // --- Moments forts (désactivés avec prefers-reduced-motion) -----------------------------------------------

@@ -13,10 +13,12 @@ dependencies = [
     "langsmith>=0.14.8",
     "fastapi>=0.143.1",
     "uvicorn>=0.54.0",
+    "pywebpush>=2",
 ]
 
 [project.scripts]
 travel-web = "travel_agent.web.server:main"
+travel-vapid = "travel_agent.web.push:main"
 
 [project.optional-dependencies]
 dev = [

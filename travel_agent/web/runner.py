@@ -2,7 +2,7 @@ import logging
 import threading
 from concurrent.futures import Executor
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Any, Callable, Literal
 
 from uuid import UUID
 
@@ -99,6 +99,11 @@ class TripRunner:
         self._running: dict[str, Stage] = {}
         self._errors: dict[str, str] = {}
         self._done_nodes: dict[str, set[str]] = {}
+        # Appelés à la fin de chaque run, hors verrou (ex. notifications push).
+        self._listeners: list[Callable[[str], None]] = []
+
+    def on_finish(self, listener: Callable[[str], None]) -> None:
+        self._listeners.append(listener)
 
     def submit(self, trip_id: str, stage: Stage, graph_input: Any, *, done_steps: tuple[str, ...] = ()) -> None:
         """`done_steps` : nœuds déjà faits que ce run ne rejouera pas (affichés comme terminés)."""
@@ -128,6 +133,11 @@ class TripRunner:
             with self._lock:
                 self._running.pop(trip_id, None)
                 self._done_nodes.pop(trip_id, None)
+        for listener in self._listeners:
+            try:
+                listener(trip_id)
+            except Exception:
+                logger.exception("Écouteur de fin de run en échec pour le voyage %s", trip_id)
 
     def state(self, trip_id: str) -> AgentState:
         with self._lock:

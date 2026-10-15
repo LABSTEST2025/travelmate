@@ -38,6 +38,8 @@ class TripRecord(BaseModel):
     votes: dict[str, str] = {}
     last_tally: dict[str, int] | None = None
     tie: list[str] = []
+    # Abonnements Web Push par id de membre (B01) : {"endpoint", "keys": {"p256dh", "auth"}}.
+    push_subscriptions: dict[str, list[dict]] = {}
 
     def member(self, member_id: str) -> Member | None:
         return next((m for m in self.members if m.id == member_id), None)
@@ -79,6 +81,20 @@ class VoteIn(_In):
 
 class TieIn(_In):
     method: Literal["revote", "random"]
+
+
+class PushKeysIn(_In):
+    p256dh: str = Field(min_length=1, max_length=200)
+    auth: str = Field(min_length=1, max_length=100)
+
+
+class PushSubscriptionIn(_In):
+    endpoint: str = Field(min_length=1, max_length=2048)
+    keys: PushKeysIn
+
+
+class PushEndpointIn(_In):
+    endpoint: str = Field(min_length=1, max_length=2048)
 
 
 class FeedbackIn(_In):

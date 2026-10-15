@@ -2,9 +2,10 @@
 // - Interface : réseau d'abord (toujours la dernière version en ligne), cache en secours hors ligne.
 // - Polices Google : cache d'abord (elles ne changent pas), mises en cache au premier usage.
 // - API : jamais interceptée ni mise en cache (données d'un voyage, cookies).
+// - Notifications push (B01) : affichage, puis ouverture du voyage au clic.
 // Changer VERSION purge les anciens caches à l'activation.
 
-const VERSION = "escapade-v4";
+const VERSION = "escapade-v5";
 const SHELL = [
   "/",
   "/static/app.css",
@@ -66,4 +67,28 @@ self.addEventListener("fetch", (event) => {
     return;
   }
   event.respondWith(networkFirst(request));
+});
+
+self.addEventListener("push", (event) => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch { /* charge utile illisible : notification générique */ }
+  event.waitUntil(self.registration.showNotification(data.title || "Escapade", {
+    body: data.body || "Du nouveau dans ton voyage.",
+    icon: "/static/icons/icon-192.png",
+    badge: "/static/icons/icon-192.png",
+    tag: data.tag,
+    data: { url: data.url || "/" },
+  }));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url = new URL(event.notification.data?.url || "/", self.location.origin);
+  if (url.origin !== self.location.origin) return;  // jamais d'ouverture hors du site
+  event.waitUntil((async () => {
+    const windows = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    const open = windows.find((client) => new URL(client.url).pathname === url.pathname);
+    if (open) return open.focus();
+    return self.clients.openWindow(url.href);
+  })());
 });

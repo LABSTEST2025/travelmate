@@ -172,7 +172,7 @@ Déjà couverts par le backlog : « Relancer » ne fait que repartager le lien (
 
 | ID | Ticket | Statut | Prérequis |
 |---|---|---|---|
-| B01 | **Notifications push** (fin de génération, rappel de vote) : clés VAPID, stockage des abonnements, gestionnaire `push` du service worker. iPhone : iOS 16.4+ et site ajouté à l'écran d'accueil | todo | B02 |
+| B01 | **Notifications push** : clés VAPID (`uv run travel-vapid`), abonnements par membre (services de push des navigateurs uniquement), envois en fin de run (idées prêtes, brouillon, plan prêt, échec), gestionnaires `push` et `notificationclick` du service worker, bouton « Me prévenir » et aide iPhone. Rappel de vote laissé de côté (lié à B03). **Reste** : test réel sur Android et iPhone une fois en ligne (Chromium sans interface ne s'abonne pas) | done | B02 |
 | B02 | Hébergement en ligne en HTTPS sur Railway : `Dockerfile` (uv), `railway.json`, volume `/data` pour SQLite, `PORT` et en-têtes du proxy, section « Déploiement » du README. Reste à créer le projet Railway (compte de l'utilisateur) ; image non construite localement (pas d'accès Docker) | done | — |
 | B03 | Relance des retardataires : message pré-écrit à partager, limité à 1 toutes les 12 h | standby | — |
 | B04 | Postes « transports locaux », « repas » et « activités » dans le budget : branche parallèle `daily_costs` (Tavily + LLM, EUR par personne et par jour, niveaux standard et économique, aucun budget dans le prompt), coût total et part de chacun selon la durée de son séjour, lignes dans le grand livre | done | — |
