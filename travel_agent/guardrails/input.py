@@ -10,6 +10,16 @@ _EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 _IBAN_RE = re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b")
 _PHONE_RE = re.compile(r"(?:\+?\d[\d\s().-]{7,}\d)")
 
+# Champs courts (pays, ville, style) : des noms, pas des phrases. Lettres (accents compris) séparées par
+# des espaces, tirets, apostrophes, points ou virgules : « Côte d'Ivoire », « Saint-Étienne », « St. Louis ».
+# On ne peut pas y glisser d'instructions à l'agent sans dépasser ces limites.
+_SHORT_TEXT_RE = re.compile(r"^[^\W\d_]+(?:[ '’\-.,]+[^\W\d_]+)*\.?$")
+_SHORT_TEXT_MAX_LENGTH = 60
+_SHORT_TEXT_MAX_WORDS = 6
+
+INJECTION_MESSAGE = "Votre message n'a pas pu être traité : tentative de manipulation détectée."
+OFF_TOPIC_MESSAGE = "Je peux seulement vous aider à planifier un voyage. Merci de reformuler votre demande."
+
 
 def _mask_pii(text: str) -> str:
     text = _EMAIL_RE.sub("[email masqué]", text)
@@ -39,6 +49,33 @@ def _check_topic_and_injection(message: str) -> _TopicCheck:
     return llm.invoke(_TOPIC_PROMPT.format(message=message))
 
 
+def _topic_error(check: _TopicCheck) -> str | None:
+    if check.is_injection_attempt:
+        return INJECTION_MESSAGE
+    if not check.is_on_topic:
+        return OFF_TOPIC_MESSAGE
+    return None
+
+
+def screen_free_text(text: str) -> tuple[str | None, str]:
+    """Texte libre destiné à l'agent (« autres idées », ajustement du plan). Renvoie (erreur, texte) :
+    l'erreur si le texte est hors sujet ou tente une injection, sinon le texte avec les données
+    personnelles masquées — masquées avant même l'appel au classifieur."""
+    masked = _mask_pii(text)
+    return _topic_error(_check_topic_and_injection(masked)), masked
+
+
+def short_text_error(label: str, value: str) -> str | None:
+    value = value.strip()
+    if (
+        len(value) > _SHORT_TEXT_MAX_LENGTH
+        or len(value.split()) > _SHORT_TEXT_MAX_WORDS
+        or not _SHORT_TEXT_RE.match(value)
+    ):
+        return f"{label} : indique seulement un nom (lettres, espaces, tirets, apostrophes)."
+    return None
+
+
 def _last_human_message(messages: list) -> str | None:
     for message in reversed(messages):
         if getattr(message, "type", None) == "human":
@@ -46,9 +83,16 @@ def _last_human_message(messages: list) -> str | None:
     return None
 
 
-def _validate_trip(trip: TripPreferences) -> str | None:
+def validate_trip(trip: TripPreferences) -> str | None:
     if not trip.origin_city or not trip.origin_city.strip():
         return f"La ville de départ pour {trip.preferred_country} est obligatoire pour estimer les vols."
+    for label, value in (
+        ("Pays souhaité", trip.preferred_country),
+        ("Ville de départ", trip.origin_city),
+        ("Style de voyage", trip.travel_style),
+    ):
+        if value and (error := short_text_error(label, value)):
+            return error
     if trip.budget_eur <= 0:
         return f"Le budget pour {trip.preferred_country} doit être strictement positif."
     if trip.start_date <= date.today():
@@ -64,17 +108,14 @@ def guard_in(state: TravelState) -> dict:
 
     last_message = _last_human_message(messages)
     if last_message:
-        check = _check_topic_and_injection(last_message)
-        if check.is_injection_attempt:
-            return {"guardrail_error": "Votre message n'a pas pu être traité : tentative de manipulation détectée."}
-        if not check.is_on_topic:
-            return {"guardrail_error": "Je peux seulement vous aider à planifier un voyage. Merci de reformuler votre demande."}
+        if error := _topic_error(_check_topic_and_injection(last_message)):
+            return {"guardrail_error": error}
 
     if preferences is None or not preferences.group_travel:
         return {"guardrail_error": "Merci d'indiquer au moins un voyage (pays, budget, dates) avant de continuer."}
 
     for trip in preferences.group_travel:
-        error = _validate_trip(trip)
+        error = validate_trip(trip)
         if error:
             return {"guardrail_error": error}
 

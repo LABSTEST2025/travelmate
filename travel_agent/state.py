@@ -28,11 +28,6 @@ class CountryOverview(BaseModel):
     sources: list[str]
 
 
-class TripOverviews(BaseModel):
-    preferences: TripPreferences
-    overviews: list[CountryOverview]
-
-
 class FinalPlan(BaseModel):
     selected_country: str
     flights: list[dict]
@@ -46,7 +41,6 @@ CHECKPOINT_MODELS = (
     TripPreferences,
     TripResponseModelGroup,
     CountryOverview,
-    TripOverviews,
     FinalPlan,
 )
 
@@ -59,8 +53,9 @@ class TravelState(TypedDict):
     messages: Annotated[list, add_messages]
     preferences: TripResponseModelGroup | None
     research: list[dict]
-    overviews: list[TripOverviews]
+    overviews: list[CountryOverview]
     selected_country: str | None
+    stay_city: str | None  # ville de séjour choisie par `planner` : vols, hôtel et itinéraire y convergent
     feedback: str | None
     flights: list[dict]
     hotels: list[dict]

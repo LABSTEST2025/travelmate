@@ -25,7 +25,7 @@ class FlightsProvider(ABC):
     def search(
         self,
         origin_city: str,
-        destination_country: str,
+        destination: str,
         start_date: date,
         end_date: date,
         budget_eur: float,
@@ -34,10 +34,13 @@ class FlightsProvider(ABC):
 
 
 class StubFlightsProvider(FlightsProvider):
+    # Prix fixe : un prix calculé sur le budget permettrait aux autres membres de le retrouver.
+    PRICE_EUR = 250.0
+
     def search(
         self,
         origin_city: str,
-        destination_country: str,
+        destination: str,
         start_date: date,
         end_date: date,
         budget_eur: float,
@@ -45,10 +48,10 @@ class StubFlightsProvider(FlightsProvider):
         return [
             {
                 "origin": origin_city,
-                "destination": destination_country,
+                "destination": destination,
                 "departure_date": start_date.isoformat(),
                 "return_date": end_date.isoformat(),
-                "price_eur": round(budget_eur * 0.3, 2),
+                "price_eur": self.PRICE_EUR,
                 "airline": "Stub Airlines",
                 "stub": True,
             }
@@ -142,14 +145,14 @@ class SerpApiFlightsProvider(FlightsProvider):
     def search(
         self,
         origin_city: str,
-        destination_country: str,
+        destination: str,
         start_date: date,
         end_date: date,
         budget_eur: float,
     ) -> list[dict]:
         try:
             origin_airports = resolve_airports(origin_city)
-            destination_airports = resolve_airports(destination_country)
+            destination_airports = resolve_airports(destination)
         except AirportResolutionError as exc:
             raise FlightsSearchError(str(exc)) from exc
 
@@ -162,7 +165,7 @@ class SerpApiFlightsProvider(FlightsProvider):
             estimate = _estimate(data)
         if estimate is None:
             raise FlightsSearchError(
-                f"Aucun vol trouvé de {origin_city} vers {destination_country} "
+                f"Aucun vol trouvé de {origin_city} vers {destination} "
                 f"du {start_date.isoformat()} au {end_date.isoformat()}."
             )
 
@@ -171,7 +174,7 @@ class SerpApiFlightsProvider(FlightsProvider):
             {
                 "origin": origin_city,
                 "origin_airports": list(searched[0]),
-                "destination": destination_country,
+                "destination": destination,
                 "destination_airports": list(searched[1]),
                 "departure_date": start_date.isoformat(),
                 "return_date": end_date.isoformat(),

@@ -1,0 +1,60 @@
+import logging
+import os
+import sqlite3
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import asynccontextmanager
+
+import uvicorn
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.store.sqlite import SqliteStore
+
+from travel_agent.graph import build_travel_graph
+from travel_agent.state import get_checkpoint_serde
+from travel_agent.web.app import create_app
+from travel_agent.web.repository import TripRepository
+from travel_agent.web.runner import TripRunner
+
+_AGENT_WORKERS = 4
+
+
+def build_app() -> FastAPI:
+    """Application branchée sur le fichier SQLite de `SQLITE_PATH` : checkpoints de l'agent et
+    voyages (store LangGraph) partagent le même fichier."""
+    load_dotenv()
+    sqlite_path = os.environ.get("SQLITE_PATH", "checkpoints.sqlite")
+
+    checkpoint_conn = sqlite3.connect(sqlite_path, check_same_thread=False)
+    graph = build_travel_graph().compile(checkpointer=SqliteSaver(checkpoint_conn, serde=get_checkpoint_serde()))
+    store_conn = sqlite3.connect(sqlite_path, check_same_thread=False, isolation_level=None)
+    store = SqliteStore(store_conn)
+    store.setup()
+    executor = ThreadPoolExecutor(max_workers=_AGENT_WORKERS, thread_name_prefix="agent")
+
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI):
+        yield
+        executor.shutdown(wait=False, cancel_futures=True)
+        store_conn.close()
+        checkpoint_conn.close()
+
+    return create_app(
+        TripRepository(store),
+        TripRunner(graph, executor),
+        secure_cookies=os.environ.get("WEB_SECURE_COOKIES", "false").lower() == "true",
+        lifespan=lifespan,
+    )
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO)
+    uvicorn.run(
+        build_app(),
+        host=os.environ.get("WEB_HOST", "127.0.0.1"),
+        port=int(os.environ.get("WEB_PORT", "8000")),
+    )
+
+
+if __name__ == "__main__":
+    main()

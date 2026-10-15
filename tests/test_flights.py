@@ -155,7 +155,7 @@ def test_provider_depends_on_serpapi_key(monkeypatch):
 def test_stub_returns_one_fake_round_trip():
     (flight,) = StubFlightsProvider().search("Paris", "Portugal", START, END, 1000)
 
-    assert flight["price_eur"] == 300 and flight["stub"] is True
+    assert flight["price_eur"] == StubFlightsProvider.PRICE_EUR and flight["stub"] is True
 
 
 # --- résolution des aéroports -------------------------------------------------

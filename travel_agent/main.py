@@ -49,15 +49,13 @@ def _collect_preferences() -> TripResponseModelGroup:
 
 
 def _print_country_proposals(payload: dict) -> None:
-    for trip in payload["trips"]:
-        print(f"\nTrip souhaité : {trip['preferences']['preferred_country']}")
-        for overview in trip["overviews"]:
-            print(
-                f"  - {overview['country']} (~{overview['estimated_budget_eur']:.0f} EUR, "
-                f"{overview['best_period']})"
-            )
-            print(f"      pros: {overview['pros']}")
-            print(f"      cons: {overview['cons']}")
+    for overview in payload["overviews"]:
+        print(
+            f"\n- {overview['country']} (~{overview['estimated_budget_eur']:.0f} EUR / pers., "
+            f"{overview['best_period']})"
+        )
+        print(f"    pour : {', '.join(overview['pros'])}")
+        print(f"    contre : {', '.join(overview['cons'])}")
 
 
 _PRICE_LEVELS = {"low": "bas", "typical": "habituel", "high": "élevé"}
@@ -120,7 +118,7 @@ def _print_final_plan(plan: dict) -> None:
 
 
 def _resume_value_for(payload: dict) -> dict:
-    if "trips" in payload:
+    if "overviews" in payload:
         choice = input("\nPays choisi par le groupe (laisser vide pour donner un feedback) : ").strip()
         if choice:
             return {"selected_country": choice}
@@ -149,7 +147,7 @@ def run() -> None:
 
     while "__interrupt__" in result:
         payload = result["__interrupt__"][0].value
-        if "trips" in payload:
+        if "overviews" in payload:
             print("\n=== Propositions de pays ===")
             _print_country_proposals(payload)
         else:

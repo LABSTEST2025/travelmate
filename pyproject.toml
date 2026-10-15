@@ -11,7 +11,12 @@ dependencies = [
     "pydantic>=2",
     "python-dotenv>=1",
     "langsmith>=0.14.8",
+    "fastapi>=0.143.1",
+    "uvicorn>=0.54.0",
 ]
+
+[project.scripts]
+travel-web = "travel_agent.web.server:main"
 
 [project.optional-dependencies]
 dev = [
@@ -25,3 +30,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["travel_agent*"]
+
+[tool.setuptools.package-data]
+travel_agent = ["web/static/**/*"]

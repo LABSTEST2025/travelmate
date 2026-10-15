@@ -205,6 +205,20 @@ budget estimé, meilleure période&lt;/span&gt;&lt;/div&gt;" style="align=center
 <mxCell id="10005" value="HITL final désactivé" style="endArrow=block;startArrow=none;html=1;rounded=0;strokeColor=#8D8D8D;strokeWidth=2;dashed=1;fontColor=#c6c6c6;fontSize=12;align=center;verticalAlign=middle;labelBackgroundColor=none;fontFamily='IBM%20Plex%20Sans%20Variable'%2Cui-sans-serif%2Csystem-ui%2Csans-serif;likec4RelationshipKind=flow;" edge="1" parent="1" source="21" target="8">
   <mxGeometry relative="1" as="geometry" />
 </mxCell>
+
+<mxCell id="10006" value="&lt;div style=&quot;box-sizing:border-box;width:100%;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#f0f9ff;font-family:&apos;IBM Plex Sans Variable&apos;,ui-sans-serif,system-ui,sans-serif;&quot;&gt;&lt;b style=&quot;font-size:19.2px;&quot;&gt;Site Escapade (PWA)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-weight:normal;font-size:19.2px;&quot;&gt;Site web responsif installable : envies, vote, plan. API FastAPI + front sans build&lt;/span&gt;&lt;/div&gt;" style="align=center;verticalAlign=middle;verticalLabelPosition=middle;labelPosition=center;fontSize=19.2;fontStyle=1;spacingTop=4;spacingLeft=2;spacingRight=2;spacingBottom=2;overflow=fill;whiteSpace=wrap;html=1;fontFamily='IBM%20Plex%20Sans%20Variable'%2Cui-sans-serif%2Csystem-ui%2Csans-serif;shape=actor;fillColor=#8F7CFF;strokeColor=#6D5BD0;fontColor=#f0f9ff;likec4Description=Site%20web%20responsif%20installable%20%3A%20envies%2C%20vote%2C%20plan.%20API%20FastAPI%20%2B%20front%20sans%20build;likec4ColorName=secondary;likec4Size=md;likec4StrokeColor=%230369a1;likec4Notation=Utilisateur;" vertex="1" parent="1">
+  
+  <mxGeometry height="180" width="327" x="1313" y="420" as="geometry" />
+</mxCell>
+<mxCell id="10007" value="navigateur ou PWA installée" style="endArrow=block;startArrow=none;html=1;rounded=0;strokeColor=#8D8D8D;strokeWidth=2;dashed=1;fontColor=#c6c6c6;fontSize=12;align=center;verticalAlign=middle;labelBackgroundColor=none;fontFamily='IBM%20Plex%20Sans%20Variable'%2Cui-sans-serif%2Csystem-ui%2Csans-serif;likec4RelationshipKind=flow;" edge="1" parent="1" source="3" target="10006">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="10008" value="API FastAPI (/api)" style="endArrow=block;startArrow=none;html=1;rounded=0;strokeColor=#8D8D8D;strokeWidth=2;dashed=1;fontColor=#c6c6c6;fontSize=12;align=center;verticalAlign=middle;labelBackgroundColor=none;fontFamily='IBM%20Plex%20Sans%20Variable'%2Cui-sans-serif%2Csystem-ui%2Csans-serif;likec4RelationshipKind=flow;" edge="1" parent="1" source="10006" target="9">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+<mxCell id="10009" value="voyages : membres, envies, votes (store)" style="endArrow=block;startArrow=none;html=1;rounded=0;strokeColor=#0ea5e9;strokeWidth=2;dashed=1;fontColor=#d4f2ff;fontSize=12;align=center;verticalAlign=middle;labelBackgroundColor=none;fontFamily='IBM%20Plex%20Sans%20Variable'%2Cui-sans-serif%2Csystem-ui%2Csans-serif;likec4RelationshipKind=calls;" edge="1" parent="1" source="10006" target="6">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
 </root>
     </mxGraphModel></diagram>
   <diagram name="Travel Agent — graphe complet" id="likec4-agent"><mxGraphModel dx="800" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">

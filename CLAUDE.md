@@ -21,6 +21,7 @@ Un agent de voyage conversationnel qui :
 | Recherche web | **Tavily** (`langchain-tavily`) | Infos pays, hôtels, activités |
 | Vols | **SerpApi Google Flights** (bloc `price_insights`) | Estimation du prix d'un aller-retour par voyageur (médiane des vols, fourchette `price_insights` sinon quartiles). Recherche sur la paire d'aéroports principaux, repli multi-aéroports. Aéroports résolus par le LLM (`tools/airports.py`). Plan gratuit : 250 recherches/mois, les tests doivent toujours mocker SerpApi. Sans `SERPAPI_API_KEY`, un stub renvoie des données factices |
 | Validation | **Pydantic** | Schémas d'entrée et de sortie |
+| Site web | **FastAPI** + HTML/CSS/JS sans build, **PWA** | `uv run travel-web` ; manifeste et service worker servis à la racine |
 
 Avant d'utiliser une API LangGraph ou LangChain, vérifie la version installée et sa documentation : ces bibliothèques évoluent vite.
 
@@ -57,7 +58,7 @@ Utilisateur
 - `hitl_country` : appelle `interrupt()` avec les overviews, puis reprend avec `Command(resume=...)`. Si l'utilisateur choisit un pays, on passe à Graph 2. S'il refuse ou fait un retour, on revient à `research` avec ce feedback.
 
 **Graph 2 : planification**
-- `planner` : découpe la tâche et lance les trois branches **en parallèle** (fan-out via `Send` ou des arêtes multiples).
+- `planner` : choisit la **ville de séjour** (`stay_city`, en tenant compte du feedback), puis lance les trois branches **en parallèle** (arêtes multiples). Vols, hôtel et itinéraire visent tous cette ville.
 - `flights` : estime le prix des vols via SerpApi (Google Flights), ou le stub sans clé. En cas d'échec, écrit un message dans `guardrail_error` et le graphe s'arrête.
 - `hotels` : appelle Tavily, filtre selon le budget et les zones.
 - `itinerary` : appelle Tavily pour les activités et le LLM pour le programme jour par jour.
@@ -121,11 +122,32 @@ travel_agent/
 ├── guardrails/
 │   ├── input.py
 │   └── output.py
+├── web/                # API du site Escapade (FastAPI) — `uv run travel-web`
+│   ├── app.py          # routes /api/…
+│   ├── models.py       # TripRecord (groupe, envies, votes) + corps des requêtes
+│   ├── repository.py   # voyages dans le store LangGraph (SqliteStore)
+│   ├── runner.py       # runs de l'agent en tâche de fond, statut du voyage
+│   ├── views.py        # vue renvoyée à un membre (règles de confidentialité des budgets)
+│   ├── static/         # front sans build : index.html, app.css (Confetti), app.js (routage, écrans)
+│   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
-tests/
+tests/                  # dont test_api.py (API web) et test_e2e.py (parcours complet)
+docs/checklist-navigateur.md
 diagrams.drawio         # diagramme d'architecture
+README.md               # installation et lancement
 .env.example
 ```
+
+## Site web (API)
+
+- **Un voyage = un `thread_id`** du checkpointer. L'état de l'agent (pays, plan) vit dans le checkpointer ; le groupe (membres, envies, votes) vit dans un `TripRecord` du store LangGraph (`SqliteStore`), dans le même fichier SQLite. Pas de comptes : un membre = un jeton aléatoire en cookie `HttpOnly`, seul son hash est stocké.
+- **Statut** déduit du runner et du checkpoint : `collecting` → `generating` → `voting` → `planning` → (`reviewing` si `ENABLE_FINAL_HITL`) → `done`, ou `error` (reprise via `POST /retry`). Les interruptions sont lues sur `snapshot.tasks` ; pendant le vote, les pays proposés sont dans la charge utile de l'interruption (pas encore dans l'état parent).
+- **Budgets privés** : aucun budget individuel ne sort de l'API, sauf celui du membre qui regarde. Fourchette du groupe arrondie à 100 € à partir de 3 réponses ; en dessous, seulement « dans le budget de chacun : oui / non ». Ne jamais dériver un prix affiché d'un budget (cf. stub de vols à prix fixe).
+- Un seul processus serveur : le verrou de `TripRepository` sérialise les écritures.
+- **Front** (`web/static/`) : HTML/CSS/JS sans build, servi sur `/` et `/t/{code}`, rafraîchi toutes les 3 s. Tout texte venant de l'API passe par `textContent` (jamais `innerHTML`). Accents de la palette en aplats sous texte encre ; texte coloré en variantes foncées (contraste ≥ 4,5:1). Animations (arrivée d'un membre, confettis, révélation du vote) coupées avec `prefers-reduced-motion`.
+- **PWA** : `/manifest.webmanifest` et `/sw.js` à la racine (un service worker ne contrôle que les pages sous son chemin). Interface en réseau d'abord avec cache de secours, polices en cache, **API jamais mise en cache**. Modifier `VERSION` dans `sw.js` purge les anciens caches.
+- **Textes libres** : pays, ville et style sont validés comme des noms (`short_text_error`) ; « autres idées » et ajustements passent par `screen_free_text` (PII masquées, classifieur hors sujet / injection) avant d'atteindre l'agent, et sont délimités dans les prompts comme des préférences, jamais des instructions.
+- **Reprise** : le cookie d'un membre (90 jours) est renouvelé à chaque visite ; un cookie perdu est signalé si le navigateur connaît déjà le voyage.
 
 ## Variables d'environnement
 
@@ -136,6 +158,9 @@ TAVILY_API_KEY=
 SERPAPI_API_KEY=         # vide = stub de vols factices
 SQLITE_PATH=checkpoints.sqlite
 ENABLE_FINAL_HITL=false
+WEB_HOST=127.0.0.1       # optionnel, serveur web
+WEB_PORT=8000            # optionnel
+WEB_SECURE_COOKIES=false # true derrière HTTPS
 ```
 
 Ne jamais committer `.env` ni le fichier SQLite.
