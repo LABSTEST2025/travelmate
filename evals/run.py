@@ -47,8 +47,8 @@ def run_case(node: str, case: dict, offline: bool) -> dict:
 
 
 def summarize(results: list[dict]) -> dict:
-    """Taux de réussite par vérification ; un cas en erreur compte comme un échec de toutes ses
-    vérifications (« sortie exploitable »)."""
+    """Taux de réussite par vérification ; un cas en erreur compte comme un échec de « sortie
+    exploitable » et n'entre pas dans le taux des autres vérifications."""
     per_check: dict[str, list[bool]] = defaultdict(list)
     for r in results:
         per_check["sortie exploitable"].append("error" not in r)
