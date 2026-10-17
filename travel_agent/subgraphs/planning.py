@@ -63,7 +63,7 @@ class _DailyCostsDraft(BaseModel):
 
 
 class _StayDraft(BaseModel):
-    city: str = Field(description="Nom de la ville de séjour, sans le pays")
+    city: str = Field(description="Nom de la ville de séjour seul, sans pays, région ni parenthèses")
 
 
 class _HotelDraft(BaseModel):
@@ -194,6 +194,16 @@ def daily_costs(state: TravelState) -> dict:
     }
 
 
+def _clean_city(raw: str) -> str | None:
+    """« La Canée (Chania), Crète » -> « La Canée » : on garde le nom avant une parenthèse ou une région
+    (une seule virgule). Une liste de villes ou une phrase reste invalide (None)."""
+    city = raw.split("(")[0].strip()
+    parts = [part.strip() for part in city.split(",")]
+    if len(parts) == 2 and all(parts):
+        city = parts[0]
+    return None if short_text_error("Ville", city) else city
+
+
 def planner(state: TravelState) -> dict:
     """Choisit la ville de séjour avant de lancer les trois branches en parallèle : vols, hôtel et
     itinéraire convergent ainsi vers la même ville (sinon : vols vers Lisbonne, hôtel à Porto…)."""
@@ -207,9 +217,9 @@ def planner(state: TravelState) -> dict:
         styles=", ".join(styles) or "non précisés",
         feedback_part=_feedback_part(state.get("feedback"), state.get("budget_note")),
     )
-    city = with_structured_retry(get_llm(temperature=0.2), _StayDraft).invoke(prompt).city.strip()
+    city = with_structured_retry(get_llm(temperature=0.2), _StayDraft).invoke(prompt).city
     # Un nom de ville invalide n'est pas propagé : les branches se rabattent alors sur le pays.
-    return {"stay_city": None if short_text_error("Ville", city) else city}
+    return {"stay_city": _clean_city(city)}
 
 
 def flights(state: TravelState) -> dict:

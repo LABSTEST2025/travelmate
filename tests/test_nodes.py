@@ -311,6 +311,18 @@ def test_planner_ignores_an_invalid_city(llm):
     assert planner(_planning_state(make_trip())) == {"stay_city": None}
 
 
+def test_planner_keeps_the_city_name_without_region_or_parentheses(llm):
+    # Réponse réelle (evals, Grèce « sur une île ») : rejetée, elle faisait oublier l'ajustement du groupe.
+    for answer, expected in (
+        ("La Canée (Chania), Crète", "La Canée"),
+        ("Héraklion, Crète", "Héraklion"),
+        ("Porto (Portugal)", "Porto"),
+        ("  Kyoto  ", "Kyoto"),
+    ):
+        llm.responses["_StayDraft"] = {"city": answer}
+        assert planner(_planning_state(make_trip())) == {"stay_city": expected}, answer
+
+
 def test_all_branches_target_the_stay_city(llm, search):
     state = _planning_state(make_trip(origin_city="Lyon")) | {"stay_city": "Lisbonne"}
 
