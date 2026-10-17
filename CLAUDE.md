@@ -16,7 +16,7 @@ Un agent de voyage conversationnel qui :
 | Composant | Choix | Notes |
 |---|---|---|
 | Orchestration | **LangGraph** (Python) | Un graphe parent + deux sous-graphes |
-| LLM | **OpenRouter**, modèle gratuit (`<model>:free`) | Via `ChatOpenrouter` avec `base_url="https://openrouter.ai/api/v1"`. Le nom du modèle vient de `OPENROUTER_MODEL` dans `.env` |
+| LLM | **OpenRouter**, modèle gratuit (`<model>:free`) | Via `ChatOpenAI` (`langchain-openai`) avec `base_url="https://openrouter.ai/api/v1"`. Le nom du modèle vient de `OPENROUTER_MODEL` dans `.env` |
 | Mémoire | **SQLite** via le checkpointer LangGraph (`SqliteSaver` / `AsyncSqliteSaver`) | Paquet `langgraph-checkpoint-sqlite`. Un `thread_id` par conversation |
 | Recherche web | **Tavily** (`langchain-tavily`) | Infos pays, hôtels, activités |
 | Vols | **SerpApi Google Flights** (bloc `price_insights`) | Estimation du prix d'un aller-retour par voyageur (médiane des vols, fourchette `price_insights` sinon quartiles). Recherche sur la paire d'aéroports principaux, repli multi-aéroports. Aéroports résolus par le LLM (`tools/airports.py`). Plan gratuit : 250 recherches/mois, les tests doivent toujours mocker SerpApi. Sans `SERPAPI_API_KEY`, un stub renvoie des données factices |
@@ -68,12 +68,13 @@ Utilisateur
 - `plan_check` : contrôle le brouillon **avant** qu'il soit montré : cohérence des dates (l'hôtel du groupe couvre du premier départ au dernier retour, sinon erreur) et total ≤ budget du groupe. Si le budget est dépassé, il renvoie vers `planner` avec une consigne de budget (`budget_note`, distincte du `feedback` du groupe, qui reste dans les prompts ; 2 relances au maximum, `MAX_PLAN_RETRIES`). Relances épuisées : le brouillon est montré quand même au HITL final (écart affiché), ou c'est une erreur si le HITL final est désactivé.
 - `hitl_final` : **optionnel**, activé par configuration. L'utilisateur valide (définitif, seul `guard_out` tourne ensuite), demande des ajustements (texte libre) ou choisit des **pistes d'économie chiffrées** (`savings` : dépenses sur place en économique → `daily_level`, hôtel −30 % → `hotel_max_eur`, l'ajustement précédent reste en vigueur). Les deux ramènent à `planner` avec de nouvelles relances budget (`budget_note` effacée, `plan_retries` à 0).
 
-## État (proposition)
+## État
+
+Référence : `travel_agent/state.py`.
 
 ```python
-
-class TripPreferences(BaseModel):
-    preferred_countrie: str
+class TripPreferences(BaseModel):          # envies d'un membre
+    preferred_country: str
     budget_eur: float
     start_date: date
     end_date: date
@@ -82,8 +83,9 @@ class TripPreferences(BaseModel):
 
 
 class TripResponseModelGroup(BaseModel):
-    groupTravel: list[TripPreferences]
-    
+    group_travel: list[TripPreferences]
+
+
 class CountryOverview(BaseModel):
     country: str
     pros: list[str]
@@ -91,23 +93,45 @@ class CountryOverview(BaseModel):
     estimated_budget_eur: float
     best_period: str
     sources: list[str]
+    wished_by: int = 0                # membres ayant rêvé de ce pays ; 0 = suggestion de l'IA
 
-class TravelState(TypedDict):
-    messages: Annotated[list, add_messages]
-    preferences: TripPreferences | None
-    overviews: list[CountryOverview]
-    selected_country: str | None
-    feedback: str | None
+
+class FinalPlan(BaseModel):                # validé par guard_out
+    selected_country: str
     flights: list[dict]
     hotels: list[dict]
     itinerary: list[dict]
+    total_cost_eur: float
+    budget_eur: float
+    daily_costs: dict | None = None
+
+
+class TravelState(TypedDict):
+    messages: Annotated[list, add_messages]
+    preferences: TripResponseModelGroup | None
+    research: list[dict]              # résultats Tavily par pays candidat
+    overviews: list[CountryOverview]
+    selected_country: str | None
+    stay_city: str | None             # ville de séjour choisie par `planner`
+    feedback: str | None              # retour du groupe (refus de pays, ajustement du plan)
+    budget_note: str | None           # consigne de `plan_check` après un dépassement
+    flights: list[dict]
+    hotels: list[dict]
+    itinerary: list[dict]
+    daily_costs: dict | None          # dépenses sur place, branche `daily_costs`
+    daily_level: str | None           # "standard" (défaut) ou "economy"
+    hotel_max_eur: float | None       # plafond d'hôtel choisi comme piste d'économie
+    total_cost_eur: float | None
     final_plan: dict | None
+    plan_retries: int                 # relances budget de `plan_check` (≤ MAX_PLAN_RETRIES)
     guardrail_error: str | None
 ```
 
+Les modèles Pydantic stockés dans les checkpoints doivent figurer dans `CHECKPOINT_MODELS` (sérialiseur du checkpointer).
+
 Pour les champs écrits en parallèle dans Graph 2, chaque branche écrit dans sa propre clé. Si plusieurs branches doivent écrire dans une même clé, utilise un reducer.
 
-## Structure de fichiers (proposition)
+## Structure de fichiers
 
 ```
 travel_agent/
@@ -118,14 +142,14 @@ travel_agent/
 ├── subgraphs/
 │   ├── suggestion.py   # Graph 1
 │   └── planning.py     # Graph 2
-├── nodes/              # un fichier par nœud si ça grossit
+├── nodes/              # vide : les nœuds vivent dans subgraphs/ et guardrails/ ; un fichier par nœud si ça grossit
 ├── tools/
 │   ├── search.py       # Tavily
 │   ├── airports.py     # ville / pays -> codes IATA (LLM)
 │   └── flights.py      # interface + SerpApi + stub
 ├── guardrails/
 │   ├── input.py
-│   └── output.py
+│   └── output.py       # check_plan (logique de plan_check) + guard_out
 ├── web/                # API du site Escapade (FastAPI) — `uv run travel-web`
 │   ├── app.py          # routes /api/…
 │   ├── models.py       # TripRecord (groupe, envies, votes) + corps des requêtes
@@ -136,9 +160,11 @@ travel_agent/
 │   ├── static/         # front sans build : index.html, app.css (Confetti), app.js (routage, écrans)
 │   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
-tests/                  # dont test_api.py (API web) et test_e2e.py (parcours complet)
+tests/                  # dont test_api.py (API web) et test_e2e.py (parcours complet) ; fixtures/ = réponses SerpApi enregistrées
 docs/checklist-navigateur.md
 diagrams.drawio         # diagramme d'architecture
+TICKETS.md              # suivi des tickets (T…, backlog B…)
+design/                 # maquettes des directions graphiques du site (Confetti, Carnet…)
 README.md               # installation, lancement et déploiement Railway
 Dockerfile              # image du site (uv), une seule instance, SQLite sur /data
 railway.json            # build Docker, healthcheck /api/health, 1 réplique
@@ -172,6 +198,8 @@ WEB_SECURE_COOKIES=false # true derrière HTTPS
 WEB_FORWARDED_ALLOW_IPS=127.0.0.1 # proxys de confiance (X-Forwarded-For) ; * dans l'image Docker
 PORT=                    # fourni par l'hébergeur, prioritaire sur WEB_PORT
 LANGSMITH_TRACING=false  # optionnel ; budgets masqués dans les traces (travel_agent/tracing.py)
+LANGSMITH_API_KEY=
+LANGSMITH_PROJECT=
 LANGSMITH_REDACT_BUDGETS=true # false seulement pour déboguer en local
 VAPID_PUBLIC_KEY=         # notifications push (uv run travel-vapid) ; vide = push désactivé
 VAPID_PRIVATE_KEY=

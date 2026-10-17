@@ -1,13 +1,47 @@
 # Escapade — agent de voyage de groupe (LangGraph)
 
-Chacun donne ses envies (pays rêvé, budget privé, dates, style, ville de départ), l'IA propose trois
-pays au groupe, le groupe vote, puis l'agent planifie le voyage : vols, hébergement, itinéraire jour par
-jour et budget détaillé. Utilisable depuis un **site web responsif installable (PWA)** ou en **ligne de
+Chacun donne ses envies (pays rêvé, budget privé, dates, style, ville de départ). L'IA présente une fiche
+par pays rêvé et complète par ses propres idées jusqu'à trois pays. Le groupe vote, puis l'agent planifie le
+voyage : vols, hébergement, itinéraire jour par jour et budget détaillé (dépenses sur place comprises). Utilisable depuis un **site web responsif installable (PWA)** ou en **ligne de
 commande**.
 
 - Architecture, conventions, règles de confidentialité : [`CLAUDE.md`](CLAUDE.md)
 - Diagramme : [`diagrams.drawio`](diagrams.drawio) · Suivi : [`TICKETS.md`](TICKETS.md)
 - Design du site : [`design/Escapade Directions.dc.html`](design/) (direction « Confetti »)
+
+## Comment ça marche (pour les voyageurs)
+
+Escapade aide un groupe d'amis ou une famille à choisir **où** partir, puis à organiser **comment** y aller,
+sans tableur ni discussion interminable.
+
+1. **Créer le voyage.** Une personne, l'organisateur·rice, crée le voyage et partage le lien avec le groupe.
+   Pas de compte ni de mot de passe : chaque membre est reconnu par son navigateur.
+2. **Donner ses envies.** Chaque membre indique son pays rêvé, ses dates, sa ville de départ, son style de
+   voyage (aventure, détente, culture…) et son budget. **Le budget reste privé** : personne d'autre ne le
+   voit, pas même l'organisateur·rice. Le groupe ne voit qu'une fourchette arrondie, et seulement à partir de
+   trois réponses.
+3. **Lancer l'IA.** Quand tout le monde a répondu (ou sans attendre les retardataires), l'organisateur·rice
+   lance l'IA. En une à trois minutes, elle étudie chaque destination : climat, coût, visa, sécurité.
+4. **Découvrir les pays.** Une fiche par pays rêvé par le groupe, complétée par des suggestions de l'IA
+   jusqu'à trois pays. Chaque fiche donne les points forts, les points faibles, un budget estimé et la
+   meilleure période. Un badge indique combien de membres ont rêvé de ce pays (sans dire qui), ou s'il s'agit
+   d'une idée de l'IA. Aucune fiche ne plaît ? L'organisateur·rice demande **d'autres idées**, avec un mot
+   sur ce que le groupe cherche.
+5. **Voter.** Chacun vote en secret pour son pays préféré. Le vote se clôt quand tout le monde a voté, ou
+   plus tôt si l'organisateur·rice le décide. En cas d'égalité, c'est l'organisateur·rice qui tranche.
+6. **Recevoir le plan.** L'IA choisit une ville de séjour dans le pays gagnant, puis prépare le voyage : prix
+   des vols depuis la ville de chacun, hôtel, programme jour par jour et dépenses sur place (transports,
+   repas, activités). Elle vérifie que le total tient dans le budget du groupe et recommence jusqu'à deux fois
+   si ce n'est pas le cas. Chacun voit sa propre part et si elle tient dans son budget.
+7. **Ajuster (si la relecture est activée).** L'organisateur·rice relit le brouillon et peut le valider,
+   demander un ajustement en quelques mots (« plutôt Porto, avec piscine ») ou, si le plan dépasse le budget,
+   cocher des **pistes d'économie chiffrées** : dépenses sur place en mode économique, hôtel plus simple.
+8. **Garder un souvenir.** Une fois le plan validé, le bouton « Télécharger le carnet (PDF) » produit un
+   carnet de voyage à imprimer ou à partager, sans aucun budget individuel.
+
+Envie d'être prévenu·e sans garder la page ouverte ? Le bouton « Me prévenir » envoie une notification quand
+les idées ou le plan sont prêts. Le site s'installe aussi comme une application sur le téléphone (voir
+ci-dessous).
 
 ## Prérequis
 
@@ -31,6 +65,7 @@ cp .env.example .env   # puis renseigner les clés
 | `ENABLE_FINAL_HITL` | `true` : l'organisateur relit et valide le plan avant qu'il soit définitif |
 | `WEB_HOST`, `WEB_PORT`, `WEB_SECURE_COOKIES` | Serveur web (défaut `127.0.0.1:8000`) ; cookies `Secure` derrière HTTPS |
 | `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | Traces LangSmith (optionnel). Les budgets y sont masqués ; `LANGSMITH_REDACT_BUDGETS=false` pour les voir en local |
+| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Notifications push (optionnel, voir plus bas) ; vide = désactivées |
 | `PORT`, `WEB_FORWARDED_ALLOW_IPS` | Hébergement : port imposé par la plateforme (prioritaire sur `WEB_PORT`) ; proxys dont on accepte `X-Forwarded-For` (défaut `127.0.0.1`) |
 
 Ne jamais committer `.env` ni le fichier SQLite (déjà dans `.gitignore`).
@@ -44,7 +79,7 @@ uv run travel-web
 Puis ouvrir <http://127.0.0.1:8000>, créer un voyage et partager le lien `/t/{code}` avec le groupe. Pas de
 compte : chaque membre est reconnu par un cookie de son navigateur.
 
-Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → une fiche par pays rêvé (complétée par l'IA jusqu'à 3) → vote secret → plan (1 à 3 min).
+Parcours : envies → l'organisateur lance l'IA (1 à 3 min) → une fiche par pays rêvé (complétée par l'IA jusqu'à 3) → vote secret → plan (1 à 3 min) → relecture par l'organisateur si `ENABLE_FINAL_HITL=true` (ajustement, pistes d'économie) → carnet PDF du plan validé.
 
 **Installer l'application (PWA)** : Chrome / Edge proposent l'installation dans la barre d'adresse ; sur
 iPhone, « Partager » puis « Sur l'écran d'accueil ». Hors `localhost`, l'installation et le mode hors ligne
@@ -108,10 +143,11 @@ Les tests n'appellent aucun service externe (LLM, Tavily et SerpApi sont simulé
 ```
 travel_agent/
 ├── graph.py, state.py, llm.py   # graphe parent, état, client OpenRouter
-├── subgraphs/                   # Graph 1 (suggestion de pays), Graph 2 (planification)
-├── guardrails/                  # entrée (validation, injection, PII), sortie (schéma, budget, URLs)
+├── tracing.py                   # traces LangSmith, budgets masqués
+├── subgraphs/                   # Graph 1 (suggestion de pays), Graph 2 (planification, dépenses sur place)
+├── guardrails/                  # entrée (validation, injection, PII), contrôle du brouillon (dates, budget), sortie (schéma, URLs)
 ├── tools/                       # Tavily, vols (SerpApi / factices), résolution des aéroports
-├── web/                         # API FastAPI, runner de l'agent, vues, front PWA (static/)
+├── web/                         # API FastAPI, runner de l'agent, vues, notifications push, front PWA (static/)
 └── main.py                      # CLI
 tests/                           # unitaires, API, parcours complet (test_e2e.py)
 docs/checklist-navigateur.md
