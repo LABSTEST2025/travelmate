@@ -1,0 +1,55 @@
+{
+ "query": "Prix des transports en commun, des repas au restaurant et des visites à Marrakech (Maroc) pour un touriste",
+ "response": {
+  "answer": "For a tourist in Marrakech, Morocco, the sources indicate that a local transport ticket costs 0.45 €, a monthly pass for public transport is 18.1 €, a cheap restaurant meal is 3.6 €, and a mid-range restaurant meal is 11.3 €. These prices reflect the significantly lower cost of living in Morocco compared to France, with transport and dining being notably cheaper.",
+  "sources": [
+   "https://www.facebook.com/groups/186287213271601/posts/1443601570873486",
+   "https://www.partirou.com/budget/voyage/maroc",
+   "https://www.partir.com/Maroc/cout-de-la-vie.html",
+   "https://partir.ouest-france.fr/maroc/budget",
+   "https://wise.com/be/blog/combien-de-dirham-pour-une-semaine-au-maroc"
+  ],
+  "results": [
+   {
+    "url": "https://www.facebook.com/groups/186287213271601/posts/1443601570873486",
+    "title": "Budget Maroc : transports sur place et repas restaurants",
+    "content": "transports sur place et repas restaurants. Maroc, à 8km de Marrakech. de 4 euros un repas a 13 euros entrée, plat, Dessert. à Marrakech en",
+    "score": 0.65966886,
+    "raw_content": null,
+    "id": "6b264d-00"
+   },
+   {
+    "url": "https://www.partirou.com/budget/voyage/maroc",
+    "title": "Coût d'un voyage au Maroc - Budget à prévoir et coût de la vie",
+    "content": "Quel est le budget quotidien à prévoir sur place pour les transports, les repas et l'hébergement ?\n\nLe plus bas : 11 €  \n Pour voyageurs au budget très limité, routards et aventuriers.\n\nConfortable : 30 € (à partir de)  \n Pour couples, familles ou voyageurs souhaitant un bon rapport qualité-prix.\n\nChic : 89 € (à partir de)  \n Pour voyageurs recherchant le confort, le raffinement ou une expérience exclusive. [...] ### Les Transports\n\nAu Maroc, les prix des transports sont nettement moins élevés qu'en France. Un billet de transport local coûte seulement 0,48 €, soit 73 % moins cher. De plus, la prise en charge d'un taxi s'élève à 0,68 €, représentant une économie de 77 %. Même un kilomètre en taxi est trois fois moins cher que dans l'Hexagone, avec une différence de 63 %. Ces tarifs avantageux facilitent les déplacements dans le pays. [...] ### Au Restaurant\n\nAu Maroc, les repas au restaurant sont particulièrement abordables par rapport à la France. Un repas bon marché y coûte 3,86 €, soit 74 % de moins qu'en France. Même un repas dans un restaurant de milieu de gamme est moins cher, à 12,07 €, contre 30 € en France. La bière locale est également favorable à 2,90 €, ce qui représente une économie substantielle de 52 %. Les boissons comme le Coca coûtent seulement 0,54 €, soit 81 % de moins.",
+    "score": 0.48147875,
+    "raw_content": null,
+    "id": "5ef47e-01"
+   },
+   {
+    "url": "https://www.partir.com/Maroc/cout-de-la-vie.html",
+    "title": "Budget et prix d'un voyage au Maroc",
+    "content": "Sandwich ou snack de rue (brochette, msemen), 4€, 5€ ; Repas dans un restaurant moyen/gastronomique, 15€, 30€ ; Repas dans un restaurant local (tajine, couscous)",
+    "score": 0.39110413,
+    "raw_content": null,
+    "id": "2989ed-02"
+   },
+   {
+    "url": "https://partir.ouest-france.fr/maroc/budget",
+    "title": "Budget voyage au Maroc : argent et coût de la vie",
+    "content": "|  |  |  |\n --- \n| Prix moyen | Fourchette de prix | Comparé à la France |\n| Transports en commun : ticket à l'unité |\n| Transports en commun : ticket à l'unité | 5 MAD | 0,45 € | 0,4 à 0,7 € | -75 % |\n| Transports en commun : pass mensuel |\n| Transports en commun : pass mensuel | 200 MAD | 18,1 € | 9 à 23 € | -71 % |\n| Essence sans plomb (1 litre) |\n| Essence sans plomb (1 litre) | 14,3 MAD | 1,30 € | 1,2 à 1,4 € | -28 % |\n| Taxi : prise en charge (tarif normal) | [...] |  |  |  |\n --- \n| Prix moyen | Fourchette de prix | Comparé à la France |\n| Un repas dans un restaurant bon marché |\n| Un repas dans un restaurant bon marché | 40 MAD | 3,6 € | 1,8 à 7,3 € |  |\n| Un repas dans un restaurant de gamme moyenne |\n| Un repas dans un restaurant de gamme moyenne | 125 MAD | 11,3 € | 7 à 27 € | -62 % |\n| Menu fast-food |\n| Menu fast-food | 60 MAD | 5,4 € | 4,5 à 6,8 € | -46 % |\n| Bière locale (50 cl pression) | [...] ## Prévoir vos dépenses au Maroc\n\nLe coût de la vie au Maroc est 53 % moins élevé qu'en France. Le pouvoir d'achat local y est cependant 62 % moins élevé.\n\nEn voyage, prévoyez un budget sur place d'au moins 66 € / jour et par personne (728 MAD / jour). Cette estimation se base sur l'idée de séjourner à deux dans un hôtel 3 étoiles, en prévoyant de payer deux repas et un ticket de transport chaque jour.\n\n  \n Budget voyage au Maroc en Dirham",
+    "score": 0.36758858,
+    "raw_content": null,
+    "id": "07f922-03"
+   },
+   {
+    "url": "https://wise.com/be/blog/combien-de-dirham-pour-une-semaine-au-maroc",
+    "title": "Combien de dirham à prévoir pour une semaine au Maroc ?",
+    "content": "Vous planifiez de séjourner ou de partir en vacances une semaine au Maroc ? Excellente nouvelle ! En 2023, le Maroc a accueilli plus de 13 millions de visiteurs ! Autant de locaux qui travaillent dans le secteur du tourisme, prêts à vous faire passer des vacances de rêve. Mais quel est le budget dont vous avez besoin pour 7 jours ? Hébergement, transport, repas… Pour vous aider, nous vous proposons des fourchettes de prix. [...] ##  :\n\n   Envoyer et dépenser des MAD et plus de 40 devises\n   Ne pas transporter d’argent liquide sur soi\n   Avoir la carte de paiement virtuelle en option\n   Posséder une carte acceptée dans les hôtels et restaurants du monde entier\n   Faire des retraits gratuits dans la limite de 200 £ par mois\n   Ajouter de l’argent via l’app Wise\n   Recevoir des notifications en direct\n   Utiliser la puce et le code PIN ou le sans-contact\n   Geler la carte en cas de perte ou de vol [...] Découvrez le compte Wise\n\n## . Rappelez-vous d’ajouter de l’argent pour les bakchich et l’achat de vos souvenirs ! Rien de tel que le Maroc pour remercier celles et ceux qui vous aident et faire des emplettes sur les marchés.\n\nAussi et avant de partir, pensez à ouvrir un compte multi-devises Wise gratuitement pour envoyer de l’argent EUR vers les MAD au taux réel du marché et/ou commander une carte de débit internationale en Dirham marocain (frais de livraison de 7 €).",
+    "score": 0.14310412,
+    "raw_content": null,
+    "id": "7f6a9e-04"
+   }
+  ]
+ }
+}

@@ -28,3 +28,6 @@ htmlcov/
 # Sauvegardes draw.io
 *.drawio.bkp
 .$*.drawio
+
+# Rapports des évaluations (evals/run.py)
+evals/reports/

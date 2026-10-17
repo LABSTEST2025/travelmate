@@ -1,0 +1,9 @@
+[
+ {"id": "lisbonne-5-jours", "country": "Portugal", "stay_city": "Lisbonne",
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 5, "style": "culture"}]},
+ {"id": "kyoto-8-jours-deux-styles", "country": "Japon", "stay_city": "Kyoto",
+  "travelers": [{"country": "Japon", "budget_eur": 3000, "days": 8, "style": "culture"},
+                {"country": "Japon", "budget_eur": 2500, "days": 8, "style": "détente", "origin": "Lyon"}]},
+ {"id": "marrakech-4-jours-desert", "country": "Maroc", "stay_city": "Marrakech", "feedback": "avec une excursion dans le désert",
+  "travelers": [{"country": "Maroc", "budget_eur": 900, "days": 4, "style": "aventure", "origin": "Marseille"}]}
+]

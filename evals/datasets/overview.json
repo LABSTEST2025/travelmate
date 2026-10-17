@@ -1,0 +1,9 @@
+[
+ {"id": "portugal-7-jours", "country": "Portugal", "budget_range_eur": [400, 2500],
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 7, "style": "culture"}]},
+ {"id": "japon-10-jours", "country": "Japon", "budget_range_eur": [1200, 5000],
+  "travelers": [{"country": "Japon", "budget_eur": 3000, "days": 10, "style": "culture"},
+                {"country": "Japon", "budget_eur": 2500, "days": 10, "origin": "Lyon"}]},
+ {"id": "maroc-6-jours", "country": "Maroc", "budget_range_eur": [300, 2000],
+  "travelers": [{"country": "Maroc", "budget_eur": 800, "days": 6, "style": "aventure", "origin": "Marseille"}]}
+]

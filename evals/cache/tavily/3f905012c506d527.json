@@ -1,0 +1,55 @@
+{
+ "query": "Hôtels en Maroc dans les zones suivantes : Marrakech pour un budget total de 1600 EUR",
+ "response": {
+  "answer": "The sources indicate several hotels in Marrakech within the budget of 1600 EUR. The Kenzi Club Agdal Medina offers rooms starting at 260 € per night, while the Grand Mogador Menara starts at 149 € per night. The La Mamounia, though more luxurious, starts at 1507 € per night. For more budget-friendly options, the Grand Hotel Tazi offers rooms around 35 to 40 € per night, and several riads in the medina start at around 40 to 60 € per night. The sources do not provide a definitive answer on whether a total of 1600 EUR can cover multiple nights in any of these hotels.",
+  "sources": [
+   "https://www.kayak.fr/Maroc-H%C3%B4tels.167.dc.html",
+   "https://www.fasthotel.com/blog/bons-plans/hotel-marrakech-pas-cher-notre-selection-dadresses-verifiees",
+   "https://www.morocco-escape.com/fr/guides/petit-budget",
+   "https://www.thehotelguru.com/fr-fr/best-hotels/morocco/affordable-hotels",
+   "https://www.expedia.be/fr/Destinations-En-Maroc-Hotels-Petit-Budget.0-0-d122-tHotelspetitbudget.Hotel-Filtre-Destinations"
+  ],
+  "results": [
+   {
+    "url": "https://www.kayak.fr/Maroc-H%C3%B4tels.167.dc.html",
+    "title": "Hôtels Maroc : comparez les hôtels (Maroc) à partir de 14 €/nuit sur KAYAK",
+    "content": "El Pueblo Tamlelt - Agadir\n\nEl Pueblo Tamlelt\n\nAgadir, Maroc\n\n5.6Passable(1107)\n\nWiFi gratuit\n\ndès 79 €\n\nVérifier la disponibilité\n\nKenzi Club Agdal Medina - Marrakech - Chambre\n\nKenzi Club Agdal Medina\n\nMarrakech, Maroc\n\n8.4Très bien(3416)\n\nParking\n\nWiFi gratuit\n\nPiscine\n\nClimatisation\n\ndès 260 €\n\nVérifier la disponibilité\n\nLa Mamounia - Marrakech - Chambre\n\nLa Mamounia\n\nMédina\n\n9.0Merveilleux(21)\n\nPiscine\n\nAnimaux admis\n\nClimatisation\n\ndès 1 507 €\n\nVérifier la disponibilité [...] Avec les fortes chaleurs estivales, la meilleure période pour chercher un hôtel au Maroc est le printemps (de mars à mai) ou l'automne (de septembre à octobre) pour profiter d'un climat doux et agréable.\n Visiter le Maroc avec un budget limité ? Vous pouvez trouver des auberges de jeunesse, des maisons d’hôtes et des riads à bon prix dans les grandes villes, telles que Marrakech et Tanger, qui offrent un endroit parfait pour un court séjour. [...] Caribbean Village Agador - Agadir - Piscine\n\nCaribbean Village Agador\n\nAgadir, Maroc\n\n6.1Correct(1651)\n\nClimatisation\n\ndès 82 €\n\nVérifier la disponibilité\n\nKenzi Farah - Marrakech - Salon\n\nKenzi Farah\n\nGuéliz - Hivernage\n\n8.1Très bien(6244)\n\nParking\n\nWiFi gratuit\n\nPiscine\n\nClimatisation\n\ndès 178 €\n\nVérifier la disponibilité\n\nGrand Mogador Menara - Marrakech - Salle de bain\n\nGrand Mogador Menara\n\nGuéliz - Hivernage\n\n8.0Très bien(6331)\n\nParking\n\nWiFi gratuit\n\nPiscine\n\nClimatisation\n\ndès 149 €",
+    "score": 0.58777803,
+    "raw_content": null,
+    "id": "f548be-00"
+   },
+   {
+    "url": "https://www.fasthotel.com/blog/bons-plans/hotel-marrakech-pas-cher-notre-selection-dadresses-verifiees",
+    "title": "Hôtel Marrakech Pas Cher : Notre Sélection d'Adresses Vérifiées - Blog Fasthotel",
+    "content": "## Notre sélection d’hôtels pas chers à Marrakech\n\n### 1. Ibis Marrakech Centre Gare — le repère fiable pour un budget maîtrisé [...] Difficile de trouver mieux placé pour ce budget : le Grand Hotel Tazi se situe à une centaine de mètres seulement de la place Jemaa el-Fna, à l’angle de l’avenue El Mouahidine et de la rue Bab Agnaou. Cet établissement historique de 80 à 105 chambres (selon les sources) affiche des tarifs autour de 35 à 40 € la nuit, piscine et petit-déjeuner buffet inclus. Sa terrasse sur le toit offre une vue sur la Koutoubia, et son bar reste l’un des rares du centre historique à servir de l’alcool, ambiance [...] Si votre budget permet une petite marge, glisser une nuit ou deux dans un riad traditionnel de la médina reste l’une des façons les plus authentiques de découvrir Marrakech : patio intérieur, décoration artisanale, terrasse et petit-déjeuner fait maison sont souvent inclus dès l’entrée de gamme. Plusieurs riads bien notés (8,5/10 et plus sur les plateformes de réservation) proposent des chambres doubles autour de 40 à 60 € la nuit, thé à la menthe de bienvenue compris. Comparez plusieurs",
+    "score": 0.518815,
+    "raw_content": null,
+    "id": "8ff2fb-01"
+   },
+   {
+    "url": "https://www.morocco-escape.com/fr/guides/petit-budget",
+    "title": "Budget voyage Maroc 2026 : combien coûte un séjour ?",
+    "content": "Coûts d'hébergement ; Luxe, Riad premium, Marrakech ou Fes, 150-350 € ; Luxe, Hôtel 5 étoiles, 200-500 € ; Camp désert, standard, Merzouga ou Zagora, 40-80 €/pers.",
+    "score": 0.44478238,
+    "raw_content": null,
+    "id": "dd1d36-02"
+   },
+   {
+    "url": "https://www.thehotelguru.com/fr-fr/best-hotels/morocco/affordable-hotels",
+    "title": "Hôtels Abordables au Maroc (2026) | The Hotel Guru",
+    "content": "A partir de 162€  pour 1 chambre, 1 nuit incluant les taxes et frais\n\nVérifier la disponibilité sur Expedia\n\nRiad Jnane Ines\n\n### Riad Jnane Ines\n\nTaroudant (Taroudant) [...] Les familles soucieuses de leur budget adoreront Dar Lazuli et ses prix avantageux ! Les trois appartements autonomes et pleins de caractère offrent une kitchenette, un coin salon à l'intérieur et à l'extérieur, plus des lits super larges et confortables. Un escalier mène à un espace commun ouvert et à une mignonne terrasse sur le toit surplombant le port. C'est un endroit idéal, proche à la fois de la plage et de la médina. [...] Riad Meriem au cœur de l'ancienne médina de Marrakech, est un excellent choix pour les couples à la recherche d'une escapade romantique à prix raisonnable. Les cinq chambres sont séduisantes avec un mélange éclectique d'artisanat africain et marocain, des teintes chaudes et de grandes œuvres d'art contemporain, plus une terrasse fleurie sur le toit et une petite piscine chauffée.",
+    "score": 0.3815888,
+    "raw_content": null,
+    "id": "db3711-03"
+   },
+   {
+    "url": "https://www.expedia.be/fr/Destinations-En-Maroc-Hotels-Petit-Budget.0-0-d122-tHotelspetitbudget.Hotel-Filtre-Destinations",
+    "title": "Hôtels pas chers à Maroc sur Expedia.be",
+    "content": "Savoy Le Grand Hotel\n\n### Savoy Le Grand Hotel\n\nOasis Hôtel & Spa\n\n### Oasis Hôtel & Spa\n\nFes Marriott Hotel Jnan Palace\n\n### Fes Marriott Hotel Jnan Palace\n\nONOMO Hotel Casablanca Airport\n\n### ONOMO Hotel Casablanca Airport\n\nMövenpick Hotel Mansour Eddahbi Marrakech\n\n### Mövenpick Hotel Mansour Eddahbi Marrakech\n\nSofitel Marrakech Palais Imperial & Spa\n\n### Sofitel Marrakech Palais Imperial & Spa\n\nRiad Palais des Princesses\n\n### Riad Palais des Princesses [...] Logo Expedia\nBelgique\n\nUne rue de marché animée où l’on peut admirer des étoffes colorées et des tapis traditionnels mis en vente.\nUne rue de marché animée où l’on peut admirer des étoffes colorées et des tapis traditionnels mis en vente.\n\n# Hôtels pas chers à Maroc\n\n## Chambre 1\n\n### Changez d’avis\n\n### Faites-vous plaisir\n\n### Trouvez votre bonheur\n\nPlan des hôtels à Maroc\n\n## Maroc : les avis sur les hôtels les plus prisés\n\nBarcelo Anfa Casablanca\n\n### Barcelo Anfa Casablanca [...] Aqua Mirage Club & Aqua Parc - All Inclusive\n\n### Aqua Mirage Club & Aqua Parc - All Inclusive\n\n## Maroc : les informations utiles\n\n## Explorez un monde de voyages avec Expedia",
+    "score": 0.3669078,
+    "raw_content": null,
+    "id": "4391f5-04"
+   }
+  ]
+ }
+}

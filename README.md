@@ -138,6 +138,15 @@ Les tests n'appellent aucun service externe (LLM, Tavily et SerpApi sont simulé
 `.env` contient de vraies clés. Ce que seul un navigateur montre est décrit dans
 [`docs/checklist-navigateur.md`](docs/checklist-navigateur.md).
 
+## Évaluations du LLM
+
+```bash
+uv run python -m evals.run            # vrai LLM, nœud par nœud ; voir evals/README.md
+```
+
+Contrairement aux tests, les évaluations appellent le vrai modèle (et Tavily, mis en cache) pour mesurer la
+qualité de ses réponses. SerpApi n'est jamais appelé.
+
 ## Structure
 
 ```
@@ -150,5 +159,6 @@ travel_agent/
 ├── web/                         # API FastAPI, runner de l'agent, vues, notifications push, front PWA (static/)
 └── main.py                      # CLI
 tests/                           # unitaires, API, parcours complet (test_e2e.py)
+evals/                           # évaluations du vrai LLM nœud par nœud
 docs/checklist-navigateur.md
 ```

@@ -1,0 +1,14 @@
+[
+ {"id": "lisbonne-2-personnes", "country": "Portugal", "stay_city": "Lisbonne", "night_per_person_eur": [20, 200],
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 7, "style": "culture"},
+                {"country": "Portugal", "budget_eur": 1200, "days": 7, "style": "culture"}]},
+ {"id": "kyoto-3-personnes", "country": "Japon", "stay_city": "Kyoto", "night_per_person_eur": [20, 250],
+  "travelers": [{"country": "Japon", "budget_eur": 2500, "days": 10, "style": "culture"},
+                {"country": "Japon", "budget_eur": 2500, "days": 10, "style": "culture", "origin": "Lyon"},
+                {"country": "Corée du Sud", "budget_eur": 2500, "days": 10, "style": "détente"}]},
+ {"id": "marrakech-4-personnes-serre", "country": "Maroc", "stay_city": "Marrakech", "night_per_person_eur": [10, 150],
+  "travelers": [{"country": "Maroc", "budget_eur": 800, "days": 6, "style": "aventure", "origin": "Marseille"},
+                {"country": "Maroc", "budget_eur": 800, "days": 6, "style": "aventure"},
+                {"country": "Tunisie", "budget_eur": 800, "days": 6, "style": "détente"},
+                {"country": "Maroc", "budget_eur": 800, "days": 6, "style": "culture", "origin": "Toulouse"}]}
+]

@@ -1,0 +1,10 @@
+[
+ {"id": "paris", "place": "Paris", "primary": ["CDG"], "known": ["CDG", "ORY", "BVA"]},
+ {"id": "lyon", "place": "Lyon", "primary": ["LYS"], "known": ["LYS", "GNB", "GVA", "CMF"]},
+ {"id": "portugal", "place": "Portugal", "primary": ["LIS"], "known": ["LIS", "OPO", "FAO", "FNC", "PDL"]},
+ {"id": "lisbonne", "place": "Lisbonne (Portugal)", "primary": ["LIS"], "known": ["LIS", "OPO", "FAO"]},
+ {"id": "japon", "place": "Japon", "primary": ["HND", "NRT"], "known": ["HND", "NRT", "KIX", "NGO", "CTS", "FUK", "ITM", "OKA"]},
+ {"id": "kyoto", "place": "Kyoto (Japon)", "primary": ["KIX", "ITM"], "known": ["KIX", "ITM", "UKB", "NGO"]},
+ {"id": "marrakech", "place": "Marrakech (Maroc)", "primary": ["RAK"], "known": ["RAK", "CMN", "AGA"]},
+ {"id": "bruxelles", "place": "Bruxelles", "primary": ["BRU"], "known": ["BRU", "CRL", "ANR", "LGG"]}
+]

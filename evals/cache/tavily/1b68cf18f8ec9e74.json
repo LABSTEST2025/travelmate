@@ -1,0 +1,55 @@
+{
+ "query": "Activités et lieux à visiter à Kyoto et ses environs (Japon) pour un voyage de style culture, détente",
+ "response": {
+  "answer": "Pour un voyage de style culturel et de détente à Kyoto et ses environs, les sources suggèrent des activités telles que la méditation au Temple Daisen-in, des spectacles de geishas dans le quartier Gion, des cérémonies du thé, et des cours traditionnels. Les visites de sanctuaires et les marchés comme Nishiki Market sont également recommandés. Les sites populaires comme Fushimi Inari, Kinkaku-ji, et le Bambou d'Arashiyama sont magnifiques tôt le matin mais peuvent être très fréquentés plus tard dans la journée. Les sources ne fournissent pas d'informations spécifiques sur des dates ou des horaires précis pour ces activités.",
+  "sources": [
+   "https://www.tourradar.fr/i/japon-voyage-culturel",
+   "https://www.getyourguide.com/fr-fr/explorer/kyoto-ttd96826/things-to-do-alone-in-kyoto",
+   "https://www.chloeinjapan.com/kyoto-en-4-jours",
+   "https://fr.trip.com/guide/things-to-do/que-faire-au-japon.html",
+   "https://japonsecret.fr/que-faire-a-kyoto"
+  ],
+  "results": [
+   {
+    "url": "https://www.tourradar.fr/i/japon-voyage-culturel",
+    "title": "Japon : Voyages culturels - TourRadar",
+    "content": "Vivez les traditions japonaises : méditation au Temple Daisen-in, spectacles de geishas dans le quartier Gion de Kyoto. Au programme : cérémonies du thé, cours",
+    "score": 0.4765072,
+    "raw_content": null,
+    "id": "c4aa4d-00"
+   },
+   {
+    "url": "https://www.getyourguide.com/fr-fr/explorer/kyoto-ttd96826/things-to-do-alone-in-kyoto",
+    "title": "7 activités à faire seul à Kyoto pour votre aventure en solo",
+    "content": "Trouvez les meilleures activités pour les voyageurs en solo à Kyoto, des cérémonies du thé dans des maisons de thé historiques aux visites de sanctuaires en",
+    "score": 0.39487803,
+    "raw_content": null,
+    "id": "70704a-01"
+   },
+   {
+    "url": "https://www.chloeinjapan.com/kyoto-en-4-jours",
+    "title": "Que faire à Kyoto en 4 jours",
+    "content": "→ Jour 1 : Découverte du centre-ville (Kyoto Centre) :château Nijo-jo, Nishiki Market, Karasuma-Shijo-Kawaramachi, temple To-ji et Kyoto Tower,. → Jour 2 :",
+    "score": 0.37882724,
+    "raw_content": null,
+    "id": "1e615c-02"
+   },
+   {
+    "url": "https://fr.trip.com/guide/things-to-do/que-faire-au-japon.html",
+    "title": "Que faire au Japon ? Villes et activités incontournables",
+    "content": "Les villes incontournables à visiter au Japon ; Tokyo aux ruelles historiques de Kyoto ; Shinjuku (gratte-ciel et vie nocturne), Harajuku ; Kyoto,",
+    "score": 0.37572992,
+    "raw_content": null,
+    "id": "051f60-03"
+   },
+   {
+    "url": "https://japonsecret.fr/que-faire-a-kyoto",
+    "title": "Que faire à Kyoto",
+    "content": "Les sites les plus connus comme Fushimi Inari, Kinkaku-ji ou le Bambou d'Arashiyama sont magnifiques à 6h30 du matin et invivables à 11h. Pas presque invivables",
+    "score": 0.2987015,
+    "raw_content": null,
+    "id": "0f6a77-04"
+   }
+  ]
+ }
+}

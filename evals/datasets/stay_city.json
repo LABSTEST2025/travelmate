@@ -1,0 +1,22 @@
+[
+ {"id": "portugal-culture", "country": "Portugal",
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 7, "style": "culture"}],
+  "cities": ["Lisbonne", "Porto", "Faro", "Coimbra", "Braga", "Funchal", "Lagos", "Évora", "Sintra", "Albufeira", "Aveiro", "Ponta Delgada"]},
+ {"id": "portugal-retour-porto", "country": "Portugal", "feedback": "plutôt Porto, avec piscine",
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 7, "style": "culture"},
+                {"country": "Espagne", "budget_eur": 1000, "days": 7, "style": "détente"}],
+  "cities": ["Lisbonne", "Porto", "Faro", "Coimbra", "Braga", "Funchal", "Lagos", "Évora", "Sintra", "Albufeira", "Aveiro", "Ponta Delgada"],
+  "expected": ["Porto"]},
+ {"id": "japon-culture", "country": "Japon",
+  "travelers": [{"country": "Japon", "budget_eur": 3000, "days": 10, "style": "culture"}],
+  "cities": ["Tokyo", "Kyoto", "Osaka", "Sapporo", "Fukuoka", "Nagoya", "Hiroshima", "Naha", "Nara", "Yokohama", "Kobe"]},
+ {"id": "grece-retour-ile", "country": "Grèce", "feedback": "au bord de la mer, sur une île",
+  "travelers": [{"country": "Grèce", "budget_eur": 1500, "days": 8, "style": "plage"},
+                {"country": "Grèce", "budget_eur": 1300, "days": 8, "style": "détente", "origin": "Nantes"}],
+  "cities": ["Athènes", "Thessalonique", "Héraklion", "Heraklion", "Iraklion", "La Canée", "Chania", "Rhodes", "Corfou",
+             "Kos", "Santorin", "Fira", "Thira", "Mykonos", "Naxos", "Paros", "Zante", "Zakynthos", "Réthymnon", "Rethymno",
+             "Céphalonie", "Argostoli", "Lindos", "Milos", "Hydra"],
+  "expected": ["Héraklion", "Heraklion", "Iraklion", "La Canée", "Chania", "Rhodes", "Corfou", "Kos", "Santorin", "Fira",
+               "Thira", "Mykonos", "Naxos", "Paros", "Zante", "Zakynthos", "Réthymnon", "Rethymno", "Céphalonie", "Argostoli",
+               "Lindos", "Milos", "Hydra"]}
+]

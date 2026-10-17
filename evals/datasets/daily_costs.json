@@ -1,0 +1,8 @@
+[
+ {"id": "lisbonne", "country": "Portugal", "stay_city": "Lisbonne", "standard_per_day_eur": [30, 150],
+  "travelers": [{"country": "Portugal", "budget_eur": 1200, "days": 7}]},
+ {"id": "kyoto", "country": "Japon", "stay_city": "Kyoto", "standard_per_day_eur": [40, 200],
+  "travelers": [{"country": "Japon", "budget_eur": 3000, "days": 10}]},
+ {"id": "marrakech", "country": "Maroc", "stay_city": "Marrakech", "standard_per_day_eur": [15, 100],
+  "travelers": [{"country": "Maroc", "budget_eur": 800, "days": 6}]}
+]

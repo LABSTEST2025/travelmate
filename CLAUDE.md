@@ -161,6 +161,7 @@ travel_agent/
 │   └── server.py       # branchement SQLite + uvicorn
 └── main.py             # boucle CLI : invoke → interrupt → resume
 tests/                  # dont test_api.py (API web) et test_e2e.py (parcours complet) ; fixtures/ = réponses SerpApi enregistrées
+evals/                  # évaluations du vrai LLM nœud par nœud (`uv run python -m evals.run`), Tavily en cache, jamais SerpApi
 docs/checklist-navigateur.md
 diagrams.drawio         # diagramme d'architecture
 TICKETS.md              # suivi des tickets (T…, backlog B…)
@@ -215,4 +216,5 @@ Ne jamais committer `.env` ni le fichier SQLite.
 - Les sorties du LLM passent par `with_structured_output(...)` dès qu'un schéma existe. Les modèles gratuits sont moins fiables : prévois un retry et une validation.
 - Les modèles `:free` d'OpenRouter ont des limites de débit. Gère les erreurs 429 avec un backoff et garde des prompts courts.
 - Tous les appels réseau (Tavily, vols, LLM) doivent pouvoir être mockés pour les tests.
+- Un changement de prompt ou de modèle se mesure avec `evals/` (voir `evals/README.md`) : `--repeat 3` avant / après. Un problème repéré en test réel devient un cas dans `evals/datasets/`.
 - Les textes destinés à l'utilisateur sont en français. Le code et les identifiants sont en anglais.

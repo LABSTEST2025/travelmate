@@ -1,0 +1,55 @@
+{
+ "query": "Prix des transports en commun, des repas au restaurant et des visites à Lisbonne (Portugal) pour un touriste",
+ "response": {
+  "answer": "For public transport in Lisbon, a single metro ride costs €1.50-1.65. For dining, a simple lunch special (prato do dia) ranges from €8-12, and dinner at a local restaurant is €12-20 per person. In Porto, a tram ride costs €2.85. For food, a meal in a modest local restaurant costs around €7-9, and a beer is €2.50. These prices are based on 2026 estimates.",
+  "sources": [
+   "https://voyaige.to/blog/portugal-travel-guide",
+   "https://travelcoolplaces.com/how-much-does-a-trip-to-portugal-cost",
+   "https://www.tourlane.fr/europe/portugal/budget-voyage",
+   "https://www.superprof.be/blog/prix-sejour-vacances-portugal",
+   "https://www.partirou.com/budget/voyage/portugal"
+  ],
+  "results": [
+   {
+    "url": "https://voyaige.to/blog/portugal-travel-guide",
+    "title": "Portugal Travel Guide 2026: Costs, When to Go, Best Places | Voyaiger",
+    "content": "Food:\n\n Espresso (bica): €0.70-1.20\n Pastel de nata: €1.20-1.80\n Bifana sandwich: €2-3.50\n Prato do dia (lunch special): €8-12\n Dinner at a local restaurant: €12-20/person\n Dinner at an upscale restaurant: €30-50/person\n Beer (imperial/fino): €1.50-3\n Glass of wine: €2.50-5 at a bar, €4-8 at a restaurant\n\nTransport:\n\n Metro single ride: €1.50-1.65\n Lisbon–Porto train (Alfa Pendular): €34\n Intercity bus (Rede Expressos): €10-22\n Rental car: €20-30/day + tolls\n Bolt/Uber across Lisbon: €5-10 [...] A realistic 10-day mid-range budget:\n\n Accommodation: €500-700\n Food and drink: €400-550\n Transport (mix of trains, buses, local metro): €100-150\n Activities and tastings: €80-120\n Total: €1,080-1,520, excluding flights\n\nThat's roughly what our AI-planned trip report came in at--€1,350 all-in for 10 days.\n\n## Safety and Practical Info\n\n### Is Portugal Safe? [...] Yes, by roughly 15-25% on accommodation and meals. A mid-range hotel in Lisbon runs €80-130/night versus €100-160 in Madrid or Barcelona. Restaurant prices are noticeably lower: a proper lunch with wine runs €10-14 in Portugal versus €14-20 in comparable Spanish cities. Porto is the best value of the major Iberian cities.\n\n### Do I need to rent a car in Portugal?",
+    "score": 0.87139857,
+    "raw_content": null,
+    "id": "0f0113-00"
+   },
+   {
+    "url": "https://travelcoolplaces.com/how-much-does-a-trip-to-portugal-cost",
+    "title": "How much does a trip to Portugal cost in 2026? (€55–€180 daily budget)",
+    "content": "Itinerary: Lisbon (4 nights) → Sintra (day trip) → Porto (3 nights) → Douro day trip → Algarve (3 nights)\n\n| Category | 10-day estimate (per person) |\n --- |\n| Flights | €550 |\n| Accommodation | €1,050 |\n| Food | €340 |\n| Transport | €170 |\n| Activities | €190 |\n| Total | €2,300 |\n\nHow to lower this fast: swap two restaurant dinners for simple local meals, and stay slightly outside Lisbon’s most tourist-heavy zones.\n\n## Sample 2-week backpacker itinerary budget [...] Mid-range (comfortable hotels, restaurants most days, key attractions):\n\n| Category | 7-day estimate (per person) |\n --- |\n| Flights | €550 |\n| Accommodation | €630 |\n| Food | €240 |\n| Transport | €120 |\n| Activities | €140 |\n| Total | €1,680 |\n\nBudget version (hostels/budget hotels, lunch deals, fewer tours) often lands closer to €1,150–€1,350 plus flights.\n\n## 2-week trip cost breakdown\n\nMid-range, with Lisbon + Porto + Algarve: [...] In small local restaurants and traditional tascas, this is often the best-value meal on the menu. Instead of paying tourist-area dinner prices, you can often get a filling local dish for around €7–€9, especially outside the most touristed parts of Lisbon and Porto.\n\nA good rule is simple: if you see a handwritten board outside a modest local restaurant, check it. That is often where Portugal still feels like one of Western Europe’s best-value countries to eat in.\n\n## Transport cost breakdown",
+    "score": 0.8361405,
+    "raw_content": null,
+    "id": "889f51-01"
+   },
+   {
+    "url": "https://www.tourlane.fr/europe/portugal/budget-voyage",
+    "title": "Quel est le prix d'un voyage au Portugal ? | Tourlane",
+    "content": "Dans les grandes villes, vous pourrez vous balader à pied ou vous déplacer en transports en commun. À Porto, vous pourrez vous déplacer en bus et à Lisbonne, utilisez le métro ou le tram. Un aller simple coûte environ 1,50 euro. Au lieu des taxis, nous vous recommandons d'utiliser Uber ou Bolt, car les prix et les services sont meilleurs. [...] Tous les prix et coûts indiqués ont été vérifiés sur place par nos expert(e)s de voyage et sont basés sur un voyage effectué en 2026. Les coûts sont calculés par personne et par jour de voyage. Le coût total d'un voyage au Portugal peut être inférieur s'il y a plus de voyageurs.\n\n### Une véritable expertise\n\nNos experts mettent leurs connaissances locales au service d'un voyage qui vous ressemble.\n\n### Une planification simplifiée [...] Le prix d'un voyage au Portugal commence à environ 1 365 euros par semaine (sans les vols). Pour ce prix, séjournez dans des hôtels 3\\, prenez des repas dans de bons restaurants et faites des activités populaires. La location d'une voiture de taille moyenne est également incluse dans le budget. Le coût par jour est donc de 195 euros.",
+    "score": 0.47124818,
+    "raw_content": null,
+    "id": "736f18-02"
+   },
+   {
+    "url": "https://www.superprof.be/blog/prix-sejour-vacances-portugal",
+    "title": "Quel Budget Prévoir pour Visiter le Portugal ?",
+    "content": "À Lisbonne, prendre le métro coûte 1,40€ alors qu'à Porto vous devrez débourser 1,20€. Le célèbre tramway jaune, quant à lui, vous coûtera 2,85€",
+    "score": 0.4594405,
+    "raw_content": null,
+    "id": "e10856-03"
+   },
+   {
+    "url": "https://www.partirou.com/budget/voyage/portugal",
+    "title": "Coût d'un voyage au Portugal - Budget à prévoir",
+    "content": "### Au Restaurant\n\nAu Portugal, les prix des repas sont nettement inférieurs à ceux de la France. Un repas dans un restaurant bon marché coûte 10 €, soit 33 % de moins qu'en France. Les repas dans les restaurants de milieu de gamme sont également plus abordables, avec une économie de 25 %. La bière locale est particulièrement intéressante, à 2,50 €, soit 58 % moins cher que dans l'Hexagone. D'autres boissons comme le cappuccino et le Coca/Pepsi affichent également des prix attractifs. [...] | Le plus bas Pour voyageurs au budget très limité, routards et aventuriers. | Confortable Pour couples, familles ou voyageurs souhaitant un bon rapport qualité-prix. | Chic Pour voyageurs recherchant le confort, le raffinement ou une expérience exclusive. |\n| 1 semaine | 488 € | 949 € | 1 965 € |\n| 2 semaines | 910 € | 1 772 € | 3 778 € |\n| 3 semaines | 1 332 € | 2 596 € | 5 591 € |\n\n## Coût de la vie\n\n### Au Restaurant [...] | Nourriture | 12,00 €/jour Repas très simples, bon marché, souvent issus de la cuisine de rue ou des petits établissements locaux, parfois peu variés ou peu équilibrés.   Exemples : Stands de rue, snacks basiques, plats rapides dans des gargotes sans confort. | 24,00 €/jour Cuisine de qualité correcte, dans des restaurants classiques ou locaux, avec un bon équilibre entre prix, goût et hygiène.   Exemples : Restaurants locaux bien notés, petits établissements touristiques, buffets d'hôtel. |",
+    "score": 0.44261298,
+    "raw_content": null,
+    "id": "262333-04"
+   }
+  ]
+ }
+}
