@@ -43,6 +43,8 @@ Envie d'être prévenu·e sans garder la page ouverte ? Le bouton « Me préveni
 les idées ou le plan sont prêts. Le site s'installe aussi comme une application sur le téléphone (voir
 ci-dessous).
 
+![Screen 01](screenshot/SC01.png)
+
 ## Prérequis
 
 - Python ≥ 3.11 et [uv](https://docs.astral.sh/uv/)
