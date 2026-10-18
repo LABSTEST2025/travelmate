@@ -24,7 +24,7 @@ ENV WEB_HOST=0.0.0.0 \
     WEB_SECURE_COOKIES=true \
     SQLITE_PATH=/data/checkpoints.sqlite
 
-# Pas d'utilisateur dédié : les volumes Railway sont montés en root, un autre utilisateur ne
+# Pas d'utilisateur dédié : les disques de l'hébergeur sont montés en root, un autre utilisateur ne
 # pourrait pas écrire le fichier SQLite.
 
 EXPOSE 8000

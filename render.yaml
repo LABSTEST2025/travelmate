@@ -1,0 +1,41 @@
+# Blueprint Render du site Escapade. Une seule instance : SQLite et le verrou du dépôt de voyages
+# l'imposent. Le disque persistant exige une offre payante (pas de disque sur l'offre gratuite).
+services:
+  - type: web
+    name: travelmate
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    numInstances: 1
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      # sync: false -> valeur saisie dans le tableau de bord, jamais dans le dépôt.
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENROUTER_MODEL
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: SERPAPI_API_KEY
+        sync: false
+      - key: ENABLE_FINAL_HITL
+        value: "true"
+      - key: LANGSMITH_TRACING
+        value: "false"
+      - key: LANGSMITH_API_KEY
+        sync: false
+      - key: LANGSMITH_PROJECT
+        sync: false
+      - key: LANGSMITH_REDACT_BUDGETS
+        value: "true"
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false

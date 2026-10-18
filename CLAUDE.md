@@ -166,9 +166,9 @@ docs/checklist-navigateur.md
 diagrams.drawio         # diagramme d'architecture
 TICKETS.md              # suivi des tickets (T…, backlog B…)
 design/                 # maquettes des directions graphiques du site (Confetti, Carnet…)
-README.md               # installation, lancement et déploiement Railway
+README.md               # installation, lancement et déploiement Render
 Dockerfile              # image du site (uv), une seule instance, SQLite sur /data
-railway.json            # build Docker, healthcheck /api/health, 1 réplique
+render.yaml             # blueprint Render : Docker, disque /data, healthcheck /api/health, 1 instance
 .env.example
 ```
 

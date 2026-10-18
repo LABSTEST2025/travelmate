@@ -59,7 +59,7 @@ def main() -> None:
     uvicorn.run(
         build_app(),
         host=os.environ.get("WEB_HOST", "127.0.0.1"),
-        # `PORT` est imposé par les hébergeurs (Railway, Render) ; `WEB_PORT` sert en local.
+        # `PORT` est imposé par les hébergeurs (Render…) ; `WEB_PORT` sert en local.
         port=int(os.environ.get("PORT") or os.environ.get("WEB_PORT", "8000")),
         # Derrière le proxy HTTPS de l'hébergeur : vraie IP du visiteur et schéma https.
         proxy_headers=True,

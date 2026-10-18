@@ -98,18 +98,21 @@ Les clés se génèrent **une seule fois** : en changer invalide les abonnements
 les notifications avec « Me prévenir » sur la page du voyage. Elles marchent sur `localhost` et en HTTPS ;
 sur iPhone, il faut iOS 16.4+ et le site ajouté à l'écran d'accueil.
 
-## Déploiement (Railway)
+## Déploiement (Render)
 
-Le dépôt contient un `Dockerfile` et un `railway.json` (build Docker, une seule instance, vérification de
-santé sur `/api/health`).
+Le dépôt contient un `Dockerfile` et un blueprint `render.yaml` : service web Docker, une seule instance,
+disque persistant de 1 Go sur `/data`, vérification de santé sur `/api/health`.
 
-1. Sur Railway : **New Project → Deploy from GitHub repo**, choisir ce dépôt.
-2. **Volume** : clic droit sur le service → *Attach volume*, point de montage **`/data`**. Sans volume, les
-   voyages disparaissent à chaque déploiement.
-3. **Variables** : `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `TAVILY_API_KEY`, `SERPAPI_API_KEY`,
-   `ENABLE_FINAL_HITL` (et, si besoin, les variables LangSmith et `VAPID_*` pour les notifications). L'image fixe déjà `WEB_HOST=0.0.0.0`,
-   `WEB_SECURE_COOKIES=true`, `WEB_FORWARDED_ALLOW_IPS=*` et `SQLITE_PATH=/data/checkpoints.sqlite`.
-4. **Settings → Networking → Generate Domain** : URL en HTTPS `*.up.railway.app` (ou un domaine à soi).
+1. Sur Render : **New → Blueprint**, choisir ce dépôt. Render lit `render.yaml`.
+2. **Variables** : Render demande les valeurs marquées `sync: false` (`OPENROUTER_API_KEY`,
+   `OPENROUTER_MODEL`, `TAVILY_API_KEY`, `SERPAPI_API_KEY`, LangSmith, `VAPID_*`). Laisser vide ce qui ne
+   sert pas ; `LANGSMITH_TRACING` et `ENABLE_FINAL_HITL` se changent ensuite dans *Environment*. L'image fixe
+   déjà `WEB_HOST=0.0.0.0`, `WEB_SECURE_COOKIES=true`, `WEB_FORWARDED_ALLOW_IPS=*` et
+   `SQLITE_PATH=/data/checkpoints.sqlite` ; Render fournit `PORT`.
+3. **Offre** : le disque exige une offre payante (`starter` dans le blueprint). L'offre gratuite n'a pas de
+   disque (voyages perdus à chaque redémarrage) et met le service en veille après 15 min sans visite, ce
+   qui coupe les générations en cours.
+4. URL en HTTPS `*.onrender.com`, ou un domaine à soi dans *Settings → Custom Domains*.
 
 À savoir :
 
@@ -118,8 +121,8 @@ santé sur `/api/health`).
   relance avec « Réessayer » (reprise au dernier checkpoint). Éviter de déployer pendant qu'un groupe génère.
 - **Limites d'usage (T59)** : à mettre en place avant de partager un lien public, sinon n'importe qui peut
   consommer les quotas SerpApi et OpenRouter.
-- **Sauvegarde** : le volume contient tout (voyages et checkpoints) ; Railway propose des sauvegardes du
-  volume dans ses réglages.
+- **Sauvegarde** : le disque contient tout (voyages et checkpoints) ; Render en prend un instantané
+  quotidien, restaurable depuis l'onglet *Disks*.
 
 ## Ligne de commande
 
