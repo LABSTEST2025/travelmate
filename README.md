@@ -166,10 +166,14 @@ docs/checklist-navigateur.md
 
 
 ## Screenshot
-Page d'accueil: ![Screen 01](screenshot/SC01.png)
+
+![Screen 01](screenshot/SC01.png)
+
 
 ![Screen 02](screenshot/SC02.png)
 
 
 ![Screen 03](screenshot/SC03.png)
 
+
+![Screen 04](screenshot/SC04.png)
