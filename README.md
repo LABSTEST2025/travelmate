@@ -43,7 +43,6 @@ Envie d'être prévenu·e sans garder la page ouverte ? Le bouton « Me préveni
 les idées ou le plan sont prêts. Le site s'installe aussi comme une application sur le téléphone (voir
 ci-dessous).
 
-![Screen 01](screenshot/SC01.png)
 
 ## Prérequis
 
@@ -164,3 +163,13 @@ tests/                           # unitaires, API, parcours complet (test_e2e.py
 evals/                           # évaluations du vrai LLM nœud par nœud
 docs/checklist-navigateur.md
 ```
+
+
+## Screenshot
+Page d'accueil: ![Screen 01](screenshot/SC01.png)
+
+![Screen 02](screenshot/SC02.png)
+
+
+![Screen 03](screenshot/SC03.png)
+
